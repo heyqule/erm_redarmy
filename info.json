@@ -1,0 +1,13 @@
+{
+  "name": "erm_redarmy",
+  "version": "0.1.0",
+  "date": "2021-07-25",
+  "title": "ERM - RedArmy",
+  "author": "heyqule",
+  "description": "Add Red Army as enemy.  Everything are painted in red.",
+  "factorio_version": "1.1",
+  "dependencies": [
+    "base >= 1.1.0",
+    "enemyracemanager >= 1.3.0"
+  ]
+}
