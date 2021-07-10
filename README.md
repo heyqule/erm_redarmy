@@ -5,7 +5,7 @@ They are weak against Acid/Poison (Max 85 resist).
 
 Credit:
 Human death sound from https://opengameart.org/content/11-male-human-paindeath-sounds
-Airplane graphic/sound from https://mods.factorio.com/mods/SuicidalKid/Aircraft
+Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
 
 Incompatible with IndustrialRevolution due to it replace base game asset on first data stage.
 
