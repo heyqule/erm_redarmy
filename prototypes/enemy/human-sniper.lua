@@ -12,6 +12,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 require('__stdlib__/stdlib/utils/defines/time')
+require('util')
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 local Table = require('__stdlib__/stdlib/utils/table')
 
@@ -49,8 +50,8 @@ local incremental_cold_resistance = 80
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_physical_damage = 50
-local incremental_physical_damage = 150
+local base_physical_damage = 10
+local incremental_physical_damage = 30
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -80,7 +81,7 @@ local sticker_box = {{-0.2, -1}, {0.2, 0}}
 function ErmRedArmy.make_human_sniper(level)
     level = level or 1
 
-    local human_miner = Table.deepcopy(data.raw['character']['character'])
+    local human_miner = util.table.deepcopy(data.raw['character']['character'])
     --Level 1 animation, level 2 and 3 are armored animations
     -- types: running, running_with_gun, mining_with_tool
     local running_animation = human_miner['animations'][2]['running']
@@ -92,7 +93,7 @@ function ErmRedArmy.make_human_sniper(level)
     ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red_crimson())
     ERM_UnitTint.mask_tint(gun_animation['layers'][4], ERM_UnitTint.tint_red_crimson())
 
-    local ammo_type = ERM_WeaponRig.get_custom_bullet(ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level))
+    
 
     data:extend({
         {
@@ -144,6 +145,7 @@ function ErmRedArmy.make_human_sniper(level)
                 ammo_category = "bullet",
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
                 shell_particle =
                 {
                     name = "shell-particle",
@@ -157,7 +159,7 @@ function ErmRedArmy.make_human_sniper(level)
                 },
                 projectile_creation_distance = 1.125,
                 sound = ERM_Sound.sniper(),
-                ammo_type = ammo_type,
+                ammo_type = ERM_WeaponRig.get_bullet(),
                 animation = gun_animation
             },
             distance_per_frame = 0.1,

@@ -43,8 +43,8 @@ local incremental_cold_resistance = 80
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_physical_damage = 20
-local incremental_physical_damage = 55
+local base_physical_damage = 4
+local incremental_physical_damage = 12
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -104,8 +104,6 @@ function ErmRedArmy.make_gunner_plane(level)
         }
     }
 
-    local ammo_type = ERM_WeaponRig.get_custom_bullet(ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level))
-
     data:extend({
         {
             type = "unit",
@@ -144,10 +142,11 @@ function ErmRedArmy.make_gunner_plane(level)
                 ammo_category = "redarmy-bullet",
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
                 projectile_creation_distance = 1.75,
                 projectile_center = {-0.3, 0},
                 sound = ERM_Sound.tank_gunshot(),
-                ammo_type = ammo_type,
+                ammo_type = ERM_WeaponRig.get_bullet(),
                 animation = gunship_animation
             },
             distance_per_frame = 1,

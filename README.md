@@ -1,14 +1,16 @@
 # ERM Redarmy
-This mod adds the player character and vehicles as an enemy force. They have heavy firepower. 
+This mod adds the player character and vehicles as an enemy force. They have heavy firepower on single target with minor AOE attacks. 
 
-They are weak against Fire/Explosive (Max 85 resist).
+They are weak against Acid/Poison (Max 85 resist).
 
 Credit:
 Human death sound from https://opengameart.org/content/11-male-human-paindeath-sounds
 Airplane graphic/sound from https://mods.factorio.com/mods/SuicidalKid/Aircraft
 
+Incompatible with IndustrialRevolution due to it replace base game asset on first data stage.
+
 ### Requirement
-* Enemy Race Manager >= 1.0
+* Enemy Race Manager >= 1.3
 * Factorio Standard Library >= 1.4.6
 * Factorio Base >= 1.1
 
@@ -16,55 +18,55 @@ Airplane graphic/sound from https://mods.factorio.com/mods/SuicidalKid/Aircraft
 #### Tier 1 Units
 ###### Miner (Retire @ tier 3)
     - Health 100 - 1100  (level 1 - 20)
-    - Melee damage 2 - 2 (level 1 - 20)
-    - 1 attack / 1-2s  
+    - Melee damage 5 - 8 (level 1 - 20)
+    - 1 attack / 1s  
 
 ###### Pistol (Retire @ tier 3)
-    - Health 100 - 1100
-    - Physical damage 5 - 5 
-    - 1 attack / 1-2s
+    - Health 80 - 880
+    - Physical damage 5 - 8 
+    - 1 attack / 2s
 
 #### Tier 2 Units
 ###### Machine gunner 
-    - Health 250 - 2750
+    - Health 200 - 2250
     - Physical damage 5 - 15   
     - 1-4 attacks / s
 
 ###### Sniper 
-    - Health 200 - 2200
+    - Health 150 - 1650
     - Physical damage 50 - 200
-    - 1 attacks / 5-3s
+    - 1 attacks / 3 - 5s
 
 ###### Tank (Evolution factor 0.6+)
-    - Health 600 - 6600
-    - Physical damage 75 - 200  
-    - 1 attacks / 5-3s
+    - Health 500 - 5500
+    - Physical damage 75 - 250  
+    - 1 attacks / 4 - 2s
 
 #### Tier 3 Units
 ###### Heavy Machine gunner
-    - Health 300 - 3300
+    - Health 225 - 2475
     - Physical damage 10 - 25   
     - 1-4 attacks / s
 
 ###### Shotgunner
-    - Health 350 - 3850
-    - Physical damage 8 - 16 per pellet 
+    - Health 300 - 3300
+    - Physical damage 5 - 15 per pellet * 16
     - 1 attacks / 1-2s
 
 ###### Plane - Gunner
-    - Health 180 - 3780
-    - Physical damage 20 - 75   
-    - 1-2 attacks / s - Slow attack
+    - Health 350 - 3850
+    - Physical damage 20 - 60
+    - 1-2 attacks / s
 
 ###### Tank - explosive rounds 
-    - Health 550 - 6050
-    - Physical damage 50 - 100 (AOE 3, 10% AOE dmg)
-    - 1 attacks / 3 - 5s
+    - Health 450 - 4950
+    - Physical damage 50 - 200 (AOE 3, 10% AOE dmg)
+    - 1 attacks / 5 - 3s
 
 ###### Plane - Bomber
-    - Health 180 - 3780
-    - Physical damage 50 - 100 (AOE 3, 25% AOE dmg)
-    - 1 attacks / 3 - 5s
+    - Health 300 - 3300
+    - Physical damage 35 - 100 (AOE 3, 25% AOE dmg)
+    - 1 attacks / 4 - 2s
 
 Physical resistance: 95
 Weak elemental resistance: 85

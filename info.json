@@ -4,7 +4,7 @@
   "date": "2021-07-25",
   "title": "ERM - RedArmy",
   "author": "heyqule",
-  "description": "Add Red Army as enemy.  Everything are painted in red.",
+  "description": "Add Red Army as enemy.  Everything is painted in red. They have heavy firepower on single target with minor AOE attacks.",
   "factorio_version": "1.1",
   "dependencies": [
     "base >= 1.1.0",

@@ -4,11 +4,13 @@
 --- DateTime: 6/28/2021 9:38 PM
 ---
 require('__stdlib__/stdlib/utils/defines/time')
+require('util')
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERM_Config = require('__enemyracemanager__/lib/global_config')
+
 
 local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
 
@@ -55,7 +57,7 @@ local selection_box = { { -1, -1 }, { 1, 1 } }
 function ErmRedArmy.make_gun_turret(level)
     level = level or 1
 
-    local redarmy_gun_turret = table.deepcopy(data.raw['ammo-turret']['gun-turret'])
+    local redarmy_gun_turret = util.table.deepcopy(data.raw['ammo-turret']['gun-turret'])
 
     -- Base changes
     redarmy_gun_turret['type'] = 'turret'

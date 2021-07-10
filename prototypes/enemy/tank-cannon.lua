@@ -44,12 +44,12 @@ local incremental_cold_resistance = 80
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_physical_damage = 50
-local incremental_physical_damage = 150
+local incremental_physical_damage = 200
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 300
-local incremental_attack_speed = 180
+local base_attack_speed = 240
+local incremental_attack_speed = 120
 
 local attack_range = 10
 
@@ -72,7 +72,7 @@ local selection_box = {{-0.9, -1.3}, {0.9, 1.3}}
 function ErmRedArmy.make_tank(level)
     level = level or 1
 
-    local tank = Table.deepcopy(data.raw['car']['tank'])
+    local tank = util.table.deepcopy(data.raw['car']['tank'])
     --Level 1 animation, level 2 and 3 are armored animations
     -- types: running, running_with_gun, mining_with_tool
     local tank_animation = tank['animation']
