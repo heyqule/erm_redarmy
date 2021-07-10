@@ -7,8 +7,6 @@ Credit:
 Human death sound from https://opengameart.org/content/11-male-human-paindeath-sounds
 Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
 
-Incompatible with IndustrialRevolution due to it replace base game asset on first data stage.
-
 ### Requirement
 * Enemy Race Manager >= 1.3
 * Factorio Standard Library >= 1.4.6
