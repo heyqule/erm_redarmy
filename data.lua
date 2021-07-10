@@ -7,6 +7,7 @@
 ErmRedArmy = {}
 
 require('__erm_redarmy__/global')
+require('util')
 
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 
@@ -39,21 +40,21 @@ data:extend(
 
 data:extend({
     ERM_WeaponRig.remove_damage_from_cannon_projectile(
-        table.deepcopy(data.raw['projectile']['cannon-projectile']),
+        util.table.deepcopy(data.raw['projectile']['cannon-projectile']),
         'cannon-projectile-no-damage'
     )
 })
 
 data:extend({
     ERM_WeaponRig.remove_damage_from_explosive_cannon_projectile(
-        table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
+        util.table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
         'explosive-cannon-projectile-no-damage'
     )
 })
 
 data:extend({
     ERM_WeaponRig.remove_damage_from_rocket(
-            table.deepcopy(data.raw['projectile']['rocket']),
+        util.table.deepcopy(data.raw['projectile']['rocket']),
             'rocket-no-damage'
     )
 })

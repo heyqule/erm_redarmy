@@ -1,0 +1,8 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2021-07-10
+
+  Major Features:
+    - initial release of red army
+    - various type of solders as miners and gunners
+    - single unit attack and aoe attack variants of tanks and planes

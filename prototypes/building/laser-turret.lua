@@ -9,11 +9,13 @@
 --- DateTime: 6/28/2021 9:38 PM
 ---
 require('__stdlib__/stdlib/utils/defines/time')
+require('util')
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERM_Config = require('__enemyracemanager__/lib/global_config')
+
 
 local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
 
@@ -60,7 +62,7 @@ local selection_box = { { -1, -1 }, { 1, 1 } }
 function ErmRedArmy.make_laser_turret(level)
     level = level or 1
 
-    local redarmy_laser_turret = table.deepcopy(data.raw['electric-turret']['laser-turret'])
+    local redarmy_laser_turret = util.table.deepcopy(data.raw['electric-turret']['laser-turret'])
 
     -- Base changes
     redarmy_laser_turret['type'] = 'turret'

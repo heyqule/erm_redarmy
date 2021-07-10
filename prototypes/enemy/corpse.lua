@@ -4,10 +4,12 @@
 --- DateTime: 7/3/2021 7:29 PM
 ---
 require('__stdlib__/stdlib/utils/defines/time')
+require('util')
 
 local Table = require('__stdlib__/stdlib/utils/table')
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
 local ERM_AnimationRig = require('__enemyracemanager__/lib/rig/animation')
+
 require('__base__/prototypes/entity/character-animations')
 
 function process_level1()
@@ -109,7 +111,7 @@ if data.raw['corpse']['common-army-corpse'] == nil then
 end
 
 if data.raw['corpse']['erm-tank-remnants'] == nil then
-    local tank_corpse = Table.deepcopy(data.raw['corpse']['tank-remnants'])
+    local tank_corpse = util.table.deepcopy(data.raw['corpse']['tank-remnants'])
     tank_corpse['name'] = 'erm-tank-remnants'
     tank_corpse['time_before_removed'] = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
     data:extend({
@@ -118,7 +120,7 @@ if data.raw['corpse']['erm-tank-remnants'] == nil then
 end
 
 if data.raw['corpse']['erm-medium-remnants'] == nil then
-    local medium_corpse = Table.deepcopy(data.raw['corpse']['medium-remnants'])
+    local medium_corpse = util.table.deepcopy(data.raw['corpse']['medium-remnants'])
     medium_corpse['name'] = 'erm-medium-remnants'
     medium_corpse['time_before_removed'] = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
     data:extend({

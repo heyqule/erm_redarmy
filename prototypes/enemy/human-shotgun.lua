@@ -12,6 +12,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 require('__stdlib__/stdlib/utils/defines/time')
+require('util')
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 local Table = require('__stdlib__/stdlib/utils/table')
 
@@ -49,7 +50,7 @@ local incremental_cold_resistance = 80
 -- Handles physical damages multiplier
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_physical_damage = 1
-local incremental_physical_damage = 1.5
+local incremental_physical_damage = 2
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -79,7 +80,7 @@ local sticker_box = {{-0.2, -1}, {0.2, 0}}
 function ErmRedArmy.make_human_shotgun(level)
     level = level or 1
 
-    local human_miner = Table.deepcopy(data.raw['character']['character'])
+    local human_miner = util.table.deepcopy(data.raw['character']['character'])
     --Level 1 animation, level 2 and 3 are armored animations
     -- types: running, running_with_gun, mining_with_tool
     local running_animation = human_miner['animations'][3]['running']
@@ -91,7 +92,6 @@ function ErmRedArmy.make_human_shotgun(level)
     ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red())
     ERM_UnitTint.mask_tint(gun_animation['layers'][4], ERM_UnitTint.tint_red())
 
-    local ammo_type = ERM_WeaponRig.get_custom_bullet(ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level))
 
     data:extend({
         {
@@ -143,7 +143,7 @@ function ErmRedArmy.make_human_shotgun(level)
                 ammo_category = "bullet",
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
-                damage_multiplier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
                 shell_particle =
                 {
                     name = "shell-particle",
@@ -184,7 +184,7 @@ function ErmRedArmy.make_human_shotgun(level)
                             action_delivery =
                             {
                                 type = "projectile",
-                                projectile = "piercing-shotgun-pellet",
+                                projectile = "shotgun-pellet",
                                 starting_speed = 1,
                                 starting_speed_deviation = 0.1,
                                 direction_deviation = 0.3,

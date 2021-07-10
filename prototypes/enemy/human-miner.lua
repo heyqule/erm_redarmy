@@ -12,6 +12,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 require('__stdlib__/stdlib/utils/defines/time')
+require('util')
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 local Table = require('__stdlib__/stdlib/utils/table')
 
@@ -48,12 +49,12 @@ local incremental_cold_resistance = 80
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_physical_damage = 5
-local incremental_physical_damage = 10
+local incremental_physical_damage = 25
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 120
-local incremental_attack_speed = 60
+local base_attack_speed = 60
+local incremental_attack_speed = 30
 
 local attack_range = 1
 
@@ -78,7 +79,7 @@ local sticker_box = {{-0.2, -1}, {0.2, 0}}
 function ErmRedArmy.make_human_miner(level)
     level = level or 1
 
-    local human_miner = Table.deepcopy(data.raw['character']['character'])
+    local human_miner = util.table.deepcopy(data.raw['character']['character'])
     --Level 1 animation, level 2 and 3 are armored animations
     -- types: running, running_with_gun, mining_with_tool
     local running_animation = human_miner['animations'][1]['running']
