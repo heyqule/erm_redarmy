@@ -42,7 +42,7 @@ local addRaceSettings = function()
         tier = 1, -- Race tier
         evolution_point = 0,
         evolution_base_point = 0,
-        angry_meter = 0, -- Build by killing their force (Spawner = 20, turrets = 10)
+        attack_meter = 0, -- Build by killing their force (Spawner = 20, turrets = 10)
         send_attack_threshold = 2000, -- When threshold reach, sends attack to the base
         send_attack_threshold_deviation = 0.2,
         next_attack_threshold = 0, -- Used by system to calculate next move

@@ -92,14 +92,14 @@ function ErmRedArmy.make_laser_turret(level)
     redarmy_laser_turret['energy_source'] = nil
 
     -- Attack Changes
-    redarmy_laser_turret['attack_parameters']['ammo_category'] = "redarmy-laser"
+    redarmy_laser_turret['attack_parameters']['ammo_category'] = "redarmy-damage"
     redarmy_laser_turret['attack_parameters']['cooldown'] = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level)
     redarmy_laser_turret['attack_parameters']['cooldown_deviation'] = 0.1
     redarmy_laser_turret['attack_parameters']['range'] = attack_range
     redarmy_laser_turret['attack_parameters']['damage_modifier'] = ERM_UnitHelper.get_damage(base_laser_damage_multiplier, incremental_laser_damage_multiplier, damage_multiplier, level)
 
     redarmy_laser_turret['attack_parameters']['ammo_type'] = {
-        category = "redarmy-laser",
+        category = "redarmy-damage",
         action =
         {
             type = "direct",

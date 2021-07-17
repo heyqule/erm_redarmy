@@ -140,7 +140,7 @@ function ErmRedArmy.make_human_shotgun(level)
             attack_parameters =
             {
                 type = "projectile",
-                ammo_category = "bullet",
+                ammo_category = "redarmy-damage",
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
@@ -159,7 +159,7 @@ function ErmRedArmy.make_human_shotgun(level)
                 sound = ERM_Sound.shotgun(),
                 ammo_type =
                 {
-                    category = "shotgun-shell",
+                    category = "redarmy-damage",
                     target_type = "direction",
                     clamp_position = true,
                     action =
