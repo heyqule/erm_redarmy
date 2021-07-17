@@ -145,14 +145,14 @@ function ErmRedArmy.make_explosive_tank(level)
             attack_parameters =
             {
                 type = "projectile",
-                ammo_category = "redarmy-cannon",
+                ammo_category = "redarmy-damage",
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 projectile_creation_distance = 1.6,
                 projectile_center = {-0.15625, -0.07812},
                 sound = ERM_Sound.tank_gunshot(),
                 ammo_type = {
-                    category = "redarmy-cannon",
+                    category = "redarmy-damage",
                     target_type = "direction",
                     action = {
                         type = "direct",

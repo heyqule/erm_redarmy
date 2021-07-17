@@ -139,7 +139,7 @@ function ErmRedArmy.make_human_pistol(level)
             attack_parameters =
             {
                 type = "projectile",
-                ammo_category = "bullet",
+                ammo_category = "redarmy-damage",
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
@@ -156,7 +156,7 @@ function ErmRedArmy.make_human_pistol(level)
                 },
                 projectile_creation_distance = 1.125,
                 sound = ERM_Sound.pistol(),
-                ammo_type = ERM_WeaponRig.get_bullet(),
+                ammo_type = ERM_WeaponRig.get_bullet('redarmy-damage'),
                 animation = gun_animation
             },
             distance_per_frame = 0.1,

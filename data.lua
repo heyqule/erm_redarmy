@@ -17,23 +17,7 @@ data:extend(
         {
             {
                 type = "ammo-category",
-                name = "redarmy-cannon"
-            },
-            {
-                type = "ammo-category",
-                name = "redarmy-explosive"
-            },
-            {
-                type = "ammo-category",
-                name = "redarmy-laser"
-            },
-            {
-                type = "ammo-category",
-                name = "redarmy-bullet"
-            },
-            {
-                type = "ammo-category",
-                name = "redarmy-melee"
+                name = "redarmy-damage"
             },
         })
 

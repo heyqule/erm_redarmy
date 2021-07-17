@@ -87,12 +87,12 @@ function ErmRedArmy.make_gun_turret(level)
     redarmy_gun_turret['spawn_decorations_on_expansion'] = false
 
     -- Attack Changes
-    redarmy_gun_turret['attack_parameters']['ammo_category'] = "redarmy-bullet"
+    redarmy_gun_turret['attack_parameters']['ammo_category'] = "redarmy-damage"
     redarmy_gun_turret['attack_parameters']['cooldown'] = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level)
     redarmy_gun_turret['attack_parameters']['cooldown_deviation'] = 0.1
     redarmy_gun_turret['attack_parameters']['range'] = attack_range
     redarmy_gun_turret['attack_parameters']['ammo_type'] = {
-        category = "redarmy-bullet",
+        category = "redarmy-damage",
         action = {
             type = "direct",
             action_delivery = {
