@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.0
+Date: 2021-07-30
+
+  Features:
+    - Add cargon plane as dropship
+    - it drops human-pistol, human-machine-gun, human-shotgun, tank-cannon
+
+  Changes:
+    - Add compatibility for attack meter
+    - Change spawn density to be similar with other races.  Hence performance improvement during processing level up.
+
+  Bugfixes:
+    - Fix plane-laser to plane-gunner in race-setting
+
+---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 2021-07-16
 

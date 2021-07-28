@@ -18,7 +18,7 @@ local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 
 local ERM_Sound = require('prototypes.sound')
 
-local name = 'plane-bomber'
+local name = 'plane-dropship'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 300
@@ -43,15 +43,15 @@ local incremental_cold_resistance = 80
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_explosive_damage = 35
-local incremental_explosive_damage = 65
+local base_physical_damage = 4
+local incremental_physical_damage = 12
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 240
-local incremental_attack_speed = 120
+local base_attack_speed = 600
+local incremental_attack_speed = 300
 
-local attack_range = ERM_Config.get_max_attack_range()
+local attack_range = 12
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.15
@@ -60,7 +60,7 @@ local incremental_movement_speed = 0.1
 -- Misc settings
 local vision_distance = 50
 
-local pollution_to_join_attack = 500
+local pollution_to_join_attack = 400
 local distraction_cooldown = 20
 
 -- Animation Settings
@@ -69,14 +69,13 @@ local unit_scale = 1
 local collision_box = {{-0.9, -1.3}, {0.9, 1.3}}
 local selection_box = {{-0.9, -1.3}, {0.9, 1.3}}
 
-function ErmRedArmy.make_bomber_plane(level)
+function ErmRedArmy.make_dropship_plane(level)
     level = level or 1
 
-    local bomber_animation =
-    {
+    local gunship_animation = {
         layers = {
             {
-                filename = "__erm_redarmy__/graphics/plane/Flying_Fortress_Spritesheet_Shadowless.png",
+                filename = "__erm_redarmy__/graphics/plane/Cargo_Plane_Spritesheet_Shadowless.png",
                 priority = "high",
                 width = 224,
                 height = 224,
@@ -86,10 +85,10 @@ function ErmRedArmy.make_bomber_plane(level)
                 line_height = 6,
                 shift = {0, 0},
                 max_advance = 1,
-                scale = 0.8
+                scale = 0.75
             },
             {
-                filename = "__erm_redarmy__/graphics/plane/Flying_Fortress_Spritesheet_Shadowless.png",
+                filename = "__erm_redarmy__/graphics/plane/Cargo_Plane_Spritesheet_Shadowless.png",
                 priority = "high",
                 width = 224,
                 height = 224,
@@ -100,7 +99,7 @@ function ErmRedArmy.make_bomber_plane(level)
                 shift = {3, 0},
                 max_advance = 1,
                 draw_as_shadow = 1,
-                scale = 0.8
+                scale = 0.75
             }
         }
     }
@@ -110,13 +109,13 @@ function ErmRedArmy.make_bomber_plane(level)
             type = "unit",
             name = MOD_NAME .. '/' .. name .. '/' .. level,
             localised_name = { 'entity-name.' .. MOD_NAME .. '/' .. name, level },
-            icon = "__erm_redarmy__/graphics/plane/Flying_Fortress_Icon.png",
+            icon = "__erm_redarmy__/graphics/plane/Cargo_Plane_Icon.png",
             icon_size = 32,
             flags = {"placeable-neutral", "player-creation", "placeable-off-grid", "not-flammable"},
             has_belt_immunity = true,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
-            subgroup = "flying-enemies",
+            subgroup = "dropship-enemies",
             shooting_cursor_size = 2,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
@@ -140,58 +139,29 @@ function ErmRedArmy.make_bomber_plane(level)
             attack_parameters =
             {
                 type = "projectile",
-                ammo_category = "redarmy-damage",
+                ammo_category = 'biological',
                 range = attack_range,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
-                projectile_creation_distance = 1.6,
-                projectile_center = {-0.15625, -0.07812},
-                sound = ERM_Sound.tank_gunshot(),
+                cooldown_deviation = 0.1,
+                warmup = 12,
                 ammo_type = {
-                    category = "redarmy-damage",
+                    category = "biological",
                     target_type = "direction",
                     action = {
                         type = "direct",
                         action_delivery = {
-                            type = "projectile",
-                            projectile = "rocket-no-damage",
-                            starting_speed = 0.3,
-                            target_effects = {
-                                {
-                                    type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.75, type = "explosion" },
-                                },
-                                {
-                                    type = "nested-result",
-                                    action =
-                                    {
-                                        type = "area",
-                                        force = "not-same",
-                                        radius = 3,
-                                        action_delivery =
-                                        {
-                                            type = "instant",
-                                            target_effects =
-                                            {
-                                                {
-                                                    type = "damage",
-                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.25, type = "explosion"}
-                                                },
-                                                {
-                                                    type = "create-entity",
-                                                    entity_name = "explosion"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                            type = 'instant',
+                            source_effects = {
+                                type = "script",
+                                effect_id = DROPSHIP_ATTACK,
                             }
                         }
                     }
                 },
-                animation = bomber_animation
+                animation = gunship_animation
             },
             distance_per_frame = 1,
-            run_animation = bomber_animation,
+            run_animation = gunship_animation,
             render_layer = "air-object",
             final_render_layer = "air-object",
             corpse = "erm-medium-remnants",
