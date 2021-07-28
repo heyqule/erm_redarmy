@@ -54,8 +54,8 @@ local incremental_attack_speed = 30
 local attack_range = ERM_Config.get_max_attack_range()
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_movement_speed = 0.1
-local incremental_movement_speed = 0.15
+local base_movement_speed = 0.2
+local incremental_movement_speed = 0.125
 
 -- Misc settings
 local vision_distance = 50
@@ -115,7 +115,7 @@ function ErmRedArmy.make_gunner_plane(level)
             has_belt_immunity = true,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
-            subgroup = "enemies",
+            subgroup = "flying-enemies",
             shooting_cursor_size = 2,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },

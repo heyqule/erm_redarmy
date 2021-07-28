@@ -56,23 +56,24 @@ local max_friends_around_to_spawn = 3
 local spawn_table = function(level)
     local res = {}
     --Tire 1
-    res[1] = { MOD_NAME .. '/human-miner/' .. level, { { 0.0, 1 }, { 0.2, 0.75 }, { 0.4, 0.6 }, { 0.6, 0.4 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
-    res[2] = { MOD_NAME .. '/human-pistol/' .. level, { { 0.0, 0 }, { 0.2, 0.25 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
+    res[1] = { MOD_NAME .. '/human-miner/' .. level,            { { 0.0, 1 }, { 0.2, 0.75 }, { 0.4, 0.6 }, { 0.6, 0.4 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
+    res[2] = { MOD_NAME .. '/human-pistol/' .. level,           { { 0.0, 0 }, { 0.2, 0.25 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
     --Tire 2
-    res[3] = { MOD_NAME .. '/human-machinegun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.3 }, { 0.8, 0.5 }, { 1.0, 0.25 } } }
-    res[4] = { MOD_NAME .. '/human-sniper/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.15 }, { 1.0, 0.1 } } }
-    res[5] = { MOD_NAME .. '/tank-cannon/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.075 } } }
+    res[3] = { MOD_NAME .. '/human-machinegun/' .. level,       { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.3 }, { 0.8, 0.5 }, { 1.0, 0.15 } } }
+    res[4] = { MOD_NAME .. '/human-sniper/' .. level,           { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
+    res[5] = { MOD_NAME .. '/tank-cannon/' .. level,            { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
+    res[6] = { MOD_NAME .. '/plane-gunner/' .. level,           { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.2 } } }
     --Tire 3
-    res[6] = { MOD_NAME .. '/human-heavy-machinegun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.2 }, { 1.0, 0.25 } } }
-    res[7] = { MOD_NAME .. '/human-shotgun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.15 }, { 1.0, 0.2 } } }
-    res[8] = { MOD_NAME .. '/tank-explosive-cannon/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.025 } } }
-    res[9] = { MOD_NAME .. '/plane-gunner/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.1 } } }
-    res[10] = { MOD_NAME .. '/plane-bomber/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
+    res[7] = { MOD_NAME .. '/human-heavy-machinegun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.15 }, { 1.0, 0.1 } } }
+    res[6] = { MOD_NAME .. '/human-shotgun/' .. level,          { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.15 }, { 1.0, 0.1 } } }
+    res[9] = { MOD_NAME .. '/tank-explosive-cannon/' .. level,  { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
+    res[10] = { MOD_NAME .. '/plane-bomber/' .. level,          { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.2 } } }
+    res[11] = { MOD_NAME .. '/plane-dropship/' .. level,        { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
     return res
 end
 
 local collision_box = {{-1.2, -1.2}, {1.2, 1.2}}
-local map_generator_bounding_box = { { -3.5, -3.5 }, { 3.5, 3.5 } }
+local map_generator_bounding_box = { { -4, -4 }, { 4, 4 } }
 local selection_box = {{-1.5, -1.5}, {1.5, 1.5}}
 
 function ErmRedArmy.make_machine(level)
@@ -132,7 +133,7 @@ function ErmRedArmy.make_machine(level)
                         priority="high",
                         width = 108,
                         height = 114,
-                        frame_count = 32,
+                        frame_count = 1,
                         line_length = 8,
                         shift = util.by_pixel(0, 2),
                         hr_version =
@@ -141,7 +142,7 @@ function ErmRedArmy.make_machine(level)
                             priority="high",
                             width = 214,
                             height = 226,
-                            frame_count = 32,
+                            frame_count = 1,
                             line_length = 8,
                             shift = util.by_pixel(0, 2),
                             scale = 0.5
@@ -154,7 +155,7 @@ function ErmRedArmy.make_machine(level)
                         height = 83,
                         frame_count = 1,
                         line_length = 1,
-                        repeat_count = 32,
+                        repeat_count = 1,
                         draw_as_shadow = true,
                         shift = util.by_pixel(8.5, 5.5),
                         hr_version =
@@ -165,7 +166,7 @@ function ErmRedArmy.make_machine(level)
                             height = 165,
                             frame_count = 1,
                             line_length = 1,
-                            repeat_count = 32,
+                            repeat_count = 1,
                             draw_as_shadow = true,
                             shift = util.by_pixel(8.5, 5),
                             scale = 0.5

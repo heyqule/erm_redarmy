@@ -62,7 +62,7 @@ local attack_range = 10
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.1
-local incremental_movement_speed = 0.1
+local incremental_movement_speed = 0.125
 
 -- Misc settings
 local vision_distance = 40
@@ -73,7 +73,7 @@ local distraction_cooldown = 20
 -- Animation Settings
 local unit_scale = 1
 
-local collision_box = {{-0.75, -1}, {0.75, 1}}
+local collision_box = {{-0.5, -0.66}, {0.5, 0.66}}
 local selection_box = {{-0.9, -1.3}, {0.9, 1.3}}
 
 function ErmRedArmy.make_explosive_tank(level)
@@ -170,6 +170,7 @@ function ErmRedArmy.make_explosive_tank(level)
                                     action =
                                     {
                                         type = "area",
+                                        force = "not-same",
                                         radius = 3,
                                         action_delivery =
                                         {

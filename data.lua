@@ -60,6 +60,7 @@ require "prototypes.enemy.tank-cannon"
 require "prototypes.enemy.tank-explosive-cannon"
 require "prototypes.enemy.plane-gunner"
 require "prototypes.enemy.plane-bomber"
+require "prototypes.enemy.plane-dropship"
 
 local level = ErmConfig.MAX_LEVELS
 
@@ -80,5 +81,6 @@ for i = 1, level do
     ErmRedArmy.make_explosive_tank(i)
     ErmRedArmy.make_gunner_plane(i)
     ErmRedArmy.make_bomber_plane(i)
+    ErmRedArmy.make_dropship_plane(i)
 end
 

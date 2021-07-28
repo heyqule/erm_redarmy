@@ -62,7 +62,7 @@ local attack_range = ERM_Config.get_max_attack_range()
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.075
-local incremental_movement_speed = 0.05
+local incremental_movement_speed = 0.1
 
 -- Misc settings
 local vision_distance = 40

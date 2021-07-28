@@ -56,7 +56,7 @@ local incremental_attack_speed = 120
 local attack_range = 30
 
 local collision_box = { { -0.7, -0.7 }, { 0.7, 0.7 } }
-local map_generator_bounding_box = { { -3, -3 }, { 3, 3 } }
+local map_generator_bounding_box = { { -2.5, -2.5 }, { 2.5, 2.5 } }
 local selection_box = { { -1, -1 }, { 1, 1 } }
 
 function ErmRedArmy.make_laser_turret(level)
