@@ -7,6 +7,8 @@ require('__stdlib__/stdlib/utils/defines/time')
 require('util')
 
 local Table = require('__stdlib__/stdlib/utils/table')
+local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
+
 local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
 local ERM_AnimationRig = require('__enemyracemanager__/lib/rig/animation')
 
@@ -122,7 +124,9 @@ end
 if data.raw['corpse']['erm-medium-remnants'] == nil then
     local medium_corpse = util.table.deepcopy(data.raw['corpse']['medium-remnants'])
     medium_corpse['name'] = 'erm-medium-remnants'
-    medium_corpse['time_before_removed'] = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
+    medium_corpse['time_before_removed'] = defines.time.second
+    medium_corpse['animation'] = Sprites.empty_pictures()
+
     data:extend({
         medium_corpse
     })
