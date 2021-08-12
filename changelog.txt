@@ -1,10 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.0
-Date: 2021-08-03
+Date: 2021-08-12
 
   Changes:
-    - Units' vision changed to 30 to 35
-    - Remove corpse for planes to reduce
+    - Units' vision changed to between 30 to 35
+    - Remove corpse for planes to reduce junks on the map.
 
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.0
