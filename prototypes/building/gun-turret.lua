@@ -65,7 +65,7 @@ function ErmRedArmy.make_gun_turret(level)
     redarmy_gun_turret['name'] = MOD_NAME .. '/' .. name .. '/' .. level
     redarmy_gun_turret['localised_name'] = { 'entity-name.' .. MOD_NAME .. '/' .. name, level }
     redarmy_gun_turret['flag'] = { "placeable-player", "placeable-enemy" }
-    redarmy_gun_turret['max_health'] = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level)
+    redarmy_gun_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level)
     redarmy_gun_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level)
     redarmy_gun_turret['order'] = MOD_NAME .. "-" .. name
     redarmy_gun_turret['minable'] = nil

@@ -91,7 +91,7 @@ function ErmRedArmy.make_lab(level)
                 },
             },
             flags = { "placeable-player", "placeable-enemy" },
-            max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. "-" .. name,
             subgroup = "enemies",
             vehicle_impact_sound = ERM_Sound.generic_impact(),
