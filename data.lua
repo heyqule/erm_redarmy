@@ -21,27 +21,21 @@ data:extend(
             },
         })
 
-
-data:extend({
-    ERM_WeaponRig.remove_damage_from_cannon_projectile(
+local cannon_projectile = ERM_WeaponRig.remove_damage_from_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['cannon-projectile']),
         'cannon-projectile-no-damage'
-    )
-})
+)
 
-data:extend({
-    ERM_WeaponRig.remove_damage_from_explosive_cannon_projectile(
+local cannon_explosive_projectile =  ERM_WeaponRig.remove_damage_from_explosive_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
         'explosive-cannon-projectile-no-damage'
-    )
-})
+)
 
-data:extend({
-    ERM_WeaponRig.remove_damage_from_rocket(
+local rocket = ERM_WeaponRig.remove_damage_from_rocket(
         util.table.deepcopy(data.raw['projectile']['rocket']),
-            'rocket-no-damage'
-    )
-})
+        'rocket-no-damage'
+)
+data:extend({cannon_projectile, cannon_explosive_projectile, rocket })
 
 require "prototypes.building.gun-turret"
 require "prototypes.building.laser-turret"
