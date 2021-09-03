@@ -1,11 +1,13 @@
-# ERM Redarmy
-This mod adds the player character and vehicles as an enemy force. They have heavy firepower on single target with minor AOE attacks. 
+# ERM Redarmy (Beta release)
+This mod adds the player character and vehicles as an enemy force. They have heavy firepower on single target with minor AOE attacks.
 
 They are weak against Acid/Poison (Max 85 resist).
 
 Credit:
 Human death sound from https://opengameart.org/content/11-male-human-paindeath-sounds
 Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
+
+Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
 ### Requirement
 * Enemy Race Manager >= 1.7
@@ -25,12 +27,12 @@ Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
     - 1 attack / 2s
 
 #### Tier 2 Units
-###### Machine gunner 
+###### Machine gunner
     - Health 200 - 2700
     - Physical damage 5 - 15   
     - 1 - 4 attacks / s
 
-###### Sniper 
+###### Sniper
     - Health 150 - 2050
     - Physical damage 30 - 200
     - 1 attacks / 5 - 3s
@@ -60,7 +62,7 @@ Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
     - Physical damage 20 - 60
     - 1 - 2 attacks / s
 
-###### Tank - explosive rounds 
+###### Tank - explosive rounds
     - Health 450 - 6750
     - Physical damage 50 - 200 (AOE 3, 10% AOE dmg)
     - 1 attacks / 5 - 3s
