@@ -8,7 +8,7 @@ Human death sound from https://opengameart.org/content/11-male-human-paindeath-s
 Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
 
 ### Requirement
-* Enemy Race Manager >= 1.3
+* Enemy Race Manager >= 1.7
 * Factorio Standard Library >= 1.4.6
 * Factorio Base >= 1.1
 
