@@ -4,13 +4,6 @@
 --- DateTime: 6/29/2021 2:14 AM
 ---
 
---
--- Created by IntelliJ IDEA.
--- User: heyqule
--- Date: 12/15/2020
--- Time: 9:39 PM
--- To change this template use File | Settings | File Templates.
---
 require('__stdlib__/stdlib/utils/defines/time')
 require('util')
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
@@ -103,7 +96,7 @@ function ErmRedArmy.make_human_pistol(level)
                     icon_size = 64,
                 },
                 {
-                    icon = "__base__/graphics/icons/signal/signal_p.png",
+                    icon = "__base__/graphics/icons/signal/signal_P.png",
                     icon_size = 64,
                     scale = 0.2,
                     shift = {-9,-9}
