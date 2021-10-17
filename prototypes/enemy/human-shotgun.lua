@@ -20,7 +20,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'human-shotgun'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local hitpoint = 300
+local hitpoint = 350
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -50,7 +50,7 @@ local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipl
 local base_attack_speed = 120
 local incremental_attack_speed = 60
 
-local attack_range = 5
+local attack_range = 6
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.075

@@ -17,11 +17,11 @@ local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 
 local ERM_Sound = require('prototypes.sound')
 
-local name = 'human-pistol'
+local name = 'human-engineer'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local hitpoint = 80
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
+local hitpoint = 250
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -43,14 +43,14 @@ local incremental_cold_resistance = 80
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_physical_damage = 1
-local incremental_physical_damage = 7
+local incremental_physical_damage = 2
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_attack_speed = 120
-local incremental_attack_speed = 60
+local base_attack_speed = 300
+local incremental_attack_speed = 240
 
-local attack_range = 6
+local attack_range = 12
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.075
@@ -59,7 +59,7 @@ local incremental_movement_speed = 0.1
 -- Misc settings
 local vision_distance = 30
 
-local pollution_to_join_attack = 5
+local pollution_to_join_attack = 250
 local distraction_cooldown = 20
 
 -- Animation Settings
@@ -70,20 +70,20 @@ local selection_box = {{-0.4, -1.4}, {0.4, 0.2}}
 local sticker_box = {{-0.2, -1}, {0.2, 0}}
 
 
-function ErmRedArmy.make_human_pistol(level)
+function ErmRedArmy.make_human_engineer(level)
     level = level or 1
 
     local human_miner = util.table.deepcopy(data.raw['character']['character'])
     --Level 1 animation, level 2 and 3 are armored animations
     -- types: running, running_with_gun, mining_with_tool
-    local running_animation = human_miner['animations'][1]['running']
-    ERM_UnitTint.mask_tint(running_animation['layers'][2], ERM_UnitTint.tint_red_madder())
+    local running_animation = human_miner['animations'][2]['running']
+    ERM_UnitTint.mask_tint(running_animation['layers'][2], ERM_UnitTint.tint_red_crimson())
+    ERM_UnitTint.mask_tint(running_animation['layers'][4], ERM_UnitTint.tint_red_crimson())
     ERM_AnimationRig.adjust_still_frame_all(running_animation['layers'], CHARACTER_RIG_STILL_FRAME)
 
-    local gun_animation = human_miner['animations'][1]['idle_with_gun']
-    ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red_madder())
-
-    
+    local gun_animation = human_miner['animations'][2]['idle_with_gun']
+    ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red_crimson())
+    ERM_UnitTint.mask_tint(gun_animation['layers'][4], ERM_UnitTint.tint_red_crimson())    
 
     data:extend({
         {
@@ -96,7 +96,7 @@ function ErmRedArmy.make_human_pistol(level)
                     icon_size = 64,
                 },
                 {
-                    icon = "__base__/graphics/icons/signal/signal_P.png",
+                    icon = "__base__/graphics/icons/signal/signal_E.png",
                     icon_size = 64,
                     scale = 0.2,
                     shift = {-9,-9}
@@ -132,30 +132,31 @@ function ErmRedArmy.make_human_pistol(level)
             attack_parameters =
             {
                 type = "projectile",
-                ammo_category = "redarmy-damage",
                 range = attack_range,
-                cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
-                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
-                shell_particle =
-                {
-                    name = "shell-particle",
-                    direction_deviation = 0.1,
-                    speed = 0.1,
-                    speed_deviation = 0.03,
-                    center = {0, 0.1},
-                    creation_distance = -0.5,
-                    starting_frame_speed = 0.4,
-                    starting_frame_speed_deviation = 0.1
+                cooldown = 10,
+                warmup = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
+                ammo_type = {
+                    category = "melee",
+                    target_type = "direction",
+                    action = {
+                        type = "direct",
+                        action_delivery = {
+                            type = 'instant',
+                            source_effects = {
+                                {
+                                    type = "script",
+                                    effect_id = ENGINEER_ATTACK,
+                                }
+                            }
+                        }
+                    }
                 },
-                projectile_creation_distance = 1.125,
-                sound = ERM_Sound.pistol(),
-                ammo_type = ERM_WeaponRig.get_bullet('redarmy-damage'),
                 animation = gun_animation
             },
             distance_per_frame = 0.1,
             run_animation = running_animation,
             dying_sound = ERM_Sound.death(0.75),
-            corpse = "common-red-army-corpse"
+            corpse = "common-red-army-corpse-2"
         }
     })
 end

@@ -21,7 +21,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'human-sniper'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local hitpoint = 150
+local hitpoint = 200
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value

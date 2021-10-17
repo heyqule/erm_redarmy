@@ -16,60 +16,65 @@ Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
 ### Features
 #### Tier 1 Units
-###### Miner (Retire @ tier 3)
-    - Health 100 - 1350  (level 1 - 20)
-    - Melee damage 5 - 8 (level 1 - 20)
+###### Miner (stop not spawn from spawner @ lvl3)
+    - Health 100 - 3225  (level 1 - 20)
+    - Melee damage 5 - 75 (level 1 - 20)
     - 1 attack / 1s  
 
-###### Pistol (Retire @ tier 3)
-    - Health 80 - 1080
-    - Physical damage 5 - 8 
-    - 1 attack / 2s
+###### Pistol (stop spawn from spawner @ lvl3)
+    - Health 80 - 2080
+    - Physical damage 5 - 40 
+    - 1 attack / 2-1s
 
-#### Tier 2 Units
 ###### Machine gunner
     - Health 200 - 2700
     - Physical damage 5 - 15   
     - 1 - 4 attacks / s
 
+#### Tier 2 Units
+
 ###### Sniper
-    - Health 150 - 2050
-    - Physical damage 30 - 200
+    - Health 200 - 2700
+    - Physical damage 30 - 210
     - 1 attacks / 5 - 3s
 
 ###### Tank (Evolution factor 0.6+)
-    - Health 500 - 6075
-    - Physical damage 30 - 250  
+    - Health 700 - 9450
+    - Physical damage 50 - 350  
     - 1 attacks / 4 - 2s
 
 ###### Dropship
-    - Health 300 - 4050
+    - Health 400 - 5400
     - Drop units
 
 #### Tier 3 Units
+###### Engineer
+    - Health 250 - 3375
+    - Build building
+
 ###### Heavy Machine gunner
-    - Health 225 - 3037
+    - Health 300 - 4050
     - Physical damage 10 - 25   
     - 1 - 4 attacks / s
 
 ###### Shotgunner
-    - Health 300 - 4050
+    - Health 350 - 4725
     - Physical damage 5 - 15 per pellet * 16
     - 1 attacks / 2 - 1s
 
 ###### Plane - Gunner
-    - Health 350 - 4725
+    - Health 450 - 6075
     - Physical damage 20 - 60
-    - 1 - 2 attacks / s
+    - 1 - 3 attacks / s
 
 ###### Tank - explosive rounds
-    - Health 450 - 6750
-    - Physical damage 50 - 200 (AOE 3, 10% AOE dmg)
+    - Health 600 - 8100
+    - Physical damage 50 - 250 (AOE 3, 45% AOE dmg)
     - 1 attacks / 5 - 3s
 
 ###### Plane - Bomber
-    - Health 300 - 4050
-    - Physical damage 35 - 100 (AOE 3, 25% AOE dmg)
+    - Health 400 - 5400
+    - Physical damage 35 - 100 (AOE 3, 65% AOE dmg)
     - 1 attacks / 4 - 2s
 
 Physical resistance: 95

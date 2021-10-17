@@ -1,4 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: ???
+
+  Features:
+    - Added an enginneer to build spawners and turrets, high-end tier 2 unit.
+
+  Changes:
+    - adjusted max_count_of_owned_units to be max_friends_around_to_spawn+2
+    - HP buff across all units
+    - Machine-gunner is now on tier 1 for custom attack group
+    - Adjust miner and pistol HP and damage for custom attack group
+    - AOE damage ratio buff for tank (45% AOE) and plane (65% AOE). Total damage stay the same.
+    - Running speed can now adjust with setting
+
+---------------------------------------------------------------------------------------------------
 Version: 0.5.1
 Date: 2021-09-18
 

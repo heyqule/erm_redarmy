@@ -20,7 +20,7 @@ local name = 'human-miner'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local hitpoint = 100
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2.5
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
 -- Handles acid and poison resistance
@@ -42,7 +42,7 @@ local incremental_cold_resistance = 80
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_physical_damage = 5
-local incremental_physical_damage = 25
+local incremental_physical_damage = 70
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -53,7 +53,7 @@ local attack_range = 1
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.075
-local incremental_movement_speed = 0.1
+local incremental_movement_speed = 0.15
 
 -- Misc settings
 local vision_distance = 30

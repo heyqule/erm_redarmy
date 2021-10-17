@@ -21,7 +21,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'plane-bomber'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local hitpoint = 300
+local hitpoint = 400
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -49,7 +49,7 @@ local incremental_explosive_damage = 65
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_attack_speed = 240
-local incremental_attack_speed = 120
+local incremental_attack_speed = 150
 
 local attack_range = ERM_Config.get_max_attack_range()
 
@@ -158,7 +158,7 @@ function ErmRedArmy.make_bomber_plane(level)
                             target_effects = {
                                 {
                                     type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.75, type = "explosion" },
+                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.35, type = "explosion" },
                                 },
                                 {
                                     type = "nested-result",
@@ -174,7 +174,7 @@ function ErmRedArmy.make_bomber_plane(level)
                                             {
                                                 {
                                                     type = "damage",
-                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.25, type = "explosion"}
+                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.65, type = "explosion"}
                                                 },
                                                 {
                                                     type = "create-entity",

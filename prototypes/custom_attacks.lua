@@ -20,12 +20,26 @@ local get_dropship_droppable_unit = function()
     return CustomAttackHelper.get_unit(droppable_unit_names, MOD_NAME)
 end
 
+local engineer_building_name = {
+    { 'gun-turret-short' },
+    { 'gun-turret-short' },
+    { 'gun-turret-short','lab' },
+}
+local get_engineer_building = function()
+    return CustomAttackHelper.get_unit(engineer_building_name, MOD_NAME)
+end
+
 local CustomAttacks = {}
 
 CustomAttacks.valid = CustomAttackHelper.valid
 
 function CustomAttacks.process_dropship(event)
     CustomAttackHelper.drop_unit(event, MOD_NAME, get_dropship_droppable_unit())
+end
+
+function CustomAttacks.process_engineer(event)
+    CustomAttackHelper.drop_unit(event, MOD_NAME, get_engineer_building())
+    event.source_entity.die('neutral')
 end
 
 return CustomAttacks

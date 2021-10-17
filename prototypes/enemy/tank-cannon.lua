@@ -21,7 +21,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'tank-cannon'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local hitpoint = 500
+local hitpoint = 700
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -43,15 +43,15 @@ local incremental_cold_resistance = 80
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_physical_damage = 30
-local incremental_physical_damage = 220
+local base_physical_damage = 50
+local incremental_physical_damage = 320
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_attack_speed = 240
 local incremental_attack_speed = 120
 
-local attack_range = 10
+local attack_range = 12
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.1

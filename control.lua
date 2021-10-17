@@ -47,8 +47,8 @@ local addRaceSettings = function()
         attack_meter = 0, -- Build by killing their force (Spawner = 50, turrets = 10, unit = 1)
         next_attack_threshold = 0, -- Used by system to calculate next move
         units = {
-            { 'human-miner', 'human-pistol' },
-            { 'human-machinegun', 'human-sniper', 'tank-cannon', 'plane-dropship' },
+            { 'human-miner', 'human-pistol', 'human-machinegun' },
+            { 'human-sniper', 'tank-cannon', 'plane-dropship', 'human-engineer' },
             { 'human-heavy-machinegun', 'human-shotgun', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' },
         },
         current_units_tier = {},
@@ -106,6 +106,8 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
     if CustomAttacks.valid(event, MOD_NAME) then
         if event.effect_id == DROPSHIP_ATTACK then
             CustomAttacks.process_dropship(event)
+        elseif event.effect_id == ENGINEER_ATTACK then
+            CustomAttacks.process_engineer(event)
         end
     end
 end)
@@ -131,6 +133,12 @@ Event.register(Event.generate_event_name(ErmConfig.RACE_SETTING_UPDATE), functio
                     {'plane-bomber'}
                 }
                 race_setting.dropship = 'plane-dropship'
+            end
+
+            if race_setting.version < 102 then
+                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 2, 'human-engineer')
+                ErmRaceSettingsHelper.remove_unit_from_tier(race_setting, 2, 'human-machinegun')
+                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 1, 'human-machinegun')
             end
 
             race_setting.version = MOD_VERSION

@@ -28,7 +28,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'tank-explosive-cannon'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local hitpoint = 450
+local hitpoint = 600
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -51,14 +51,14 @@ local incremental_cold_resistance = 80
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_explosive_damage = 50
-local incremental_explosive_damage = 150
+local incremental_explosive_damage = 200
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_attack_speed = 300
-local incremental_attack_speed = 120
+local incremental_attack_speed = 180
 
-local attack_range = 10
+local attack_range = 12
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.1
@@ -163,7 +163,7 @@ function ErmRedArmy.make_explosive_tank(level)
                             target_effects = {
                                 {
                                     type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.9, type = "explosion" },
+                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.55, type = "explosion" },
                                 },
                                 {
                                     type = "nested-result",
@@ -179,7 +179,7 @@ function ErmRedArmy.make_explosive_tank(level)
                                             {
                                                 {
                                                     type = "damage",
-                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.1, type = "explosion"}
+                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.45, type = "explosion"}
                                                 },
                                                 {
                                                     type = "create-entity",

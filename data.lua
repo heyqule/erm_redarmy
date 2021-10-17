@@ -47,6 +47,7 @@ require "prototypes.enemy.corpse"
 require "prototypes.enemy.human-miner"
 require "prototypes.enemy.human-pistol"
 require "prototypes.enemy.human-machinegun"
+require "prototypes.enemy.human-engineer"
 require "prototypes.enemy.human-sniper"
 require "prototypes.enemy.human-shotgun"
 require "prototypes.enemy.human-heavy-machinegun"
@@ -69,6 +70,7 @@ for i = 1, level do
     ErmRedArmy.make_human_pistol(i)
     ErmRedArmy.make_human_machinegun(i)
     ErmRedArmy.make_human_sniper(i)
+    ErmRedArmy.make_human_engineer(i)
     ErmRedArmy.make_human_shotgun(i)
     ErmRedArmy.make_human_heavy_machinegun(i)
     ErmRedArmy.make_tank(i)

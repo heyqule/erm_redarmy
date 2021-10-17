@@ -21,7 +21,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'plane-gunner'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local hitpoint = 350
+local hitpoint = 450
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -49,7 +49,7 @@ local incremental_physical_damage = 12
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_attack_speed = 60
-local incremental_attack_speed = 30
+local incremental_attack_speed = 40
 
 local attack_range = ERM_Config.get_max_attack_range()
 
