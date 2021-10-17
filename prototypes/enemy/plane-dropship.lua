@@ -21,7 +21,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'plane-dropship'
 
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local hitpoint = 300
+local hitpoint = 450
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value

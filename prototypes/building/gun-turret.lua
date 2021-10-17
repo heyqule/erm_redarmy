@@ -15,6 +15,7 @@ local ERM_Config = require('__enemyracemanager__/lib/global_config')
 local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
 
 local name = 'gun-turret'
+local short_range_name = 'gun-turret-short'
 
 -- Hitpoints
 local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -124,5 +125,16 @@ function ErmRedArmy.make_gun_turret(level)
 
     data:extend({
         redarmy_gun_turret
+    })
+
+
+    local short_redarmy_gun_turret = util.table.deepcopy(redarmy_gun_turret)
+
+    short_redarmy_gun_turret['name'] = MOD_NAME .. '/' .. short_range_name .. '/' .. level
+    short_redarmy_gun_turret['attack_parameters']['range'] = ERM_Config.get_max_attack_range()
+    short_redarmy_gun_turret['autoplace'] = nil
+
+    data:extend({
+        short_redarmy_gun_turret
     })
 end
