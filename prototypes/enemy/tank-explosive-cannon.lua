@@ -147,6 +147,7 @@ function ErmRedArmy.make_explosive_tank(level)
                 type = "projectile",
                 ammo_category = "redarmy-damage",
                 range = attack_range,
+                min_attack_distance = attack_range - 4,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 projectile_creation_distance = 1.6,
                 projectile_center = {-0.15625, -0.07812},
@@ -163,7 +164,7 @@ function ErmRedArmy.make_explosive_tank(level)
                             target_effects = {
                                 {
                                     type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.55, type = "explosion" },
+                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.65, type = "explosion" },
                                 },
                                 {
                                     type = "nested-result",
@@ -179,7 +180,7 @@ function ErmRedArmy.make_explosive_tank(level)
                                             {
                                                 {
                                                     type = "damage",
-                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.45, type = "explosion"}
+                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.35, type = "explosion"}
                                                 },
                                                 {
                                                     type = "create-entity",
