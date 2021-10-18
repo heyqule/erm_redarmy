@@ -69,7 +69,7 @@ Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
 ###### Tank - explosive rounds
     - Health 600 - 8100
-    - Physical damage 50 - 250 (AOE 3, 45% AOE dmg)
+    - Physical damage 50 - 250 (AOE 3, 35% AOE dmg)
     - 1 attacks / 5 - 3s
 
 ###### Plane - Bomber

@@ -55,7 +55,7 @@ local attack_range = 3
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.15
-local incremental_movement_speed = 0.1
+local incremental_movement_speed = 0.125
 
 -- Misc settings
 local vision_distance = 35
@@ -141,6 +141,7 @@ function ErmRedArmy.make_dropship_plane(level)
                 type = "projectile",
                 ammo_category = 'biological',
                 range = attack_range,
+                min_attack_distance = attack_range - 4,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 cooldown_deviation = 0.1,
                 warmup = 12,

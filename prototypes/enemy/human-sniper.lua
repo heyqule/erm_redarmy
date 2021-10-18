@@ -137,6 +137,7 @@ function ErmRedArmy.make_human_sniper(level)
                 type = "projectile",
                 ammo_category = "redarmy-damage",
                 range = attack_range,
+                min_attack_distance = attack_range - 4,
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
                 shell_particle =
