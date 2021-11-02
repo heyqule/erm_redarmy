@@ -9,7 +9,7 @@ require('util')
 local Table = require('__stdlib__/stdlib/utils/table')
 local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
 
-local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
+local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_AnimationRig = require('__enemyracemanager__/lib/rig/animation')
 
 require('__base__/prototypes/entity/character-animations')

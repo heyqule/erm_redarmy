@@ -11,8 +11,8 @@
 require('__stdlib__/stdlib/utils/defines/time')
 require('util')
 
-local ERM_UnitHelper = require('__enemyracemanager__/lib/unit_helper')
-local ERM_UnitTint = require('__enemyracemanager__/lib/unit_tint')
+local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
+local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERM_Config = require('__enemyracemanager__/lib/global_config')
 
