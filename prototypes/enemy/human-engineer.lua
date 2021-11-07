@@ -107,7 +107,7 @@ function ErmRedArmy.make_human_engineer(level)
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level),
             order = MOD_NAME .. '/'  .. name .. '/' .. level,
-            subgroup = "enemies",
+            subgroup = "erm-builder-enemies",
             shooting_cursor_size = 2,
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
