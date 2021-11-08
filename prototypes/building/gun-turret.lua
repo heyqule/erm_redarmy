@@ -49,7 +49,7 @@ local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipl
 local base_attack_speed = 300
 local incremental_attack_speed = 285
 
-local attack_range = 20
+local attack_range = 30
 
 local collision_box = { { -0.7, -0.7 }, { 0.7, 0.7 } }
 local map_generator_bounding_box = { { -2.5, -2.5 }, { 2.5, 2.5 } }
