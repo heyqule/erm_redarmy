@@ -7,6 +7,7 @@ Date: ???
 
   Changes:
     - Change unit flags
+    - Adjusted pollution_to_join_attack values, overall lower required values.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0

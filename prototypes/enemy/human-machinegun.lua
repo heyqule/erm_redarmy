@@ -50,7 +50,7 @@ local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipl
 local base_attack_speed = 60
 local incremental_attack_speed = 45
 
-local attack_range = 10
+local attack_range = 9
 
 local movement_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
 local base_movement_speed = 0.075
