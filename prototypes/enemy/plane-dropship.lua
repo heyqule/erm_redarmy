@@ -163,8 +163,7 @@ function ErmRedArmy.make_dropship_plane(level)
             },
             distance_per_frame = 1,
             run_animation = gunship_animation,
-            render_layer = "air-object",
-            final_render_layer = "air-object",
+            render_layer = "wires-above",
             corpse = "erm-medium-remnants",
             dying_explosion = "medium-explosion",
         }
