@@ -9,6 +9,8 @@ Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
 
 Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
+ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.youtube.com/watch?v=phLRReAjxHA)
+
 ### Requirement
 * Enemy Race Manager >= 1.7
 * Factorio Standard Library >= 1.4.6
