@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.3.0
+Date: 2022-01-15
+
+  Changes:
+    - Balance spawner for Free for all mode
+    - Standardized spawn timers for spawner to be 10s - 5s.
+    - Standardize max_count_of_owned_units and max_friends_around_to_spawn to 8, 5 respectively
+    - Changed spawn rate and spawn unit for spanwers.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.2.0
 Date: 2012-12-26
 
