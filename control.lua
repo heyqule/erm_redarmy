@@ -30,7 +30,11 @@ local createRace = function()
     force.disable_research()
     force.friendly_fire = false;
 
-    ErmForceHelper.set_friends(game, FORCE_NAME)
+    if settings.startup['enemyracemanager-free-for-all'].value then
+        ErmForceHelper.set_friends(game, FORCE_NAME, false)
+    else
+        ErmForceHelper.set_friends(game, FORCE_NAME, true)
+    end
 end
 
 local addRaceSettings = function()

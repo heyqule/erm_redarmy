@@ -164,7 +164,7 @@ function ErmRedArmy.make_explosive_tank(level)
                             target_effects = {
                                 {
                                     type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.65, type = "explosion" },
+                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.35, type = "explosion" },
                                 },
                                 {
                                     type = "nested-result",
@@ -180,7 +180,7 @@ function ErmRedArmy.make_explosive_tank(level)
                                             {
                                                 {
                                                     type = "damage",
-                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.35, type = "explosion"}
+                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.65, type = "explosion"}
                                                 },
                                                 {
                                                     type = "create-entity",
