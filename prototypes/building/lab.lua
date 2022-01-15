@@ -45,8 +45,8 @@ local unit_scale = 2
 local pollution_absorption_absolute = 200
 local spawning_cooldown = { 600, 300 }
 local spawning_radius = 10
-local max_count_of_owned_units = 5
-local max_friends_around_to_spawn = 3
+local max_count_of_owned_units = 8
+local max_friends_around_to_spawn = 5
 local spawn_table = function(level)
     local res = {}
     --Tire 1
