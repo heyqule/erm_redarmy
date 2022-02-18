@@ -13,5 +13,5 @@ DEBUG_MODE = false
 
 CHARACTER_RIG_STILL_FRAME = 12
 
-DROPSHIP_ATTACK = 'dropship-attack'
-ENGINEER_ATTACK = 'engineer-attack'
+DROPSHIP_ATTACK = 'emrmy-dsh'
+ENGINEER_ATTACK = 'emrmy-gin'

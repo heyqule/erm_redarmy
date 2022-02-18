@@ -38,56 +38,53 @@ local createRace = function()
 end
 
 local addRaceSettings = function()
-    if remote.call('enemy_race_manager', 'get_race', MOD_NAME) then
-        return
+    local race_settings = remote.call('enemy_race_manager', 'get_race', MOD_NAME)
+    if race_settings == nil then
+        race_settings = {}
     end
-    local race_settings = {
-        race = MOD_NAME,
-        version = MOD_VERSION,
-        level = 1, -- Race level
-        tier = 1, -- Race tier
-        evolution_point = 0,
-        evolution_base_point = 0,
-        attack_meter = 0, -- Build by killing their force (Spawner = 50, turrets = 10, unit = 1)
-        next_attack_threshold = 0, -- Used by system to calculate next move
-        units = {
-            { 'human-miner', 'human-pistol', 'human-machinegun' },
-            { 'human-sniper', 'tank-cannon', 'plane-dropship', 'human-engineer' },
-            { 'human-heavy-machinegun', 'human-shotgun', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' },
-        },
-        current_units_tier = {},
-        turrets = {
-            { 'gun-turret', 'laser-turret' },
-            {},
-            {},
-        },
-        current_turrets_tier = {},
-        command_centers = {
-            { 'lab' },
-            {},
-            {}
-        },
-        current_command_centers_tier = {},
-        support_structures = {
-            { 'assemble-machine' },
-            { 'electric-furnace' },
-            {  },
-        },
-        current_support_structures_tier = {},
-        flying_units = {
-            {'plane-gunner'}, -- Fast unit that uses in rapid target attack group
-            {'plane-dropship'},
-            {'plane-bomber'}
-        },
-        dropship = 'plane-dropship'
-    }
 
-    race_settings.current_units_tier = race_settings.units[1]
-    race_settings.current_turrets_tier = race_settings.turrets[1]
-    race_settings.current_command_centers_tier = race_settings.command_centers[1]
-    race_settings.current_support_structures_tier = race_settings.support_structures[1]
+    race_settings.race =  race_settings.race or MOD_NAME
+    race_settings.version =  race_settings.version or MOD_VERSION
+    race_settings.level =  race_settings.level or 1
+    race_settings.tier =  race_settings.tier or 1
+    race_settings.evolution_point =  race_settings.evolution_point or 0
+    race_settings.evolution_base_point =  race_settings.evolution_base_point or 0
+    race_settings.attack_meter = race_settings.attack_meter or 0
+    race_settings.attack_meter_total = race_settings.attack_meter_total or 0
+    race_settings.next_attack_threshold = race_settings.next_attack_threshold or 0
+
+    race_settings.units = {
+        { 'human-miner', 'human-pistol', 'human-machinegun' },
+        { 'human-sniper', 'tank-cannon', 'plane-dropship', 'human-engineer' },
+        { 'human-heavy-machinegun', 'human-shotgun', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' },
+    }
+    race_settings.turrets = {
+        { 'gun-turret', 'laser-turret' },
+        {},
+        {},
+    }
+    race_settings.command_centers = {
+        { 'lab' },
+        {},
+        {}
+    }
+    race_settings.support_structures = {
+        { 'assemble-machine' },
+        { 'electric-furnace' },
+        {  },
+    }
+    race_settings.flying_units = {
+        {'plane-gunner'}, -- Fast unit that uses in rapid target attack group
+        {'plane-dropship'},
+        {'plane-bomber'}
+    }
+    race_settings.dropship = 'plane-dropship'
 
     remote.call('enemy_race_manager', 'register_race', race_settings)
+
+    Event.dispatch({
+        name = Event.get_event_name(ErmConfig.RACE_SETTING_UPDATE), affected_race = MOD_NAME })
+
 end
 
 Event.on_init(function(event)
