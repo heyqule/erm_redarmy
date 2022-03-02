@@ -97,10 +97,7 @@ end)
 
 Event.on_configuration_changed(function(event)
     createRace()
-
-    -- Mod Compatibility Upgrade for race settings
-    Event.dispatch({
-        name = Event.get_event_name(ErmConfig.RACE_SETTING_UPDATE), affected_race = MOD_NAME })
+    addRaceSettings()
 end)
 
 local attack_functions =
@@ -119,42 +116,6 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
         attack_functions[event.effect_id](event)
     end
 end)
-
----
---- Modify Race Settings for existing game
----
-Event.register(Event.generate_event_name(ErmConfig.RACE_SETTING_UPDATE), function(event)
-    local race_setting = remote.call('enemy_race_manager', 'get_race', MOD_NAME)
-    if (event.affected_race == MOD_NAME) and race_setting then
-        if race_setting.version < MOD_VERSION then
-            if race_setting.version < 101 then
-                race_setting.angry_meter = nil
-                race_setting.send_attack_threshold = nil
-                race_setting.send_attack_threshold_deviation = nil
-                race_setting.attack_meter = 0
-                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 2, 'plane-dropship')
-                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 3, 'plane-gunner')
-                ErmRaceSettingsHelper.remove_unit_from_tier(race_setting, 3, 'plane-laser')
-                race_setting.flying_units = {
-                    {'plane-gunner'}, -- Fast unit that uses in rapid target attack group
-                    {'plane-dropship'},
-                    {'plane-bomber'}
-                }
-                race_setting.dropship = 'plane-dropship'
-            end
-
-            if race_setting.version < 102 then
-                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 2, 'human-engineer')
-                ErmRaceSettingsHelper.remove_unit_from_tier(race_setting, 2, 'human-machinegun')
-                ErmRaceSettingsHelper.add_unit_to_tier(race_setting, 1, 'human-machinegun')
-            end
-
-            race_setting.version = MOD_VERSION
-        end
-        remote.call('enemy_race_manager', 'update_race_setting', race_setting)
-    end
-end)
-
 
 
 
