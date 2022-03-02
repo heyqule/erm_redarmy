@@ -135,6 +135,7 @@ function ErmRedArmy.make_tank(level)
             pollution_to_join_attack = pollution_to_join_attack,
             distraction_cooldown = distraction_cooldown,
             ai_settings = biter_ai_settings,
+            spawning_time_modifier = 1.5,
             attack_parameters =
             {
                 type = "projectile",
