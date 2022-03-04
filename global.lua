@@ -7,11 +7,10 @@
 -- Globals within the mod
 MOD_NAME = 'erm_redarmy'
 FORCE_NAME = 'enemy_erm_redarmy'
-MOD_VERSION = 102
 
 DEBUG_MODE = false
 
 CHARACTER_RIG_STILL_FRAME = 12
 
-DROPSHIP_ATTACK = 'dropship-attack'
-ENGINEER_ATTACK = 'engineer-attack'
+DROPSHIP_ATTACK = 'emrmy-dsh'
+ENGINEER_ATTACK = 'emrmy-gin'
