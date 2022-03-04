@@ -44,7 +44,6 @@ local addRaceSettings = function()
     end
 
     race_settings.race =  race_settings.race or MOD_NAME
-    race_settings.version =  race_settings.version or MOD_VERSION
     race_settings.level =  race_settings.level or 1
     race_settings.tier =  race_settings.tier or 1
     race_settings.evolution_point =  race_settings.evolution_point or 0
