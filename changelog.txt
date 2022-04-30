@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.5.0
+Date: ???
+
+  Features:
+    - Added support for featured squad
+    - Added support for elite squad
+
+  Changes:
+    - Dropship unit dropping timer changed from 15-10s to 45-30s
+
+---------------------------------------------------------------------------------------------------
 Version: 1.4.0
 Date: 2022-03-04
 

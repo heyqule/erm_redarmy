@@ -57,15 +57,9 @@ require "prototypes.enemy.plane-gunner"
 require "prototypes.enemy.plane-bomber"
 require "prototypes.enemy.plane-dropship"
 
-local level = ErmConfig.MAX_LEVELS
+local max_level = ErmConfig.MAX_LEVELS
 
-for i = 1, level do
-    ErmRedArmy.make_gun_turret(i)
-    ErmRedArmy.make_laser_turret(i)
-    ErmRedArmy.make_lab(i)
-    ErmRedArmy.make_furnace(i)
-    ErmRedArmy.make_machine(i)
-
+for i = 1, max_level + ErmConfig.MAX_ELITE_LEVELS do
     ErmRedArmy.make_human_miner(i)
     ErmRedArmy.make_human_pistol(i)
     ErmRedArmy.make_human_machinegun(i)
@@ -78,5 +72,13 @@ for i = 1, level do
     ErmRedArmy.make_gunner_plane(i)
     ErmRedArmy.make_bomber_plane(i)
     ErmRedArmy.make_dropship_plane(i)
+end
+
+for i = 1, max_level do
+    ErmRedArmy.make_gun_turret(i)
+    ErmRedArmy.make_laser_turret(i)
+    ErmRedArmy.make_lab(i)
+    ErmRedArmy.make_furnace(i)
+    ErmRedArmy.make_machine(i)
 end
 

@@ -19,7 +19,6 @@ local String = require('__stdlib__/stdlib/utils/string')
 require('__erm_redarmy__/global')
 -- Constants
 
-
 local createRace = function()
     local force = game.forces[FORCE_NAME]
     if not force then
@@ -73,16 +72,15 @@ local addRaceSettings = function()
         {  },
     }
     race_settings.flying_units = {
-        {'plane-gunner'}, -- Fast unit that uses in rapid target attack group
+        {'plane-gunner'},
         {'plane-dropship'},
         {'plane-bomber'}
     }
     race_settings.dropship = 'plane-dropship'
 
-    remote.call('enemy_race_manager', 'register_race', race_settings)
+    ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 
-    Event.dispatch({
-        name = Event.get_event_name(ErmConfig.RACE_SETTING_UPDATE), affected_race = MOD_NAME })
+    remote.call('enemy_race_manager', 'register_race', race_settings)
 
 end
 
