@@ -43,8 +43,8 @@ local incremental_cold_resistance = 80
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_physical_damage = 50
-local incremental_physical_damage = 320
+local base_physical_damage = 5
+local incremental_physical_damage = 32
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -145,6 +145,7 @@ function ErmRedArmy.make_tank(level)
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 projectile_creation_distance = 1.6,
                 projectile_center = {-0.15625, -0.07812},
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level),
                 sound = ERM_Sound.tank_gunshot(),
                 ammo_type = {
                     category = "redarmy-damage",
@@ -153,18 +154,9 @@ function ErmRedArmy.make_tank(level)
                         type = "direct",
                         action_delivery = {
                             type = "projectile",
-                            projectile = "cannon-projectile-no-damage",
+                            projectile = "redarmy-cannon-projectile",
                             starting_speed = 1,
-                            target_effects = {
-                                {
-                                    type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level) * 0.67, type = "physical" },
-                                },
-                                {
-                                    type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level) * 0.33, type = "explosion" },
-                                }
-                            }
+                            max_range = ERM_Config.get_max_projectile_range(2),
                         }
                     }
                 },
