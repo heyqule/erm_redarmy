@@ -21,20 +21,50 @@ data:extend(
             },
         })
 
-local cannon_projectile = ERM_WeaponRig.remove_damage_from_cannon_projectile(
+local cannon_projectile = ERM_WeaponRig.standardize_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['cannon-projectile']),
-        'cannon-projectile-no-damage'
+        'redarmy-cannon-projectile'
 )
 
-local cannon_explosive_projectile =  ERM_WeaponRig.remove_damage_from_explosive_cannon_projectile(
+local cannon_explosive_projectile =  ERM_WeaponRig.standardize_explosive_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
-        'explosive-cannon-projectile-no-damage'
+        'redarmy-explosive-cannon-projectile'
 )
 
-local rocket = ERM_WeaponRig.remove_damage_from_rocket(
+local rocket = ERM_WeaponRig.standardize_rocket_damage(
         util.table.deepcopy(data.raw['projectile']['rocket']),
-        'rocket-no-damage'
+        'redarmy-rocket'
 )
+rocket['turn_speed'] = nil
+rocket['turning_speed_increases_exponentially_with_projectile_speed'] = false
+
+rocket['action']['action_delivery']['target_effects'][2] =
+{
+    type = "damage",
+    damage = { amount = 3.5, type = "explosion" },
+}
+table.insert(rocket['action']['action_delivery']['target_effects'], {
+    type = "nested-result",
+    action =
+    {
+        type = "area",
+        force = "not-same",
+        radius = 3,
+        action_delivery =
+        {
+            type = "instant",
+            target_effects =
+            {
+                {
+                    type = "damage",
+                    damage = {amount = 6.5, type = "explosion"}
+                },
+            }
+        }
+    }
+})
+
+
 data:extend({cannon_projectile, cannon_explosive_projectile, rocket })
 
 require "prototypes.building.gun-turret"
