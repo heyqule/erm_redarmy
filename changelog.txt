@@ -5,20 +5,20 @@ Date: 2022-06-06
   Features:
     - Added support for featured squad
     - Added support for elite squad
-    --- Featured Squad Details ---
+    - -- Featured Squad Details ---
     - Unit list, spawn ratio, unit attack point cost
     - {{'human-heavy-machinegun', 'human-shotgun', 'human-sniper','human-engineer' }, {2, 2, 1, 1}, 15},
     - {{'human-machinegun', 'human-heavy-machinegun', 'tank-explosive-cannon'}, {2, 2, 1}, 20},
     - {{'tank-cannon', 'tank-explosive-cannon'}, {2, 1}, 30},
     - {{'human-shotgun','tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber'}, {2, 1, 1, 1, 1}, 20},
     - {{'human-sniper','tank-cannon', 'tank-explosive-cannon','plane-gunner', 'plane-bomber'}, {2,1,1,1,1}, 20},
-    ------------------------------
-    --- Featured Flying Squad Details ---
+    - -----------------------------
+    - -- Featured Flying Squad Details ---
     - {{'plane-gunner', 'plane-bomber'}, {3, 2}, 50},
     - {{'plane-gunner', 'plane-dropship'}, {2, 1}, 50},
     - {{'plane-bomber'}, {1}, 50},
     - {{'plane-gunner'}, {1}, 30}
-    -------------------------------------
+    - ------------------------------------
 
   Changes:
     - Dropship unit dropping timer changed from 15-10s to 45-30s
