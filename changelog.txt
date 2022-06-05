@@ -21,10 +21,11 @@ Date: 2022-06-06
     - ------------------------------------
 
   Changes:
-    - Dropship unit dropping timer changed from 15-10s to 45-30s
+    - Dropship unit cooldown changed from 15-10s to 45-30s
     - Remove rocket turning_speed_increases_exponentially_with_projectile_speed to improve performance when there are many bomber planes.
     - Refactored rocket and cannon damage handling.
     - Added max_range to projectiles
+    - Refactored custom attack handling (dropships and proxy builder)
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.4.0
