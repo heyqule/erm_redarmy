@@ -43,8 +43,8 @@ local incremental_cold_resistance = 80
 
 -- Handles physical damages
 local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
-local base_explosive_damage = 35
-local incremental_explosive_damage = 65
+local base_explosive_damage = 3.5
+local incremental_explosive_damage = 6.5
 
 -- Handles Attack Speed
 local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
@@ -147,6 +147,7 @@ function ErmRedArmy.make_bomber_plane(level)
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level),
                 projectile_creation_distance = 1.6,
                 projectile_center = {-0.15625, -0.07812},
+                damage_modifier = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level),
                 sound = ERM_Sound.tank_gunshot(),
                 ammo_type = {
                     category = "redarmy-damage",
@@ -155,38 +156,9 @@ function ErmRedArmy.make_bomber_plane(level)
                         type = "direct",
                         action_delivery = {
                             type = "projectile",
-                            projectile = "rocket-no-damage",
+                            projectile = "redarmy-rocket",
                             starting_speed = 0.3,
-                            target_effects = {
-                                {
-                                    type = "damage",
-                                    damage = { amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.35, type = "explosion" },
-                                },
-                                {
-                                    type = "nested-result",
-                                    action =
-                                    {
-                                        type = "area",
-                                        force = "not-same",
-                                        radius = 3,
-                                        action_delivery =
-                                        {
-                                            type = "instant",
-                                            target_effects =
-                                            {
-                                                {
-                                                    type = "damage",
-                                                    damage = {amount = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, damage_multiplier, level) * 0.65, type = "explosion"}
-                                                },
-                                                {
-                                                    type = "create-entity",
-                                                    entity_name = "explosion"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            max_range = ERM_Config.get_max_projectile_range(2),
                         }
                     }
                 },

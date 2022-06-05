@@ -19,7 +19,6 @@ local String = require('__stdlib__/stdlib/utils/string')
 require('__erm_redarmy__/global')
 -- Constants
 
-
 local createRace = function()
     local force = game.forces[FORCE_NAME]
     if not force then
@@ -70,19 +69,42 @@ local addRaceSettings = function()
     race_settings.support_structures = {
         { 'assemble-machine' },
         { 'electric-furnace' },
-        {  },
+        { },
     }
     race_settings.flying_units = {
-        {'plane-gunner'}, -- Fast unit that uses in rapid target attack group
+        {'plane-gunner'},
         {'plane-dropship'},
         {'plane-bomber'}
     }
     race_settings.dropship = 'plane-dropship'
+    race_settings.droppable_units = {
+        {{ 'human-miner', 'human-pistol' },{3,1}},
+        {{ 'human-machinegun', 'tank-cannon' },{4,2}},
+        {{ 'human-heavy-machinegun', 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon' },{4,2,1,1}},
+    }
+    race_settings.construction_buildings = {
+        {{ 'gun-turret-short'},{1}},
+        {{ 'gun-turret-short'},{1}},
+        {{ 'gun-turret-short','lab'},{2,1}},
+    }
+    race_settings.featured_groups = {
+        -- Unit list, spawn ratio, unit attack point cost
+        {{'human-heavy-machinegun', 'human-shotgun', 'human-sniper','human-engineer' }, {2, 2, 1, 1}, 15},
+        {{'human-machinegun', 'human-heavy-machinegun', 'tank-explosive-cannon'}, {2, 2, 1}, 20},
+        {{'tank-cannon', 'tank-explosive-cannon'}, {2, 1}, 30},
+        {{'human-shotgun','tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber'}, {2, 1, 1, 1, 1}, 20},
+        {{'human-sniper','tank-cannon', 'tank-explosive-cannon','plane-gunner', 'plane-bomber'}, {2,1,1,1,1}, 20},
+    }
+    race_settings.featured_flying_groups = {
+        {{'plane-gunner', 'plane-bomber'}, {3, 2}, 50},
+        {{'plane-gunner', 'plane-dropship'}, {2, 1}, 50},
+        {{'plane-bomber'}, {1}, 50},
+        {{'plane-gunner'}, {1}, 30}
+    }
+
+    ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 
     remote.call('enemy_race_manager', 'register_race', race_settings)
-
-    Event.dispatch({
-        name = Event.get_event_name(ErmConfig.RACE_SETTING_UPDATE), affected_race = MOD_NAME })
 
 end
 

@@ -4,42 +4,19 @@
 --- DateTime: 12/23/2020 8:27 PM
 ---
 
-local String = require('__stdlib__/stdlib/utils/string')
-local Math = require('__stdlib__/stdlib/utils/math')
-local Table = require('__stdlib__/stdlib/utils/table')
-
-local ForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
 local CustomAttackHelper = require('__enemyracemanager__/lib/helper/custom_attack_helper')
-
-local droppable_unit_names = {
-    { 'human-pistol' },
-    { 'human-machinegun', 'human-machinegun', 'human-machinegun', 'tank-cannon' },
-    { 'human-heavy-machinegun', 'human-shotgun', 'tank-cannon', 'human-shotgun' },
-}
-local get_dropship_droppable_unit = function()
-    return CustomAttackHelper.get_unit(droppable_unit_names, MOD_NAME)
-end
-
-local engineer_building_name = {
-    { 'gun-turret-short' },
-    { 'gun-turret-short' },
-    { 'gun-turret-short','lab' },
-}
-local get_engineer_building = function()
-    return CustomAttackHelper.get_unit(engineer_building_name, MOD_NAME)
-end
 
 local CustomAttacks = {}
 
 CustomAttacks.valid = CustomAttackHelper.valid
 
-function CustomAttacks.process_dropship(event)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, get_dropship_droppable_unit())
+function CustomAttacks.process_engineer(event)
+    CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'construction_buildings'))
+    event.source_entity.die('neutral')
 end
 
-function CustomAttacks.process_engineer(event)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, get_engineer_building())
-    event.source_entity.die('neutral')
+function CustomAttacks.process_dropship(event)
+    CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'))
 end
 
 return CustomAttacks
