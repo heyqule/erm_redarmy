@@ -3,7 +3,7 @@ Version: 1.5.1
 Date: 2022-06-11
 
   Change:
-    - Remove smoke from scout rocket to increase performance in large group.
+    - reduced smoke from rocket frequency to 1 / 5 to increase performance in large group.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.5.0
