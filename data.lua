@@ -37,7 +37,7 @@ local rocket = ERM_WeaponRig.standardize_rocket_damage(
 )
 rocket['turn_speed'] = nil
 rocket['turning_speed_increases_exponentially_with_projectile_speed'] = false
-rocket['smoke'] = nil
+rocket['smoke'][1]['frequency'] = 1 / 5
 
 rocket['action']['action_delivery']['target_effects'][2] =
 {
