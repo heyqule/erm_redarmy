@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.5.3
-Date: 2022-xx-xx
+Date: 2022-07-10
 
   Changes:
     - Improve unit performance by changing enemies distraction_cooldown from 20 to 300.
