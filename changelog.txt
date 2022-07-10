@@ -1,15 +1,22 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.5.3
+Date: 2022-xx-xx
+
+  Changes:
+    - Improve unit performance by changing enemies distraction_cooldown from 20 to 300.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.5.2
 Date: 2022-06-22
 
-  Change:
+  Changes:
     - Added support to set neutral for neutral forces that created from other mods.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.5.1
 Date: 2022-06-11
 
-  Change:
+  Changes:
     - reduced smoke from rocket frequency to 1 / 5 to increase performance in large group.
 
 ---------------------------------------------------------------------------------------------------
@@ -26,13 +33,13 @@ Date: 2022-06-06
     - {{'tank-cannon', 'tank-explosive-cannon'}, {2, 1}, 30},
     - {{'human-shotgun','tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber'}, {2, 1, 1, 1, 1}, 20},
     - {{'human-sniper','tank-cannon', 'tank-explosive-cannon','plane-gunner', 'plane-bomber'}, {2,1,1,1,1}, 20},
-    - -----------------------------
+    - -- / Featured Squad Details --
     - -- Featured Flying Squad Details ---
     - {{'plane-gunner', 'plane-bomber'}, {3, 2}, 50},
     - {{'plane-gunner', 'plane-dropship'}, {2, 1}, 50},
     - {{'plane-bomber'}, {1}, 50},
     - {{'plane-gunner'}, {1}, 30}
-    - ------------------------------------
+    - -- / Featured Flying Squad Details ---
 
   Changes:
     - Dropship unit cooldown changed from 15-10s to 45-30s
