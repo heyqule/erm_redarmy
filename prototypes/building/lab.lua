@@ -106,6 +106,7 @@ function ErmRedArmy.make_lab(level)
                 { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
             },
+            map_color = REDARMY_MAP_COLOR,
             healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier,  level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
