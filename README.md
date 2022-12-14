@@ -11,11 +11,6 @@ Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
 ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.youtube.com/watch?v=phLRReAjxHA)
 
-### Requirement
-* Enemy Race Manager >= 1.15
-* Factorio Standard Library >= 1.4.6
-* Factorio Base >= 1.1
-
 ### Features
 #### Tier 1 Units
 ###### Miner (stop not spawn from spawner @ lvl3)
