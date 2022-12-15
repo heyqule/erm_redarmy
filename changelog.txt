@@ -3,7 +3,7 @@ Version: 1.6.0
 Date: 2022-12-12
 
   Changes:
-    - Refactored Level Strength Multiplier.
+    - Refactored Level Strength Multiplier for ERM 1.16.
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.5.4
