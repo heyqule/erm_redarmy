@@ -18,11 +18,11 @@ local name = 'gun-turret'
 local short_range_name = 'gun-turret-short'
 
 -- Hitpoints
-local health_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
+
 local hitpoint = 350
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
 
-local resistance_mutiplier = settings.startup["enemyracemanager-level-multipliers"].value
+
 -- Handles acid and poison resistance
 local base_acid_resistance = 0
 local incremental_acid_resistance = 75
@@ -40,12 +40,12 @@ local base_cold_resistance = 15
 local incremental_cold_resistance = 65
 
 -- Handles damages
-local damage_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
+
 local base_physical_damage = 5
 local incremental_physical_damage = 55
 
 -- Handles Attack Speed
-local attack_speed_multiplier = settings.startup["enemyracemanager-level-multipliers"].value
+
 local base_attack_speed = 60
 local incremental_attack_speed = 45
 
@@ -66,19 +66,19 @@ function ErmRedArmy.make_gun_turret(level)
     redarmy_gun_turret['name'] = MOD_NAME .. '/' .. name .. '/' .. level
     redarmy_gun_turret['localised_name'] = { 'entity-name.' .. MOD_NAME .. '/' .. name, level }
     redarmy_gun_turret['flag'] = { "placeable-player", "placeable-enemy" }
-    redarmy_gun_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, health_multiplier, level)
-    redarmy_gun_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, health_multiplier, level)
+    redarmy_gun_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level)
+    redarmy_gun_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier,  level)
     redarmy_gun_turret['order'] = MOD_NAME .. "-" .. name
     redarmy_gun_turret['minable'] = nil
     redarmy_gun_turret['resistance'] = {
-        { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
-        { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, resistance_mutiplier, level) },
-        { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, resistance_mutiplier, level) },
-        { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
-        { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, resistance_mutiplier, level) },
-        { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
-        { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, resistance_mutiplier, level) },
-        { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, resistance_mutiplier, level) }
+        { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
+        { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
+        { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance,  level) },
+        { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
+        { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
+        { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
+        { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
+        { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
     }
     redarmy_gun_turret['map_color'] = REDARMY_MAP_COLOR
     redarmy_gun_turret['collision_box'] = collision_box
@@ -90,7 +90,7 @@ function ErmRedArmy.make_gun_turret(level)
 
     -- Attack Changes
     redarmy_gun_turret['attack_parameters']['ammo_category'] = "redarmy-damage"
-    redarmy_gun_turret['attack_parameters']['cooldown'] = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, attack_speed_multiplier, level)
+    redarmy_gun_turret['attack_parameters']['cooldown'] = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed,  level)
     redarmy_gun_turret['attack_parameters']['cooldown_deviation'] = 0.1
     redarmy_gun_turret['attack_parameters']['range'] = attack_range
     redarmy_gun_turret['attack_parameters']['ammo_type'] = {
@@ -110,7 +110,7 @@ function ErmRedArmy.make_gun_turret(level)
                     },
                     {
                         type = "damage",
-                        damage = { amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, damage_multiplier, level), type="physical"}
+                        damage = { amount = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage,  level), type="physical"}
                     }
                 }
             }
