@@ -134,7 +134,7 @@ function ErmRedArmy.make_gunner_plane(level)
             selection_box = selection_box,
             vision_distance = vision_distance,
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed,  level),
-            pollution_to_join_attack = pollution_to_join_attack,
+            pollution_to_join_attack = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level),
             distraction_cooldown = distraction_cooldown,
             ai_settings = biter_ai_settings,
             spawning_time_modifier = 2,
