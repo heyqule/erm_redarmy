@@ -1,6 +1,6 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.6.1
-Date: 2023-??-??
+Date: 2023-01-13
 
   Changes:
     - Add support for pollution to join attack multiplier setting
