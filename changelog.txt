@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.7.0
+Date: 2023-??-??
+
+  Features:
+    - Added support for Milestones mod.
+    - "Default" enemy spawner generating method now group enemy spawns together.
+
+  Changes:
+    - Change code to use new remote interface name
+
+---------------------------------------------------------------------------------------------------
 Version: 1.6.1
 Date: 2023-01-13
 
