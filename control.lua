@@ -92,7 +92,7 @@ local addRaceSettings = function()
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost
         {{'human-heavy-machinegun', 'human-shotgun', 'human-sniper','human-engineer' }, {2, 2, 1, 1}, 15},
-        {{'human-machinegun', 'human-heavy-machinegun', 'tank-explosive-cannon'}, {2, 2, 1}, 20},
+        {{'human-machinegun', 'human-heavy-machinegun', 'human-sniper', 'tank-explosive-cannon'}, {2, 2, 1, 1}, 20},
         {{'tank-cannon', 'tank-explosive-cannon'}, {2, 1}, 30},
         {{'human-shotgun','tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber'}, {2, 1, 1, 1, 1}, 20},
         {{'human-sniper','tank-cannon', 'tank-explosive-cannon','plane-gunner', 'plane-bomber'}, {2,1,1,1,1}, 20},
