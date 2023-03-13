@@ -39,7 +39,7 @@ local createRace = function()
 end
 
 local addRaceSettings = function()
-    local race_settings = remote.call('enemy_race_manager', 'get_race', MOD_NAME)
+    local race_settings = remote.call('enemyracemanager', 'get_race', MOD_NAME)
     if race_settings == nil then
         race_settings = {}
     end
@@ -92,7 +92,7 @@ local addRaceSettings = function()
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost
         {{'human-heavy-machinegun', 'human-shotgun', 'human-sniper','human-engineer' }, {2, 2, 1, 1}, 15},
-        {{'human-machinegun', 'human-heavy-machinegun', 'tank-explosive-cannon'}, {2, 2, 1}, 20},
+        {{'human-machinegun', 'human-heavy-machinegun', 'human-sniper', 'tank-explosive-cannon'}, {2, 2, 1, 1}, 20},
         {{'tank-cannon', 'tank-explosive-cannon'}, {2, 1}, 30},
         {{'human-shotgun','tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber'}, {2, 1, 1, 1, 1}, 20},
         {{'human-sniper','tank-cannon', 'tank-explosive-cannon','plane-gunner', 'plane-bomber'}, {2,1,1,1,1}, 20},
@@ -106,7 +106,7 @@ local addRaceSettings = function()
 
     ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 
-    remote.call('enemy_race_manager', 'register_race', race_settings)
+    remote.call('enemyracemanager', 'register_race', race_settings)
 
 end
 
@@ -139,6 +139,9 @@ Event.register(defines.events.on_script_trigger_effect, function(event)
         attack_functions[event.effect_id](event)
     end
 end)
+
+local RemoteApi = require('scripts/remote')
+remote.add_interface("erm_redarmy", RemoteApi)
 
 
 
