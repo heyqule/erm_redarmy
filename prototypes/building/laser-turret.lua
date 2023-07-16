@@ -64,11 +64,11 @@ function ErmRedArmy.make_laser_turret(level)
     redarmy_laser_turret['subgroup'] = 'enemies'
     redarmy_laser_turret['name'] = MOD_NAME .. '/' .. name .. '/' .. level
     redarmy_laser_turret['localised_name'] = { 'entity-name.' .. MOD_NAME .. '/' .. name, level }
-    redarmy_laser_turret['flag'] = { "placeable-player", "placeable-enemy" }
+    redarmy_laser_turret['flags'] = { "placeable-player", "placeable-enemy" }
     redarmy_laser_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level)
     redarmy_laser_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier,  level)
     redarmy_laser_turret['order'] = MOD_NAME .. "-" .. name
-    redarmy_laser_turret['resistance'] = {
+    redarmy_laser_turret['resistances'] = {
         { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
         { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
         { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance,  level) },
