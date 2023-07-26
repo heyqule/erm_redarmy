@@ -13,6 +13,7 @@ local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_AnimationRig = require('__enemyracemanager__/lib/rig/animation')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 
 local ERM_Sound = require('prototypes.sound')
 
@@ -56,7 +57,7 @@ local base_movement_speed = 0.075
 local incremental_movement_speed = 0.15
 
 -- Misc settings
-local vision_distance = 30
+local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
 local pollution_to_join_attack = 2
 local distraction_cooldown = 300

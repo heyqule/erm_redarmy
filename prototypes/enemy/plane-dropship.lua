@@ -51,14 +51,14 @@ local incremental_physical_damage = 12
 local base_attack_speed = 2700
 local incremental_attack_speed = 900
 
-local attack_range = 3
+local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.5)
 
 
 local base_movement_speed = 0.15
 local incremental_movement_speed = 0.125
 
 -- Misc settings
-local vision_distance = 35
+local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
 local pollution_to_join_attack = 200
 local distraction_cooldown = 300
