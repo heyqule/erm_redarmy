@@ -4,7 +4,7 @@ Date: 2023-??-??
 
     Features:
       - ERM 1.18 compatibility changes
-      - Updated unit for dynamic attack range
+      - Updated unit for dynamic attack range and dynamic vision distance
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.7.1
