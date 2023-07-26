@@ -14,6 +14,7 @@ local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_AnimationRig = require('__enemyracemanager__/lib/rig/animation')
 local ERM_WeaponRig = require('__enemyracemanager__/lib/rig/weapon')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
+local ERM_Config = require('__enemyracemanager__/lib/global_config')
 
 local ERM_Sound = require('prototypes.sound')
 
@@ -50,7 +51,7 @@ local incremental_physical_damage = 2
 local base_attack_speed = 300
 local incremental_attack_speed = 240
 
-local attack_range = 12
+local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.75)
 
 
 local base_movement_speed = 0.075

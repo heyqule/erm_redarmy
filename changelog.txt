@@ -1,9 +1,17 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.8.0
+Date: 2023-??-??
+
+    Features:
+      - ERM 1.18 compatibility changes
+      - Updated unit for dynamic attack range
+
+---------------------------------------------------------------------------------------------------
 Version: 1.7.1
 Date: 2023-07-16
 
   Changes:
-    - Builder uses destroy(), instead of die()
+    - Systematic despawn units use destroy(), instead of die()
 
   Bugfixes:
     - Fixed turret resistances.

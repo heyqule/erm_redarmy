@@ -51,7 +51,7 @@ local incremental_explosive_damage = 6.5
 local base_attack_speed = 240
 local incremental_attack_speed = 150
 
-local attack_range = ERM_Config.get_max_attack_range()
+local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.75)
 
 
 local base_movement_speed = 0.15
