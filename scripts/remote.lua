@@ -37,4 +37,9 @@ function RemoteAPI.milestones_preset_addons()
     return preset
 end
 
+
+function RemoteAPI.register_new_enemy_race()
+    return true
+end
+
 return RemoteAPI
