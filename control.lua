@@ -11,7 +11,7 @@ local Game = require('__stdlib__/stdlib/game')
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 local ErmForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
 local ErmRaceSettingsHelper = require('__enemyracemanager__/lib/helper/race_settings_helper')
-local CustomAttacks = require('__erm_redarmy__/prototypes/custom_attacks')
+local CustomAttacks = require('__erm_redarmy__/scripts/custom_attacks')
 
 local Event = require('__stdlib__/stdlib/event/event')
 local String = require('__stdlib__/stdlib/utils/string')
@@ -94,18 +94,22 @@ local addRaceSettings = function()
     }
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost
-        {{'human-heavy-machinegun', 'human-shotgun', 'human-sniper','human-engineer' }, {2, 2, 1, 1}, 15},
-        {{'human-machinegun', 'human-heavy-machinegun', 'human-sniper', 'tank-explosive-cannon'}, {2, 2, 1, 1}, 20},
-        {{'tank-cannon', 'tank-explosive-cannon'}, {2, 1}, 30},
-        {{'human-shotgun','tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber'}, {2, 1, 1, 1, 1}, 20},
-        {{'human-sniper','tank-cannon', 'tank-explosive-cannon','plane-gunner', 'plane-bomber'}, {2,1,1,1,1}, 20},
+        {{'human-heavy-machinegun', 'human-shotgun', 'human-sniper','human-engineer' }, {2, 2, 1, 1}, 20},
+        {{'human-machinegun', 'human-heavy-machinegun', 'human-sniper', 'tank-explosive-cannon'}, {2, 2, 1, 1}, 25},
+        {{'tank-cannon', 'tank-explosive-cannon'}, {2, 1}, 35},
+        {{'human-shotgun','tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber'}, {2, 1, 1, 1, 1}, 25},
+        {{'human-sniper','tank-cannon', 'tank-explosive-cannon','plane-gunner', 'plane-bomber'}, {2,1,1,1,1}, 25},
     }
     race_settings.featured_flying_groups = {
-        {{'plane-gunner', 'plane-bomber'}, {3, 2}, 50},
-        {{'plane-gunner', 'plane-dropship'}, {2, 1}, 50},
-        {{'plane-bomber'}, {1}, 50},
-        {{'plane-gunner'}, {1}, 30}
+        {{'plane-gunner', 'plane-bomber'}, {3, 2}, 75},
+        {{'plane-gunner', 'plane-dropship'}, {2, 1}, 75},
+        {{'plane-bomber'}, {1}, 75},
+        {{'plane-gunner'}, {1}, 40}
     }
+
+    if game.active_mods['Krastorio2'] then
+        race_settings.enable_k2_creep = settings.startup['erm_redarmy-k2-creep'].value
+    end
 
     ErmRaceSettingsHelper.process_unit_spawn_rate_cache(race_settings)
 

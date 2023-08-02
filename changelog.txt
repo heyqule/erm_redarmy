@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.8.1
+Date: 2023-??-??
+
+  Changes:
+    - increased unit cost for custom attacks groups.
+    - dropship now drops multiple units like zerg and protoss
+    - Map color is now changeable in startup setting.
+    - K2 Creep can be toggled off.
+
+
+---------------------------------------------------------------------------------------------------
 Version: 1.8.0
 Date: 2023-07-26
 

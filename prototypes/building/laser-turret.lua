@@ -78,7 +78,7 @@ function ErmRedArmy.make_laser_turret(level)
         { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
         { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
     }
-    redarmy_laser_turret['map_color'] = REDARMY_MAP_COLOR
+    redarmy_laser_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup['erm_redarmy-map-color'].value)
     redarmy_laser_turret['collision_box'] = collision_box
     redarmy_laser_turret['selection_box'] = selection_box
     redarmy_laser_turret['map_generator_bounding_box'] = map_generator_bounding_box
