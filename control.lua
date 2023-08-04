@@ -104,7 +104,7 @@ local addRaceSettings = function()
         {{'plane-gunner', 'plane-bomber'}, {3, 2}, 75},
         {{'plane-gunner', 'plane-dropship'}, {2, 1}, 75},
         {{'plane-bomber'}, {1}, 75},
-        {{'plane-gunner'}, {1}, 40}
+        {{'plane-gunner'}, {1}, 50}
     }
 
     if game.active_mods['Krastorio2'] then

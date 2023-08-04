@@ -16,7 +16,17 @@ function CustomAttacks.process_engineer(event)
 end
 
 function CustomAttacks.process_dropship(event)
-    CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'))
+    local race_settings = CustomAttackHelper.get_race_settings(MOD_NAME)
+    CustomAttackHelper.drop_unit(event, MOD_NAME, 'human-machinegun', 3)
+    if CustomAttackHelper.can_spawn(75) then
+        CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'))
+    end
+    if race_settings.tier == 3 and CustomAttackHelper.can_spawn(40) then
+        CustomAttackHelper.drop_unit(event, MOD_NAME, 'human-shotgun', 2)
+        if CustomAttackHelper.can_spawn(20) then
+            CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'droppable_units'), 1)
+        end
+    end
 end
 
 return CustomAttacks
