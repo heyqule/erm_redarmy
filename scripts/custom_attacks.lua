@@ -9,6 +9,7 @@ local CustomAttackHelper = require('__enemyracemanager__/lib/helper/custom_attac
 local CustomAttacks = {}
 
 CustomAttacks.valid = CustomAttackHelper.valid
+CustomAttacks.get_race_settings = CustomAttackHelper.get_race_settings
 
 function CustomAttacks.process_engineer(event)
     CustomAttackHelper.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'construction_buildings'))
