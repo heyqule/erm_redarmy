@@ -5,6 +5,7 @@ Date: 2023-08-10
   Changes:
     - Refactored default autoplace
     - use new ERM mod registration system
+    - Turret max range is now max range config + 16
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.8.1

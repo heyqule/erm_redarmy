@@ -49,7 +49,7 @@ local incremental_physical_damage = 55
 local base_attack_speed = 60
 local incremental_attack_speed = 45
 
-local attack_range = 30
+local attack_range = ERM_Config.get_max_attack_range() + 16
 
 local collision_box = { { -0.7, -0.7 }, { 0.7, 0.7 } }
 local map_generator_bounding_box = { { -2.5, -2.5 }, { 2.5, 2.5 } }
