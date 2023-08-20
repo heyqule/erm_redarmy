@@ -6,13 +6,12 @@
 
 
 require('__stdlib__/stdlib/utils/defines/time')
-require ("util")
+require("util")
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_Sound = require('prototypes.sound')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
-
 
 local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
 local name = 'lab'
@@ -50,26 +49,26 @@ local max_friends_around_to_spawn = 5
 local spawn_table = function(level)
     local res = {}
     --Tire 1
-    res[1] = { MOD_NAME .. '/human-miner/' .. level,           { { 0.0, 1 }, { 0.2, 0.75 }, { 0.4, 0.6 }, { 0.6, 0.4 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
-    res[2] = { MOD_NAME .. '/human-pistol/' .. level,          { { 0.0, 0 }, { 0.2, 0.25 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
+    res[1] = { MOD_NAME .. '/human-miner/' .. level, { { 0.0, 1 }, { 0.2, 0.75 }, { 0.4, 0.6 }, { 0.6, 0.4 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
+    res[2] = { MOD_NAME .. '/human-pistol/' .. level, { { 0.0, 0 }, { 0.2, 0.25 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
     --Tire 2
-    res[3] = { MOD_NAME .. '/human-machinegun/' .. level,      { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.3 }, { 0.8, 0.5 }, { 1.0, 0.1 } } }
-    res[4] = { MOD_NAME .. '/human-sniper/' .. level,          { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
-    res[5] = { MOD_NAME .. '/tank-cannon/' .. level,           { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
-    res[6] = { MOD_NAME .. '/plane-gunner/' .. level,          { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
+    res[3] = { MOD_NAME .. '/human-machinegun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.3 }, { 0.8, 0.5 }, { 1.0, 0.1 } } }
+    res[4] = { MOD_NAME .. '/human-sniper/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
+    res[5] = { MOD_NAME .. '/tank-cannon/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
+    res[6] = { MOD_NAME .. '/plane-gunner/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
     --Tire 3
-    res[7] = { MOD_NAME .. '/human-engineer/' .. level,        { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
-    res[8] = { MOD_NAME .. '/human-heavy-machinegun/' .. level,{ { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.15 }, { 1.0, 0.15 } } }
-    res[9] = { MOD_NAME .. '/human-shotgun/' .. level,         { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
+    res[7] = { MOD_NAME .. '/human-engineer/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
+    res[8] = { MOD_NAME .. '/human-heavy-machinegun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.15 }, { 1.0, 0.15 } } }
+    res[9] = { MOD_NAME .. '/human-shotgun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
     res[10] = { MOD_NAME .. '/tank-explosive-cannon/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.1 } } }
-    res[11] = { MOD_NAME .. '/plane-bomber/' .. level,         { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.1 } } }
-    res[12] = { MOD_NAME .. '/plane-dropship/' .. level,       { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.1 } } }
+    res[11] = { MOD_NAME .. '/plane-bomber/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.1 } } }
+    res[12] = { MOD_NAME .. '/plane-dropship/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.1 } } }
     return res
 end
 
-local collision_box = {{-1.2, -1.2}, {1.2, 1.2}}
+local collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } }
 local map_generator_bounding_box = { { -4, -4 }, { 4, 4 } }
-local selection_box = {{-1.5, -1.5}, {1.5, 1.5}}
+local selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } }
 
 function ErmRedArmy.make_lab(level)
     level = level or 1
@@ -88,26 +87,26 @@ function ErmRedArmy.make_lab(level)
                     icon = "__base__/graphics/icons/signal/signal_red.png",
                     icon_size = 64,
                     scale = 0.2,
-                    shift = {-9,-9}
+                    shift = { -9, -9 }
                 },
             },
             flags = { "placeable-player", "placeable-enemy" },
-            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, level),
             order = MOD_NAME .. "-" .. name,
             subgroup = "enemies",
             vehicle_impact_sound = ERM_Sound.generic_impact(),
             resistances = {
-                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance,  level) },
-                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
+                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
+                { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
+                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, level) },
+                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, level) },
+                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, level) },
+                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
+                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
+                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, level) }
             },
             map_color = ERM_UnitHelper.format_map_color(settings.startup['erm_redarmy-map-color'].value),
-            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier,  level),
+            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
@@ -118,8 +117,7 @@ function ErmRedArmy.make_lab(level)
             max_count_of_owned_units = max_count_of_owned_units,
             max_friends_around_to_spawn = max_friends_around_to_spawn,
             animations = {
-                layers =
-                {
+                layers = {
                     {
                         filename = "__base__/graphics/entity/lab/lab.png",
                         width = 98,
@@ -128,8 +126,7 @@ function ErmRedArmy.make_lab(level)
                         line_length = 11,
                         animation_speed = 1 / 3,
                         shift = util.by_pixel(0, 1.5),
-                        hr_version =
-                        {
+                        hr_version = {
                             filename = "__base__/graphics/entity/lab/hr-lab.png",
                             width = 194,
                             height = 174,
@@ -149,8 +146,7 @@ function ErmRedArmy.make_lab(level)
                         repeat_count = 1,
                         animation_speed = 1 / 3,
                         shift = util.by_pixel(0, 15.5),
-                        hr_version =
-                        {
+                        hr_version = {
                             filename = "__base__/graphics/entity/lab/hr-lab-integration.png",
                             width = 242,
                             height = 162,
@@ -173,8 +169,7 @@ function ErmRedArmy.make_lab(level)
                         animation_speed = 1 / 3,
                         shift = util.by_pixel(-1, 1),
                         tint = tint_red,
-                        hr_version =
-                        {
+                        hr_version = {
                             filename = "__base__/graphics/entity/lab/hr-lab-light.png",
                             blend_mode = "additive",
                             draw_as_light = true,
@@ -198,8 +193,7 @@ function ErmRedArmy.make_lab(level)
                         animation_speed = 1 / 3,
                         shift = util.by_pixel(13, 11),
                         draw_as_shadow = true,
-                        hr_version =
-                        {
+                        hr_version = {
                             filename = "__base__/graphics/entity/lab/hr-lab-shadow.png",
                             width = 242,
                             height = 136,

@@ -2,6 +2,9 @@
 Version: 1.9.1
 Date: 2023-08-??
 
+  Changes:
+    - Code clean up
+
   Bugfixes:
     - Fix the settings in race mod cache did not properly refresh when version upgrades.
 

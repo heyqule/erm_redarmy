@@ -6,13 +6,12 @@
 
 
 require('__stdlib__/stdlib/utils/defines/time')
-require ("util")
+require("util")
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_Sound = require('prototypes.sound')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
-
 
 local enemy_autoplace = require("__enemyracemanager__/lib/enemy-autoplace-utils")
 local name = 'assemble-machine'
@@ -50,26 +49,26 @@ local max_friends_around_to_spawn = 5
 local spawn_table = function(level)
     local res = {}
     --Tire 1
-    res[1] = { MOD_NAME .. '/human-miner/' .. level,            { { 0.0, 1 }, { 0.2, 0.75 }, { 0.4, 0.6 }, { 0.6, 0.4 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
-    res[2] = { MOD_NAME .. '/human-pistol/' .. level,           { { 0.0, 0 }, { 0.2, 0.25 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
+    res[1] = { MOD_NAME .. '/human-miner/' .. level, { { 0.0, 1 }, { 0.2, 0.75 }, { 0.4, 0.6 }, { 0.6, 0.4 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
+    res[2] = { MOD_NAME .. '/human-pistol/' .. level, { { 0.0, 0 }, { 0.2, 0.25 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
     --Tire 2
-    res[3] = { MOD_NAME .. '/human-machinegun/' .. level,       { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.3 }, { 0.8, 0.5 }, { 1.0, 0.15 } } }
-    res[4] = { MOD_NAME .. '/human-sniper/' .. level,           { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
-    res[5] = { MOD_NAME .. '/tank-cannon/' .. level,            { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
-    res[6] = { MOD_NAME .. '/plane-gunner/' .. level,           { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.2 } } }
+    res[3] = { MOD_NAME .. '/human-machinegun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.3 }, { 0.8, 0.5 }, { 1.0, 0.15 } } }
+    res[4] = { MOD_NAME .. '/human-sniper/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
+    res[5] = { MOD_NAME .. '/tank-cannon/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
+    res[6] = { MOD_NAME .. '/plane-gunner/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.2 } } }
     --Tire 3
-    res[7] = { MOD_NAME .. '/human-engineer/' .. level,        { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
+    res[7] = { MOD_NAME .. '/human-engineer/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
     res[8] = { MOD_NAME .. '/human-heavy-machinegun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.15 }, { 1.0, 0.1 } } }
-    res[9] = { MOD_NAME .. '/human-shotgun/' .. level,          { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
-    res[10] = { MOD_NAME .. '/tank-explosive-cannon/' .. level,  { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
-    res[11] = { MOD_NAME .. '/plane-bomber/' .. level,          { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.15 } } }
-    res[12] = { MOD_NAME .. '/plane-dropship/' .. level,        { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
+    res[9] = { MOD_NAME .. '/human-shotgun/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
+    res[10] = { MOD_NAME .. '/tank-explosive-cannon/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
+    res[11] = { MOD_NAME .. '/plane-bomber/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.15 } } }
+    res[12] = { MOD_NAME .. '/plane-dropship/' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.0 }, { 1.0, 0.05 } } }
     return res
 end
 
-local collision_box = {{-1.2, -1.2}, {1.2, 1.2}}
+local collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } }
 local map_generator_bounding_box = { { -4, -4 }, { 4, 4 } }
-local selection_box = {{-1.5, -1.5}, {1.5, 1.5}}
+local selection_box = { { -1.5, -1.5 }, { 1.5, 1.5 } }
 
 function ErmRedArmy.make_machine(level)
     level = level or 1
@@ -91,26 +90,26 @@ function ErmRedArmy.make_machine(level)
                     icon = "__base__/graphics/icons/signal/signal_red.png",
                     icon_size = 64,
                     scale = 0.2,
-                    shift = {-9,-9}
+                    shift = { -9, -9 }
                 },
             },
             flags = { "placeable-player", "placeable-enemy" },
-            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier,  level),
+            max_health = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, level),
             order = MOD_NAME .. "-" .. name,
             subgroup = "enemies",
             vehicle_impact_sound = ERM_Sound.generic_impact(),
             resistances = {
-                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance,  level) },
-                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance,  level) },
-                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance,  level) },
-                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance,  level) },
-                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance,  level) }
+                { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
+                { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
+                { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, level) },
+                { type = "fire", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, level) },
+                { type = "explosion", percent = ERM_UnitHelper.get_resistance(base_fire_resistance, incremental_fire_resistance, level) },
+                { type = "laser", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
+                { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
+                { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, level) }
             },
             map_color = ERM_UnitHelper.format_map_color(settings.startup['erm_redarmy-map-color'].value),
-            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier,  level),
+            healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
@@ -120,22 +119,19 @@ function ErmRedArmy.make_machine(level)
             dying_explosion = "assembling-machine-1-explosion",
             max_count_of_owned_units = max_count_of_owned_units,
             max_friends_around_to_spawn = max_friends_around_to_spawn,
-            animations =
-            {
-                layers =
-                {
+            animations = {
+                layers = {
                     {
                         filename = "__base__/graphics/entity/assembling-machine-1/assembling-machine-1.png",
-                        priority="high",
+                        priority = "high",
                         width = 108,
                         height = 114,
                         frame_count = 1,
                         line_length = 8,
                         shift = util.by_pixel(0, 2),
-                        hr_version =
-                        {
+                        hr_version = {
                             filename = "__base__/graphics/entity/assembling-machine-1/hr-assembling-machine-1.png",
-                            priority="high",
+                            priority = "high",
                             width = 214,
                             height = 226,
                             frame_count = 1,
@@ -146,7 +142,7 @@ function ErmRedArmy.make_machine(level)
                     },
                     {
                         filename = "__base__/graphics/entity/assembling-machine-1/assembling-machine-1-shadow.png",
-                        priority="high",
+                        priority = "high",
                         width = 95,
                         height = 83,
                         frame_count = 1,
@@ -154,10 +150,9 @@ function ErmRedArmy.make_machine(level)
                         repeat_count = 1,
                         draw_as_shadow = true,
                         shift = util.by_pixel(8.5, 5.5),
-                        hr_version =
-                        {
+                        hr_version = {
                             filename = "__base__/graphics/entity/assembling-machine-1/hr-assembling-machine-1-shadow.png",
-                            priority="high",
+                            priority = "high",
                             width = 190,
                             height = 165,
                             frame_count = 1,
@@ -171,20 +166,18 @@ function ErmRedArmy.make_machine(level)
                 }
             },
             integration = {
-                layers =
-                {
+                layers = {
                     {
                         filename = "__base__/graphics/entity/assembling-machine-1/assembling-machine-1.png",
-                        priority="high",
+                        priority = "high",
                         width = 108,
                         height = 114,
                         frame_count = 1,
                         line_length = 8,
                         shift = util.by_pixel(0, 2),
-                        hr_version =
-                        {
+                        hr_version = {
                             filename = "__base__/graphics/entity/assembling-machine-1/hr-assembling-machine-1.png",
-                            priority="high",
+                            priority = "high",
                             width = 214,
                             height = 226,
                             frame_count = 1,
@@ -195,17 +188,16 @@ function ErmRedArmy.make_machine(level)
                     },
                     {
                         filename = "__base__/graphics/entity/assembling-machine-1/assembling-machine-1-shadow.png",
-                        priority="high",
+                        priority = "high",
                         width = 95,
                         height = 83,
                         frame_count = 1,
                         line_length = 1,
                         draw_as_shadow = true,
                         shift = util.by_pixel(8.5, 5.5),
-                        hr_version =
-                        {
+                        hr_version = {
                             filename = "__base__/graphics/entity/assembling-machine-1/hr-assembling-machine-1-shadow.png",
-                            priority="high",
+                            priority = "high",
                             width = 190,
                             height = 165,
                             frame_count = 1,

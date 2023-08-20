@@ -44,12 +44,12 @@ local addRaceSettings = function()
         race_settings = {}
     end
 
-    race_settings.race =  race_settings.race or MOD_NAME
-    race_settings.label = {'gui.label-erm_redarmy'}
-    race_settings.level =  race_settings.level or 1
-    race_settings.tier =  race_settings.tier or 1
-    race_settings.evolution_point =  race_settings.evolution_point or 0
-    race_settings.evolution_base_point =  race_settings.evolution_base_point or 0
+    race_settings.race = race_settings.race or MOD_NAME
+    race_settings.label = { 'gui.label-erm_redarmy' }
+    race_settings.level = race_settings.level or 1
+    race_settings.tier = race_settings.tier or 1
+    race_settings.evolution_point = race_settings.evolution_point or 0
+    race_settings.evolution_base_point = race_settings.evolution_base_point or 0
     race_settings.attack_meter = race_settings.attack_meter or 0
     race_settings.attack_meter_total = race_settings.attack_meter_total or 0
     race_settings.next_attack_threshold = race_settings.next_attack_threshold or 0
@@ -77,34 +77,34 @@ local addRaceSettings = function()
     race_settings.timed_units = {
     }
     race_settings.flying_units = {
-        {'plane-gunner'},
-        {'plane-dropship'},
-        {'plane-bomber'}
+        { 'plane-gunner' },
+        { 'plane-dropship' },
+        { 'plane-bomber' }
     }
     race_settings.dropship = 'plane-dropship'
     race_settings.droppable_units = {
-        {{ 'human-miner', 'human-pistol' },{3,1}},
-        {{ 'human-machinegun', 'tank-cannon' },{4,2}},
-        {{ 'human-heavy-machinegun', 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon' },{4,2,1,1}},
+        { { 'human-miner', 'human-pistol' }, { 3, 1 } },
+        { { 'human-machinegun', 'tank-cannon' }, { 4, 2 } },
+        { { 'human-heavy-machinegun', 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon' }, { 4, 2, 1, 1 } },
     }
     race_settings.construction_buildings = {
-        {{ 'gun-turret-short'},{1}},
-        {{ 'gun-turret-short'},{1}},
-        {{ 'gun-turret-short','lab'},{2,1}},
+        { { 'gun-turret-short' }, { 1 } },
+        { { 'gun-turret-short' }, { 1 } },
+        { { 'gun-turret-short', 'lab' }, { 2, 1 } },
     }
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost
-        {{'human-heavy-machinegun', 'human-shotgun', 'human-sniper','human-engineer' }, {2, 2, 1, 1}, 20},
-        {{'human-machinegun', 'human-heavy-machinegun', 'human-sniper', 'tank-explosive-cannon'}, {2, 2, 1, 1}, 25},
-        {{'tank-cannon', 'tank-explosive-cannon'}, {2, 1}, 35},
-        {{'human-shotgun','tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber'}, {2, 1, 1, 1, 1}, 25},
-        {{'human-sniper','tank-cannon', 'tank-explosive-cannon','plane-gunner', 'plane-bomber'}, {2,1,1,1,1}, 25},
+        { { 'human-heavy-machinegun', 'human-shotgun', 'human-sniper', 'human-engineer' }, { 2, 2, 1, 1 }, 20 },
+        { { 'human-machinegun', 'human-heavy-machinegun', 'human-sniper', 'tank-explosive-cannon' }, { 2, 2, 1, 1 }, 25 },
+        { { 'tank-cannon', 'tank-explosive-cannon' }, { 2, 1 }, 35 },
+        { { 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' }, { 2, 1, 1, 1, 1 }, 25 },
+        { { 'human-sniper', 'tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' }, { 2, 1, 1, 1, 1 }, 25 },
     }
     race_settings.featured_flying_groups = {
-        {{'plane-gunner', 'plane-bomber'}, {3, 2}, 75},
-        {{'plane-gunner', 'plane-dropship'}, {2, 1}, 75},
-        {{'plane-bomber'}, {1}, 75},
-        {{'plane-gunner'}, {1}, 50}
+        { { 'plane-gunner', 'plane-bomber' }, { 3, 2 }, 75 },
+        { { 'plane-gunner', 'plane-dropship' }, { 2, 1 }, 75 },
+        { { 'plane-bomber' }, { 1 }, 75 },
+        { { 'plane-gunner' }, { 1 }, 50 }
     }
 
     if game.active_mods['Krastorio2'] then
@@ -131,8 +131,7 @@ Event.on_configuration_changed(function(event)
     addRaceSettings()
 end)
 
-local attack_functions =
-{
+local attack_functions = {
     [DROPSHIP_ATTACK] = function(args)
         CustomAttacks.process_dropship(args)
     end,
@@ -141,7 +140,7 @@ local attack_functions =
     end
 }
 Event.register(defines.events.on_script_trigger_effect, function(event)
-    if  attack_functions[event.effect_id] and
+    if attack_functions[event.effect_id] and
             CustomAttacks.valid(event, MOD_NAME)
     then
         attack_functions[event.effect_id](event)

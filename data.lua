@@ -18,12 +18,12 @@ data.erm_registered_race = data.erm_registered_race or {}
 data.erm_registered_race[MOD_NAME] = true
 data.erm_spawn_specs = data.erm_spawn_specs or {}
 table.insert(data.erm_spawn_specs, {
-    mod_name=MOD_NAME,
-    force_name=FORCE_NAME,
-    moisture=2, -- 1 = Dry and 2 = Wet
-    aux=2, -- -- 1 = red desert, 2 = sand
-    elevation=1, --1,2,3 (1 low elevation, 2. medium, 3 high elavation)
-    temperature=2, --1,2,3 (1 cold, 2. normal, 3 hot)
+    mod_name = MOD_NAME,
+    force_name = FORCE_NAME,
+    moisture = 2, -- 1 = Dry and 2 = Wet
+    aux = 2, -- -- 1 = red desert, 2 = sand
+    elevation = 1, --1,2,3 (1 low elevation, 2. medium, 3 high elavation)
+    temperature = 2, --1,2,3 (1 cold, 2. normal, 3 hot)
 })
 
 data:extend(
@@ -39,7 +39,7 @@ local cannon_projectile = ERM_WeaponRig.standardize_cannon_projectile(
         'redarmy-cannon-projectile'
 )
 
-local cannon_explosive_projectile =  ERM_WeaponRig.standardize_explosive_cannon_projectile(
+local cannon_explosive_projectile = ERM_WeaponRig.standardize_explosive_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
         'redarmy-explosive-cannon-projectile'
 )
@@ -52,34 +52,29 @@ rocket['turn_speed'] = nil
 rocket['turning_speed_increases_exponentially_with_projectile_speed'] = false
 rocket['smoke'][1]['frequency'] = 1 / 5
 
-rocket['action']['action_delivery']['target_effects'][2] =
-{
+rocket['action']['action_delivery']['target_effects'][2] = {
     type = "damage",
     damage = { amount = 3.5, type = "explosion" },
 }
 table.insert(rocket['action']['action_delivery']['target_effects'], {
     type = "nested-result",
-    action =
-    {
+    action = {
         type = "area",
         force = "not-same",
         radius = 3,
-        action_delivery =
-        {
+        action_delivery = {
             type = "instant",
-            target_effects =
-            {
+            target_effects = {
                 {
                     type = "damage",
-                    damage = {amount = 6.5, type = "explosion"}
+                    damage = { amount = 6.5, type = "explosion" }
                 },
             }
         }
     }
 })
 
-
-data:extend({cannon_projectile, cannon_explosive_projectile, rocket })
+data:extend({ cannon_projectile, cannon_explosive_projectile, rocket })
 
 require "prototypes.building.gun-turret"
 require "prototypes.building.laser-turret"

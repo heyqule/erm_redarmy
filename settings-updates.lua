@@ -8,7 +8,6 @@ table.insert(data.raw["string-setting"]["enemyracemanager-4way-top-right"].allow
 table.insert(data.raw["string-setting"]["enemyracemanager-4way-bottom-right"].allowed_values, MOD_NAME)
 table.insert(data.raw["string-setting"]["enemyracemanager-4way-bottom-left"].allowed_values, MOD_NAME)
 
-
 if mods['Krastorio2'] then
     data:extend {
         {

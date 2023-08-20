@@ -9,23 +9,23 @@ local RedArmySound = {}
 local base_sound = require('__base__/prototypes/entity/sounds')
 
 function RedArmySound.pistol()
-    return  base_sound.light_gunshot
+    return base_sound.light_gunshot
 end
 
 function RedArmySound.tank_gunshot()
-    return  base_sound.tank_gunshot
+    return base_sound.tank_gunshot
 end
 
 function RedArmySound.machine_gun()
-    return  base_sound.submachine_gunshot
+    return base_sound.submachine_gunshot
 end
 
 function RedArmySound.heavy_machine_gun()
-    return  base_sound.gun_turret_gunshot
+    return base_sound.gun_turret_gunshot
 end
 
 function RedArmySound.sniper()
-    return  base_sound.heavy_gunshot
+    return base_sound.heavy_gunshot
 end
 
 function RedArmySound.generic_impact()
@@ -33,15 +33,15 @@ function RedArmySound.generic_impact()
 end
 
 function RedArmySound.shotgun()
-    return  base_sound.shotgun
+    return base_sound.shotgun
 end
 
 function RedArmySound.pistol()
-    return  base_sound.light_gunshot
+    return base_sound.light_gunshot
 end
 
 function RedArmySound.death(volume)
-    return  {
+    return {
         variations = {
             {
                 filename = "__erm_redarmy__/sounds/die1.ogg",

@@ -11,13 +11,13 @@ function RemoteAPI.milestones_preset_addons()
     local boss_level = ErmConfig.BOSS_LEVELS
     local preset = {
         ["erm_redarmy"] = {
-            required_mods = {"erm_redarmy"},
+            required_mods = { "erm_redarmy" },
             milestones = {
-                {type="group", name="Kills"},
-                {type="kill", name="erm_redarmy/lab/5",  quantity=1},
-                {type="kill", name="erm_redarmy/lab/10",  quantity=1},
-                {type="kill", name="erm_redarmy/lab/15",  quantity=1},
-                {type="kill", name="erm_redarmy/lab/20",  quantity=1, next="x10"},
+                { type = "group", name = "Kills" },
+                { type = "kill", name = "erm_redarmy/lab/5", quantity = 1 },
+                { type = "kill", name = "erm_redarmy/lab/10", quantity = 1 },
+                { type = "kill", name = "erm_redarmy/lab/15", quantity = 1 },
+                { type = "kill", name = "erm_redarmy/lab/20", quantity = 1, next = "x10" },
             }
         },
     }
@@ -36,7 +36,6 @@ function RemoteAPI.milestones_preset_addons()
 
     return preset
 end
-
 
 function RemoteAPI.register_new_enemy_race()
     return true
