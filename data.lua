@@ -6,6 +6,7 @@
 
 ErmRedArmy = {}
 
+local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 require('__erm_redarmy__/global')
 require('util')
 
@@ -38,11 +39,15 @@ local cannon_projectile = ERM_WeaponRig.standardize_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['cannon-projectile']),
         'redarmy-cannon-projectile'
 )
+cannon_projectile['force_condition'] = "not-same"
+cannon_projectile['hit_collision_mask'] = {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()}
 
 local cannon_explosive_projectile = ERM_WeaponRig.standardize_explosive_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
         'redarmy-explosive-cannon-projectile'
 )
+cannon_explosive_projectile['force_condition'] = "not-same"
+cannon_explosive_projectile['hit_collision_mask'] = {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()}
 
 local rocket = ERM_WeaponRig.standardize_rocket_damage(
         util.table.deepcopy(data.raw['projectile']['rocket']),
