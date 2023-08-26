@@ -27,6 +27,32 @@ table.insert(data.erm_spawn_specs, {
     temperature = 2, --1,2,3 (1 cold, 2. normal, 3 hot)
 })
 
+data.erm_menu_replacement = data.erm_menu_replacement or {}
+data.erm_menu_replacement[MOD_NAME] = {
+    race = MOD_NAME,
+    level = 3,
+    ["unit"] = {
+        ["small-biter"] = 'human-miner',
+        ["small-spitter"] = 'human-heavy-machinegun',
+        ["medium-biter"] = 'human-heavy-machinegun',
+        ["medium-spitter"] = 'tank-explosive-cannon',
+        ["big-biter"] = 'tank-explosive-cannon',
+        ["big-spitter"] = 'human-shotgun',
+        ["behemoth-biter"] = "human-shotgun",
+        ["behemoth-spitter"] = "human-shotgun",
+    },
+    ["turret"] = {
+        ["small-worm-turret"] = 'gun-turret',
+        ["medium-worm-turret"] = 'gun-turret',
+        ["big-worm-turret"] = 'laser-turret',
+        ["behemoth-worm-turret"] = 'laser-turret',
+    },
+    ["unit-spawner"] = {
+        ["biter-spawner"] = 'lab',
+        ["spitter-spawner"] = 'assemble-machine',
+    },
+}
+
 data:extend(
         {
             {
@@ -37,21 +63,21 @@ data:extend(
 
 local cannon_projectile = ERM_WeaponRig.standardize_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['cannon-projectile']),
-        'redarmy-cannon-projectile'
+        MOD_NAME..'/cannon-projectile'
 )
 cannon_projectile['force_condition'] = "not-same"
 cannon_projectile['hit_collision_mask'] = {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()}
 
 local cannon_explosive_projectile = ERM_WeaponRig.standardize_explosive_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
-        'redarmy-explosive-cannon-projectile'
+        MOD_NAME..'/explosive-cannon-projectile'
 )
 cannon_explosive_projectile['force_condition'] = "not-same"
 cannon_explosive_projectile['hit_collision_mask'] = {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()}
 
 local rocket = ERM_WeaponRig.standardize_rocket_damage(
         util.table.deepcopy(data.raw['projectile']['rocket']),
-        'redarmy-rocket'
+        MOD_NAME..'/rocket'
 )
 rocket['turn_speed'] = nil
 rocket['turning_speed_increases_exponentially_with_projectile_speed'] = false

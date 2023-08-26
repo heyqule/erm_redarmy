@@ -153,9 +153,9 @@ function ErmRedArmy.make_bomber_plane(level)
                         type = "direct",
                         action_delivery = {
                             type = "projectile",
-                            projectile = "redarmy-rocket",
+                            projectile = MOD_NAME.."/rocket",
                             starting_speed = 0.3,
-                            max_range = ERM_Config.get_max_projectile_range(2),
+                            max_range = ERM_Config.get_max_projectile_range(),
                         }
                     }
                 },

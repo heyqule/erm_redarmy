@@ -158,9 +158,9 @@ function ErmRedArmy.make_explosive_tank(level)
                         type = "direct",
                         action_delivery = {
                             type = "projectile",
-                            projectile = "redarmy-explosive-cannon-projectile",
+                            projectile = MOD_NAME.."/explosive-cannon-projectile",
                             starting_speed = 1,
-                            max_range = ERM_Config.get_max_projectile_range(2),
+                            max_range = ERM_Config.get_max_projectile_range(),
                         }
                     }
                 },
