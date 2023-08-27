@@ -4,7 +4,7 @@
 --- DateTime: 2/8/2023 9:02 PM
 ---
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
-local CustomAttacks = require('__erm_zerg__/scripts/custom_attacks')
+local CustomAttacks = require('scripts/custom_attacks')
 
 local RemoteAPI = {}
 
