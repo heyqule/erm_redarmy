@@ -20,7 +20,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'human-miner'
 
 local hitpoint = 100
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2.5
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 5
 
 
 -- Handles acid and poison resistance
@@ -41,8 +41,8 @@ local incremental_cold_resistance = 80
 
 -- Handles physical damages
 
-local base_physical_damage = 5
-local incremental_physical_damage = 70
+local base_physical_damage = 10
+local incremental_physical_damage = 190
 
 -- Handles Attack Speed
 
@@ -51,13 +51,13 @@ local incremental_attack_speed = 30
 
 local attack_range = 1
 
-local base_movement_speed = 0.075
+local base_movement_speed = 0.1
 local incremental_movement_speed = 0.15
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
-local pollution_to_join_attack = 2
+local pollution_to_join_attack = 3
 local distraction_cooldown = 300
 
 -- Animation Settings

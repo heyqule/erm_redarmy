@@ -21,7 +21,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'human-sniper'
 
 local hitpoint = 200
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.25
 
 
 -- Handles acid and poison resistance
@@ -53,7 +53,7 @@ local incremental_attack_speed = 120
 local attack_range = ERM_Config.get_max_attack_range()
 
 local base_movement_speed = 0.075
-local incremental_movement_speed = 0.1
+local incremental_movement_speed = 0.15
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)

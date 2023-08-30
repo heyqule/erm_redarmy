@@ -21,7 +21,7 @@ local ERM_Sound = require('prototypes.sound')
 local name = 'human-shotgun'
 
 local hitpoint = 350
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.25
 
 
 -- Handles acid and poison resistance
@@ -43,7 +43,7 @@ local incremental_cold_resistance = 80
 -- Handles physical damages multiplier
 
 local base_physical_damage = 1
-local incremental_physical_damage = 2
+local incremental_physical_damage = 3
 
 -- Handles Attack Speed
 
@@ -52,8 +52,8 @@ local incremental_attack_speed = 60
 
 local attack_range = math.ceil(ERM_Config.get_max_attack_range() * 0.5)
 
-local base_movement_speed = 0.075
-local incremental_movement_speed = 0.125
+local base_movement_speed = 0.1
+local incremental_movement_speed = 0.15
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)

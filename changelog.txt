@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.10.2
+Date: 2023-09-01
+
+  Changes:
+    - Spawn table tweaks
+    - Pollution to attack tweaks
+    - Re-added Human-miner for late game.
+    - Buffed Human-miner offense and defense
+    - Buffed all human running speed
+    - Buffed human unit HP for higher levels
+
+---------------------------------------------------------------------------------------------------
 Version: 1.10.1
 Date: 2023-08-26
 
