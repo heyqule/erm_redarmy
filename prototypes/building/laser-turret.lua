@@ -47,14 +47,14 @@ local incremental_laser_damage = 12
 local base_attack_speed = 120
 local incremental_attack_speed = 60
 
-local attack_range = ERM_Config.get_max_attack_range() + 16
-
 local collision_box = { { -0.7, -0.7 }, { 0.7, 0.7 } }
 local map_generator_bounding_box = { { -2.5, -2.5 }, { 2.5, 2.5 } }
 local selection_box = { { -1, -1 }, { 1, 1 } }
 
 function ErmRedArmy.make_laser_turret(level)
     level = level or 1
+
+    local attack_range = ERM_UnitHelper.get_attack_range(level) + 16
 
     local redarmy_laser_turret = util.table.deepcopy(data.raw['electric-turret']['laser-turret'])
 

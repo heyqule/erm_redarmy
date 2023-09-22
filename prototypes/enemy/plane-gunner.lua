@@ -50,14 +50,10 @@ local incremental_physical_damage = 12
 local base_attack_speed = 60
 local incremental_attack_speed = 40
 
-local attack_range = ERM_Config.get_max_attack_range()
-
 local base_movement_speed = 0.2
 local incremental_movement_speed = 0.15
 
 -- Misc settings
-local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
-
 local pollution_to_join_attack = 100
 local distraction_cooldown = 300
 
@@ -69,6 +65,8 @@ local selection_box = { { -0.9, -1.3 }, { 0.9, 1.3 } }
 
 function ErmRedArmy.make_gunner_plane(level)
     level = level or 1
+    local attack_range = ERM_UnitHelper.get_attack_range(level)
+    local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
     local gunship_animation = {
         layers = {

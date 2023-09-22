@@ -50,13 +50,10 @@ local incremental_physical_damage = 32
 local base_attack_speed = 240
 local incremental_attack_speed = 120
 
-local attack_range = ERM_Config.get_max_attack_range()
-
 local base_movement_speed = 0.1
 local incremental_movement_speed = 0.125
 
 -- Misc settings
-local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
 local pollution_to_join_attack = 200
 local distraction_cooldown = 300
@@ -69,6 +66,8 @@ local selection_box = { { -0.9, -1.3 }, { 0.9, 1.3 } }
 
 function ErmRedArmy.make_tank(level)
     level = level or 1
+    local attack_range = ERM_UnitHelper.get_attack_range(level)
+    local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
     local tank = util.table.deepcopy(data.raw['car']['tank'])
     --Level 1 animation, level 2 and 3 are armored animations

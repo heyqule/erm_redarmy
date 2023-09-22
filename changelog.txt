@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.10.3
+Date: 2023-09-22
+
+  Bugfixes:
+    - Not default max attack range now gradually increase from level 1 - level 5. This fixes nothing in early game can hit an unit that has very high max attack range.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.10.2
 Date: 2023-09-01
 
