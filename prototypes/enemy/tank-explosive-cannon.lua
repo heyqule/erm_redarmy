@@ -169,7 +169,7 @@ function ErmRedArmy.make_explosive_tank(level)
             distance_per_frame = 1,
             run_animation = new_animation,
             corpse = "erm-tank-remnants",
-            dying_explosion = "tank-explosion"
+            dying_explosion = "erm-fire-explosion-ground_normal-1"
         }
     })
 end

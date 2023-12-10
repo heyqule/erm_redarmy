@@ -16,11 +16,12 @@ local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERM_Config = require('__enemyracemanager__/lib/global_config')
 
 local ERM_Sound = require('prototypes.sound')
+local HumanAnimation = require('prototypes.human_animation')
 
 local name = 'human-miner'
 
 local hitpoint = 100
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 5
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 6
 
 
 -- Handles acid and poison resistance
@@ -57,7 +58,7 @@ local incremental_movement_speed = 0.15
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
-local pollution_to_join_attack = 3
+local pollution_to_join_attack = 8
 local distraction_cooldown = 300
 
 -- Animation Settings
@@ -70,16 +71,16 @@ local sticker_box = { { -0.2, -1 }, { 0.2, 0 } }
 function ErmRedArmy.make_human_miner(level)
     level = level or 1
 
-    local human_miner = util.table.deepcopy(data.raw['character']['character'])
+    local human_animation = HumanAnimation.get_animation()
     --Level 1 animation, level 2 and 3 are armored animations
     -- types: running, running_with_gun, mining_with_tool
-    local running_animation = human_miner['animations'][1]['running']
+    local running_animation = human_animation['animations'][1]['running']
     ERM_UnitTint.mask_tint(running_animation['layers'][2], ERM_UnitTint.tint_red_madder())
     ERM_AnimationRig.adjust_still_frame(running_animation['layers'][1], CHARACTER_RIG_STILL_FRAME)
     ERM_AnimationRig.adjust_still_frame(running_animation['layers'][2], CHARACTER_RIG_STILL_FRAME)
     ERM_AnimationRig.adjust_still_frame(running_animation['layers'][3], CHARACTER_RIG_STILL_FRAME)
 
-    local mining_animation = human_miner['animations'][1]['mining_with_tool']
+    local mining_animation = human_animation['animations'][1]['mining_with_tool']
     ERM_UnitTint.mask_tint(mining_animation['layers'][2], ERM_UnitTint.tint_red_madder())
 
     data:extend({

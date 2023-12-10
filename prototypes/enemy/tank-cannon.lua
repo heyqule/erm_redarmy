@@ -55,7 +55,7 @@ local incremental_movement_speed = 0.125
 
 -- Misc settings
 
-local pollution_to_join_attack = 200
+local pollution_to_join_attack = 150
 local distraction_cooldown = 300
 
 -- Animation Settings
@@ -162,7 +162,7 @@ function ErmRedArmy.make_tank(level)
             distance_per_frame = 1,
             run_animation = new_animation,
             corpse = "erm-tank-remnants",
-            dying_explosion = "tank-explosion"
+            dying_explosion = "erm-fire-explosion-ground_normal-1"
         }
     })
 end

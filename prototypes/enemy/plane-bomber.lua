@@ -165,7 +165,7 @@ function ErmRedArmy.make_bomber_plane(level)
             run_animation = bomber_animation,
             render_layer = "wires-above",
             corpse = "erm-medium-remnants",
-            dying_explosion = "medium-explosion",
+            dying_explosion = "erm-fire-explosion-air_large-1"
         }
     })
 end

@@ -151,7 +151,7 @@ function ErmRedArmy.make_gunner_plane(level)
             run_animation = gunship_animation,
             render_layer = "wires-above",
             corpse = "erm-medium-remnants",
-            dying_explosion = "medium-explosion",
+            dying_explosion = "erm-fire-explosion-air_normal-1"
         }
     })
 end

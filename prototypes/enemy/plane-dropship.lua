@@ -55,7 +55,7 @@ local incremental_movement_speed = 0.125
 
 -- Misc settings
 
-local pollution_to_join_attack = 150
+local pollution_to_join_attack = 120
 local distraction_cooldown = 300
 
 -- Animation Settings
@@ -163,7 +163,7 @@ function ErmRedArmy.make_dropship_plane(level)
             run_animation = gunship_animation,
             render_layer = "wires-above",
             corpse = "erm-medium-remnants",
-            dying_explosion = "medium-explosion",
+            dying_explosion = "erm-fire-explosion-air_large-1"
         }
     })
 end

@@ -17,6 +17,7 @@ local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local ERM_Config = require('__enemyracemanager__/lib/global_config')
 
 local ERM_Sound = require('prototypes.sound')
+local HumanAnimation = require('prototypes.human_animation')
 
 local name = 'human-shotgun'
 
@@ -69,15 +70,15 @@ function ErmRedArmy.make_human_shotgun(level)
     local attack_range = ERM_UnitHelper.get_attack_range(level, 0.5)
     local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
-    local human_miner = util.table.deepcopy(data.raw['character']['character'])
+    local human_animation = HumanAnimation.get_animation()
     --Level 1 animation, level 2 and 3 are armored animations
     -- types: running, running_with_gun, mining_with_tool
-    local running_animation = human_miner['animations'][3]['running']
+    local running_animation = human_animation['animations'][3]['running']
     ERM_UnitTint.mask_tint(running_animation['layers'][2], ERM_UnitTint.tint_red())
     ERM_UnitTint.mask_tint(running_animation['layers'][4], ERM_UnitTint.tint_red())
     ERM_AnimationRig.adjust_still_frame_all(running_animation['layers'], CHARACTER_RIG_STILL_FRAME)
 
-    local gun_animation = human_miner['animations'][3]['idle_with_gun']
+    local gun_animation = human_animation['animations'][3]['idle_with_gun']
     ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red())
     ERM_UnitTint.mask_tint(gun_animation['layers'][4], ERM_UnitTint.tint_red())
 

@@ -1,4 +1,26 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.10.4
+Date: 2023-12-10
+
+  Changes:
+    - Human Miner pollution_to_join_attack from 3 to 8
+    - Human Pistol pollution_to_join_attack from 5 to 8
+    - Heavy machine gun pollution_to_join_attack from 150 to 100
+    - machine gun pollution_to_join_attack from 20 to 25
+    - sniper pollution_to_join_attack from 100 to 80
+    - dropship pollution_to_join_attack from 150 to 120
+    - tank pollution_to_join_attack from 200 to 150
+
+
+  Graphics:
+    - Changed Tank death animation.
+    - Changed Airplane death animation.
+
+  Bugfixes:
+    - Human animation is no longer rely on character prototype.  This fixes compatibility issues with other character override mods.
+    - Fixed high laser damage at low levels.
+
+---------------------------------------------------------------------------------------------------
 Version: 1.10.3
 Date: 2023-09-22
 
