@@ -152,3 +152,9 @@ for i = 1, max_level do
     ErmRedArmy.make_machine(i)
 end
 
+
+data.erm_land_scout = data.erm_land_scout or {}
+data.erm_land_scout[MOD_NAME] = 'human-miner'
+
+data.erm_aerial_scout = data.erm_aerial_scout or {}
+data.erm_aerial_scout[MOD_NAME] = 'plane-gunner'
