@@ -67,6 +67,8 @@ function ErmRedArmy.make_laser_turret(level)
     redarmy_laser_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, hitpoint * max_hitpoint_multiplier, level)
     redarmy_laser_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, level)
     redarmy_laser_turret['order'] = MOD_NAME .. '/' .. name .. '/'.. level
+    redarmy_laser_turret['minable'] = nil
+    redarmy_laser_turret['next_upgrade'] = nil
     redarmy_laser_turret['resistances'] = {
         { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
         { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },

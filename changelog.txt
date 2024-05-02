@@ -1,5 +1,12 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.10.4
+Date: 2024-05-01
+
+  Bugfixes:
+    - Fixed a startup crash when 5dim_battlefield enabled. It somehow assigns next_upgrade to red army turrets.
+
+---------------------------------------------------------------------------------------------------
+Version: 1.10.4
 Date: 2023-12-10
 
   Changes:
