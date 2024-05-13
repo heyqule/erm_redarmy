@@ -2,8 +2,11 @@
 Version: 1.11.0
 Date: 2024-??-??
 
+  Features:
+    - Added support for fog of war beacons
+    - Added units for scouting subsystem
+
   Changes:
-    - Add support for fog of war beacons
     - Human-miner runs a little faster
 
 ---------------------------------------------------------------------------------------------------
