@@ -21,8 +21,8 @@ local HumanAnimation = require('prototypes.human_animation')
 
 local name = 'human-pistol'
 
-local hitpoint = 80
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
+local hitpoint = 70
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2.5
 
 
 -- Handles acid and poison resistance

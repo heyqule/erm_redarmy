@@ -20,8 +20,8 @@ local HumanAnimation = require('prototypes.human_animation')
 
 local name = 'human-miner'
 
-local hitpoint = 100
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 6
+local hitpoint = 85
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 8
 
 
 -- Handles acid and poison resistance
