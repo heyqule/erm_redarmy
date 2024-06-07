@@ -1,5 +1,18 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.10.4
+Version: 1.11.0
+Date: 2024-06-07
+
+  Features:
+    - Added support for fog of war beacons
+    - Added units for scouting subsystem
+    - Changed human-miner base health from 100 to 80
+    - Changed human-pistol base health from 80 to 70
+
+  Changes:
+    - Human-miner runs a little faster
+
+---------------------------------------------------------------------------------------------------
+Version: 1.10.5
 Date: 2024-05-01
 
   Bugfixes:

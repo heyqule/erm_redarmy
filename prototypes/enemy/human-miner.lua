@@ -20,8 +20,8 @@ local HumanAnimation = require('prototypes.human_animation')
 
 local name = 'human-miner'
 
-local hitpoint = 100
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 6
+local hitpoint = 85
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 8
 
 
 -- Handles acid and poison resistance
@@ -53,7 +53,7 @@ local incremental_attack_speed = 30
 local attack_range = 1
 
 local base_movement_speed = 0.1
-local incremental_movement_speed = 0.15
+local incremental_movement_speed = 0.175
 
 -- Misc settings
 local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
