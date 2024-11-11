@@ -39,7 +39,7 @@ function RemoteAPI.milestones_preset_addons()
 end
 
 function RemoteAPI.register_new_enemy_race()
-    return true
+    return MOD_NAME
 end
 
 function RemoteAPI.refresh_custom_attack_cache()
