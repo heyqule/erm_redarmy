@@ -107,10 +107,6 @@ local addRaceSettings = function()
         { { 'plane-gunner' }, { 1 }, 50 }
     }
 
-    if game.active_mods['Krastorio2'] then
-        race_settings.enable_k2_creep = settings.startup['erm_redarmy-k2-creep'].value
-    end
-
     remote.call('enemyracemanager', 'register_race', race_settings)
 
     CustomAttacks.get_race_settings(MOD_NAME, true)
