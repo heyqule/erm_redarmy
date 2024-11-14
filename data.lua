@@ -27,32 +27,6 @@ table.insert(data.erm_spawn_specs, {
     temperature = 2, --1,2,3 (1 cold, 2. normal, 3 hot)
 })
 
-data.erm_menu_replacement = data.erm_menu_replacement or {}
-data.erm_menu_replacement[MOD_NAME] = {
-    race = MOD_NAME,
-    level = 3,
-    ["unit"] = {
-        ["small-biter"] = 'human-miner',
-        ["small-spitter"] = 'human-heavy-machinegun',
-        ["medium-biter"] = 'human-heavy-machinegun',
-        ["medium-spitter"] = 'tank-explosive-cannon',
-        ["big-biter"] = 'tank-explosive-cannon',
-        ["big-spitter"] = 'human-shotgun',
-        ["behemoth-biter"] = "human-shotgun",
-        ["behemoth-spitter"] = "human-shotgun",
-    },
-    ["turret"] = {
-        ["small-worm-turret"] = 'gun-turret',
-        ["medium-worm-turret"] = 'gun-turret',
-        ["big-worm-turret"] = 'laser-turret',
-        ["behemoth-worm-turret"] = 'laser-turret',
-    },
-    ["unit-spawner"] = {
-        ["biter-spawner"] = 'lab',
-        ["spitter-spawner"] = 'assemble-machine',
-    },
-}
-
 data:extend(
         {
             {
