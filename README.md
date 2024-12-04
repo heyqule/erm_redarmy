@@ -5,6 +5,13 @@ AOE attacks.
 
 They have flat resistances. 75% for unit, turret and 50% for spawners
 
+### Changes in 2.0
+- Support Factorio 2.0
+- They have a flat resistances without any weakness.
+- This is an experimental release.
+- The red army will get new toys in the future updates.
+- Planet earth will be their home planet.
+
 Credit:
 Human death sound from https://opengameart.org/content/11-male-human-paindeath-sounds
 Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
