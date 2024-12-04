@@ -6,15 +6,9 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local Game = require('__stdlib__/stdlib/game')
 
-local ErmConfig = require('__enemyracemanager__/lib/global_config')
-local ErmForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
-local ErmRaceSettingsHelper = require('__enemyracemanager__/lib/helper/race_settings_helper')
+local ForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
 local CustomAttacks = require('__erm_redarmy__/scripts/custom_attacks')
-
-local Event = require('__stdlib__/stdlib/event/event')
-local String = require('__stdlib__/stdlib/utils/string')
 
 require('__erm_redarmy__/global')
 -- Constants
@@ -30,12 +24,12 @@ local createRace = function()
     force.friendly_fire = false;
 
     if settings.startup['enemyracemanager-free-for-all'].value then
-        ErmForceHelper.set_friends(game, FORCE_NAME, false)
+        ForceHelper.set_friends(game, FORCE_NAME, false)
     else
-        ErmForceHelper.set_friends(game, FORCE_NAME, true)
+        ForceHelper.set_friends(game, FORCE_NAME, true)
     end
 
-    ErmForceHelper.set_neutral_force(game, FORCE_NAME)
+    ForceHelper.set_neutral_force(game, FORCE_NAME)
 end
 
 local addRaceSettings = function()
@@ -106,21 +100,23 @@ local addRaceSettings = function()
         { { 'plane-bomber' }, { 1 }, 75 },
         { { 'plane-gunner' }, { 1 }, 50 }
     }
+    race_settings.structure_killed_count_by_planet = {}
+    race_settings.unit_killed_count_by_planet = {}
 
     remote.call('enemyracemanager', 'register_race', race_settings)
 
     CustomAttacks.get_race_settings(MOD_NAME, true)
 end
 
-Event.on_init(function(event)
+script.on_init(function(event)
     createRace()
     addRaceSettings()
 end)
 
-Event.on_load(function(event)
+script.on_load(function(event)
 end)
 
-Event.on_configuration_changed(function(event)
+script.on_configuration_changed(function(event)
     createRace()
     addRaceSettings()
 end)
@@ -133,7 +129,7 @@ local attack_functions = {
         CustomAttacks.process_engineer(args)
     end
 }
-Event.register(defines.events.on_script_trigger_effect, function(event)
+script.on_event(defines.events.on_script_trigger_effect, function(event)
     if attack_functions[event.effect_id] and
             CustomAttacks.valid(event, MOD_NAME)
     then

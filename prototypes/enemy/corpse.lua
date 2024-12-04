@@ -3,11 +3,8 @@
 --- Created by heyqule.
 --- DateTime: 7/3/2021 7:29 PM
 ---
-require('__stdlib__/stdlib/utils/defines/time')
-require('util')
 
-local Table = require('__stdlib__/stdlib/utils/table')
-local Sprites = require('__stdlib__/stdlib/data/modules/sprites')
+require('util')
 
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_AnimationRig = require('__enemyracemanager__/lib/rig/animation')
@@ -63,7 +60,7 @@ if data.raw['corpse']['common-army-corpse'] == nil then
             flags = { "placeable-neutral", "placeable-off-grid", "building-direction-8-way", "not-on-map" },
             selection_box = { { -0.7, -0.7 }, { 0.7, 0.7 } },
             selectable_in_game = false,
-            time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value / 20,
+            time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value / 20,
             final_render_layer = "lower-object-above-shadow",
             subgroup = "corpses",
             order = "x-common-red-army-corpse",
@@ -81,7 +78,7 @@ if data.raw['corpse']['common-army-corpse'] == nil then
             flags = { "placeable-neutral", "placeable-off-grid", "building-direction-8-way", "not-on-map" },
             selection_box = { { -0.7, -0.7 }, { 0.7, 0.7 } },
             selectable_in_game = false,
-            time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value / 20,
+            time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value / 20,
             final_render_layer = "lower-object-above-shadow",
             subgroup = "corpses",
             order = "x-common-red-army-corpse-2",
@@ -99,7 +96,7 @@ if data.raw['corpse']['common-army-corpse'] == nil then
             flags = { "placeable-off-grid", "building-direction-8-way", "not-on-map" },
             selection_box = { { -0.7, -0.7 }, { 0.7, 0.7 } },
             selectable_in_game = false,
-            time_before_removed = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value / 20,
+            time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value / 20,
             final_render_layer = "lower-object-above-shadow",
             subgroup = "corpses",
             order = "x-common-red-army-corpse-3",
@@ -115,7 +112,7 @@ end
 if data.raw['corpse']['erm-tank-remnants'] == nil then
     local tank_corpse = util.table.deepcopy(data.raw['corpse']['tank-remnants'])
     tank_corpse['name'] = 'erm-tank-remnants'
-    tank_corpse['time_before_removed'] = defines.time.minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
+    tank_corpse['time_before_removed'] = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
     data:extend({
         tank_corpse
     })
@@ -124,8 +121,8 @@ end
 if data.raw['corpse']['erm-medium-remnants'] == nil then
     local medium_corpse = util.table.deepcopy(data.raw['corpse']['medium-remnants'])
     medium_corpse['name'] = 'erm-medium-remnants'
-    medium_corpse['time_before_removed'] = defines.time.second
-    medium_corpse['animation'] = Sprites.empty_pictures()
+    medium_corpse['time_before_removed'] = second
+    medium_corpse['animation'] = util.empty_sprite()
 
     data:extend({
         medium_corpse

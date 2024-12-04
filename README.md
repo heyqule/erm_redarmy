@@ -3,7 +3,7 @@
 This mod adds the player character and vehicles as an enemy force. They have heavy firepower on single target with minor
 AOE attacks.
 
-They are weak against Acid/Poison (Max 85 resist).
+They have flat resistances. 75% for unit, turret and 50% for spawners
 
 Credit:
 Human death sound from https://opengameart.org/content/11-male-human-paindeath-sounds
@@ -17,11 +17,11 @@ ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.y
 
 #### Tier 1 Units
 
-###### Miner (stop not spawn from spawner @ lvl3)
+###### Miner
 
 - Attack: Physical
 
-###### Pistol (stop spawn from spawner @ lvl3)
+###### Pistol
 
 - Attack: Physical
 

@@ -5,8 +5,9 @@
 ---
 
 -- Globals within the mod
-MOD_NAME = 'erm_redarmy'
+MOD_NAME = 'enemy_erm_redarmy'
 FORCE_NAME = 'enemy_erm_redarmy'
+AUTOCONTROL_NAME = MOD_NAME.."-enemy-base"
 
 DEBUG_MODE = false
 
@@ -15,4 +16,4 @@ CHARACTER_RIG_STILL_FRAME = 12
 DROPSHIP_ATTACK = 'emrmy-dsh'
 ENGINEER_ATTACK = 'emrmy-gin'
 
-REDARMY_MAP_COLOR = { r = 220, g = 20, b = 60, a = 255 }
+REDARMY_MAP_COLOR = { r = 165, g = 0, b = 33, a = 255 }

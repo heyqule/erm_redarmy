@@ -5,14 +5,15 @@
 ---
 
 ErmRedArmy = {}
-
-local ERMDataHelper = require('__enemyracemanager__/lib/rig/data_helper')
-require('__erm_redarmy__/global')
 require('util')
+require('__erm_redarmy__/global')
+require "prototypes.noise-functions"
 
-local ErmConfig = require('__enemyracemanager__/lib/global_config')
 
-local ERM_WeaponRig = require('__enemyracemanager__/lib/rig/weapon')
+local DataHelper = require('__enemyracemanager__/lib/rig/data_helper')
+local GlobalConfig = require('__enemyracemanager__/lib/global_config')
+
+local WeaponRig = require('__enemyracemanager__/lib/rig/weapon')
 
 -- This set of data is used for set up default autoplace calculation.
 data.erm_registered_race = data.erm_registered_race or {}
@@ -35,23 +36,23 @@ data:extend(
             },
         })
 
-local cannon_projectile = ERM_WeaponRig.standardize_cannon_projectile(
+local cannon_projectile = WeaponRig.standardize_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['cannon-projectile']),
-        MOD_NAME..'/cannon-projectile'
+        MOD_NAME..'--cannon-projectile'
 )
 cannon_projectile['force_condition'] = "not-same"
-cannon_projectile['hit_collision_mask'] = {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()}
+cannon_projectile['hit_collision_mask'] = { layers = {player = true, train = true,   [DataHelper.getFlyingLayerName()] = true}}
 
-local cannon_explosive_projectile = ERM_WeaponRig.standardize_explosive_cannon_projectile(
+local cannon_explosive_projectile = WeaponRig.standardize_explosive_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
-        MOD_NAME..'/explosive-cannon-projectile'
+        MOD_NAME..'--explosive-cannon-projectile'
 )
 cannon_explosive_projectile['force_condition'] = "not-same"
-cannon_explosive_projectile['hit_collision_mask'] = {"player-layer", "train-layer", ERMDataHelper.getFlyingLayerName()}
+cannon_explosive_projectile['hit_collision_mask'] = { layers = {player = true, train = true,   [DataHelper.getFlyingLayerName()] = true}}
 
-local rocket = ERM_WeaponRig.standardize_rocket_damage(
+local rocket = WeaponRig.standardize_rocket_damage(
         util.table.deepcopy(data.raw['projectile']['rocket']),
-        MOD_NAME..'/rocket'
+        MOD_NAME..'--rocket'
 )
 rocket['turn_speed'] = nil
 rocket['turning_speed_increases_exponentially_with_projectile_speed'] = false
@@ -101,9 +102,9 @@ require "prototypes.enemy.plane-gunner"
 require "prototypes.enemy.plane-bomber"
 require "prototypes.enemy.plane-dropship"
 
-local max_level = ErmConfig.MAX_LEVELS
+local max_level = GlobalConfig.MAX_LEVELS
 
-for i = 1, max_level + ErmConfig.MAX_ELITE_LEVELS do
+for i = 1, max_level do
     ErmRedArmy.make_human_miner(i)
     ErmRedArmy.make_human_pistol(i)
     ErmRedArmy.make_human_machinegun(i)

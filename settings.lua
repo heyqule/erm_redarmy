@@ -9,8 +9,8 @@ data:extend {
     --- Startup Tab
     {
         type = "color-setting",
-        name = "erm_redarmy-map-color",
-        description = "erm_redarmy-map-color",
+        name = FORCE_NAME.."-map-color",
+        description = FORCE_NAME.."-map-color",
         setting_type = "startup",
         default_value = REDARMY_MAP_COLOR,
         order = "erm_redarmy-100"

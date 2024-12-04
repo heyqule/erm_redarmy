@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.0
+Date: 2024-??-??
+  
+  Changes:
+    - Updated to Factorio 2.0
+    - Utilized 2.0 autoplace and noise functions.    
+    - Replaced leveling system with quality spawning system to determine enemy stats.
+    - Changed to 75% flat resistances for units and turrets and 50% for spawners
+
+---------------------------------------------------------------------------------------------------
 Version: 1.11.1
 Date: 2024-07-02
 
