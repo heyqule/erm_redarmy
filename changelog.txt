@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.0
 Date: 2024-12-05
-  
+
   Changes:
     - Updated to Factorio 2.0
     - Utilized 2.0 autoplace and noise functions.    

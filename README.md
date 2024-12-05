@@ -9,7 +9,8 @@ They have flat resistances. 75% for unit, turret and 50% for spawners
 - Support Factorio 2.0
 - They have a flat resistances without any weakness.
 - This is an experimental release.
-- The red army will get new toys in the future updates.
+### Future updates
+- The red army will get new toys.
 - Planet earth will be their home planet.
 
 Credit:
