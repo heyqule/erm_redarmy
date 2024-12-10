@@ -100,8 +100,8 @@ local addRaceSettings = function()
         { { 'plane-bomber' }, { 1 }, 75 },
         { { 'plane-gunner' }, { 1 }, 50 }
     }
-    race_settings.structure_killed_count_by_planet = {}
-    race_settings.unit_killed_count_by_planet = {}
+    race_settings.structure_killed_count_by_planet = race_settings.structure_killed_count_by_planet or {}
+    race_settings.unit_killed_count_by_planet = race_settings.unit_killed_count_by_planet or {}
 
     remote.call('enemyracemanager', 'register_race', race_settings)
 
