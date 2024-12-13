@@ -4,7 +4,7 @@ Date: 2024-12-13
 
   Changes:
     - Scouts have their own localised name, instead of it with parent entity.
-    
+
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.1
 Date: 2024-12-10
