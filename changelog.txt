@@ -5,7 +5,7 @@ Date: 2025-01-18
   Changes:
     - Auto select "redarmy" on negative axis for 2 ways split.
     - Auto select "redarmy" on north east corner for 4 ways split.
-    
+
   Bugfixes:
     - Fixed data stage crash when 3rd party mod removed "death world" from map presets        
 
@@ -15,7 +15,7 @@ Date: 2024-12-30
 
   Changes:
     - Redarmy's Assembly Machine can be captured as captive biter spawner.  They become biter afterward.
-    
+
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.2
 Date: 2024-12-13
