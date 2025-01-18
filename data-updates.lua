@@ -9,7 +9,10 @@ local MapGenFunctions = require('__erm_libs__/prototypes/map_gen')
 -- Update RTS world
 local mapgen = data.raw["map-gen-presets"]["default"]
 mapgen["erm-rts-death-world"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = "very-high", size = "very-big" }
-mapgen["death-world"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = "very-high", size = "very-big" }
+
+if mapgen["death-world"] then
+    mapgen["death-world"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = "very-high", size = "very-big" }
+end
 
 if mapgen["erm-debug"] then
     mapgen["erm-debug"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = 5, size = 5 }

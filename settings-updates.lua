@@ -10,3 +10,10 @@ table.insert(data.raw["string-setting"]["enemyracemanager-4way-northwest"].allow
 table.insert(data.raw["string-setting"]["enemyracemanager-4way-southwest"].allowed_values, MOD_NAME)
 table.insert(data.raw["string-setting"]["enemyracemanager-4way-southeast"].allowed_values, MOD_NAME)
 
+if data.raw["string-setting"]["enemyracemanager-2way-group-enemy-positive"].default_value ~= MOD_NAME then
+    data.raw["string-setting"]["enemyracemanager-2way-group-enemy-positive"].default_value = MOD_NAME
+end
+
+if data.raw["string-setting"]["enemyracemanager-4way-northwest"].default_value ~= MOD_NAME then
+    data.raw["string-setting"]["enemyracemanager-4way-northwest"].default_value = MOD_NAME
+end
