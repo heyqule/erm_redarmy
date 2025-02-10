@@ -40,7 +40,6 @@ local base_cold_resistance = 10
 local incremental_cold_resistance = 40
 
 -- Animation Settings
-local unit_scale = 2
 
 local pollution_absorption_absolute = 200
 local spawning_cooldown = { 600, 300 }
@@ -59,7 +58,7 @@ local spawn_table = function(level)
     res[6] = { MOD_NAME .. '--plane-gunner--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
     --Tire 3
     res[7] = { MOD_NAME .. '--human-engineer--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
-    res[8] = { MOD_NAME .. '--human-heavy-machinegun--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.05 }, { 0.8, 0.15 }, { 1.0, 0.15 } } }
+    res[8] = { MOD_NAME .. '--human-flamethrower--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.05 }, { 0.8, 0.15 }, { 1.0, 0.15 } } }
     res[9] = { MOD_NAME .. '--human-shotgun--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
     res[10] = { MOD_NAME .. '--tank-explosive-cannon--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
     res[11] = { MOD_NAME .. '--plane-bomber--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }

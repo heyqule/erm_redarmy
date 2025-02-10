@@ -18,10 +18,10 @@ local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 local ERM_Sound = require('prototypes.sound')
 local HumanAnimation = require('prototypes.human_animation')
 
-local name = 'human-heavy-machinegun'
+local name = 'human-flamethrower'
 
 local hitpoint = 300
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.25
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
 
 
 -- Handles acid and poison resistance
@@ -42,16 +42,17 @@ local incremental_cold_resistance = 65
 
 -- Handles physical damages
 
-local base_physical_damage = 2
-local incremental_physical_damage = 6
+local base_physical_damage = 1
+local incremental_physical_damage = 4
 
 -- Handles Attack Speed
 
 local base_attack_speed = 60
 local incremental_attack_speed = 45
 
-local base_movement_speed = 0.075
-local incremental_movement_speed = 0.15
+
+local base_movement_speed = 0.125
+local incremental_movement_speed = 0.1
 
 -- Misc settings
 
@@ -59,13 +60,12 @@ local pollution_to_join_attack = 100
 local distraction_cooldown = 300
 
 -- Animation Settings
-local unit_scale = 1
 
 local collision_box = { { -0.2, -0.2 }, { 0.2, 0.2 } }
 local selection_box = { { -0.4, -1.4 }, { 0.4, 0.2 } }
 local sticker_box = { { -0.2, -1 }, { 0.2, 0 } }
 
-function ErmRedArmy.make_human_heavy_machinegun(level)
+function ErmRedArmy.make_human_machinegun(level)
     level = level or 1
     local attack_range = ERM_UnitHelper.get_attack_range(level, 0.75)
     local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
@@ -73,14 +73,14 @@ function ErmRedArmy.make_human_heavy_machinegun(level)
     local human_animation = HumanAnimation.get_animation()
     --Level 1 animation, level 2 and 3 are armored animations
     -- types: running, running_with_gun, mining_with_tool
-    local running_animation = human_animation['animations'][3]['running']
-    ERM_UnitTint.mask_tint(running_animation['layers'][2], ERM_UnitTint.tint_red())
-    ERM_UnitTint.mask_tint(running_animation['layers'][4], ERM_UnitTint.tint_red())
+    local running_animation = human_animation['animations'][2]['running']
+    ERM_UnitTint.mask_tint(running_animation['layers'][2], ERM_UnitTint.tint_red_crimson())
+    ERM_UnitTint.mask_tint(running_animation['layers'][4], ERM_UnitTint.tint_red_crimson())
     ERM_AnimationRig.adjust_still_frame_all(running_animation['layers'], CHARACTER_RIG_STILL_FRAME)
 
-    local gun_animation = human_animation['animations'][3]['idle_with_gun']
-    ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red())
-    ERM_UnitTint.mask_tint(gun_animation['layers'][4], ERM_UnitTint.tint_red())
+    local gun_animation = human_animation['animations'][2]['idle_with_gun']
+    ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red_crimson())
+    ERM_UnitTint.mask_tint(gun_animation['layers'][4], ERM_UnitTint.tint_red_crimson())
 
     data:extend({
         {
@@ -93,7 +93,7 @@ function ErmRedArmy.make_human_heavy_machinegun(level)
                     icon_size = 64,
                 },
                 {
-                    icon = "__base__/graphics/icons/signal/signal_H.png",
+                    icon = "__base__/graphics/icons/signal/signal_F.png",
                     icon_size = 64,
                     scale = 0.2,
                     shift = { -9, -9 }
@@ -127,33 +127,38 @@ function ErmRedArmy.make_human_heavy_machinegun(level)
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
             ai_settings = biter_ai_settings,
-            spawning_time_modifier = 2,
             attack_parameters = {
-                type = "projectile",
-                ammo_category = "redarmy-damage",
+                type = "stream",
+                cooldown = 5,
                 range = attack_range,
-                min_attack_distance = attack_range - 3,
-                cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, level),
-                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, level),
-                shell_particle = {
-                    name = "shell-particle",
-                    direction_deviation = 0.1,
-                    speed = 0.1,
-                    speed_deviation = 0.03,
-                    center = { 0, 0.1 },
-                    creation_distance = -0.5,
-                    starting_frame_speed = 0.4,
-                    starting_frame_speed_deviation = 0.1
+                min_attack_distance = attack_range - 2,
+                damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, level) / 3,
+                ammo_category = "redarmy-damage",
+                ammo_type =
+                {
+                    action =
+                    {
+                        type = "direct",
+                        action_delivery =
+                        {
+                            type = "stream",
+                            stream = MOD_NAME..'--flamethrower-fire-stream',
+                            source_offset = {0.15, -0.5}
+                        }
+                    }
                 },
-                projectile_creation_distance = 1.125,
-                sound = ERM_Sound.heavy_machine_gun(),
-                ammo_type = ERM_WeaponRig.get_bullet('redarmy-damage'),
-                animation = gun_animation
+                animation = gun_animation,
+                cyclic_sound =
+                {
+                    begin_sound = sound_variations("__base__/sound/fight/flamethrower-turret-start", 3, 0.5),
+                    middle_sound = sound_variations("__base__/sound/fight/flamethrower-turret-mid", 3, 0.5),
+                    end_sound = sound_variations("__base__/sound/fight/flamethrower-turret-end", 3, 0.5)
+                }
             },
             distance_per_frame = 0.1,
             run_animation = running_animation,
             dying_sound = ERM_Sound.death(0.75),
-            corpse = "common-red-army-corpse-3"
+            corpse = "common-red-army-corpse-2"
         }
     })
 end

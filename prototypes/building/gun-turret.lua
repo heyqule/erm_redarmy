@@ -137,7 +137,7 @@ function ErmRedArmy.make_gun_turret(level)
 
     short_redarmy_gun_turret['name'] = MOD_NAME .. '--' .. short_range_name .. '--' .. level
     short_redarmy_gun_turret['attack_parameters']['range'] = GlobalConfig.get_max_attack_range()
-    short_redarmy_gun_turret['autoplace'] = nil
+    short_redarmy_gun_turret['autoplace']['probability_expression'] = "0"
 
     data:extend({
         short_redarmy_gun_turret

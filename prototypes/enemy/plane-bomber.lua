@@ -50,23 +50,22 @@ local base_attack_speed = 240
 local incremental_attack_speed = 150
 
 
-local base_movement_speed = 0.15
-local incremental_movement_speed = 0.125
+local base_movement_speed = 0.25
+local incremental_movement_speed = 0.15
 
 -- Misc settings
 
 local pollution_to_join_attack = 300
 local distraction_cooldown = 300
 
--- Animation Settings
-local unit_scale = 1
+
 
 local collision_box = { { -0.9, -1.3 }, { 0.9, 1.3 } }
 local selection_box = { { -0.9, -1.3 }, { 0.9, 1.3 } }
 
 function ErmRedArmy.make_bomber_plane(level)
     level = level or 1
-    local attack_range = ERM_UnitHelper.get_attack_range(level, 0.75)
+    local attack_range = math.floor(ERM_UnitHelper.get_attack_range(level, 0.35))
     local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
     local bomber_animation = {
@@ -139,8 +138,8 @@ function ErmRedArmy.make_bomber_plane(level)
                 type = "projectile",
                 ammo_category = "redarmy-damage",
                 range = attack_range,
-                min_attack_distance = attack_range - 4,
-                cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, level),
+                min_attack_distance = attack_range - 1,
+                cooldown = 5,
                 projectile_creation_distance = 1.6,
                 projectile_center = { -0.15625, -0.07812 },
                 damage_modifier = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, level),
@@ -149,12 +148,24 @@ function ErmRedArmy.make_bomber_plane(level)
                     category = "redarmy-damage",
                     target_type = "direction",
                     action = {
-                        type = "direct",
-                        action_delivery = {
-                            type = "projectile",
-                            projectile = MOD_NAME.."--rocket",
-                            starting_speed = 0.3,
-                            max_range = GlobalConfig.get_max_projectile_range(),
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "projectile",
+                                projectile = MOD_NAME.."--explosive-rocket",
+                                starting_speed = 0.3,
+                                max_range = GlobalConfig.get_max_projectile_range(),
+                            }                            
+                        },
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "instant",
+                                source_effects = {
+                                    type = "script",
+                                    effect_id = GUERRILLA_ATTACK,
+                                }
+                            }
                         }
                     }
                 },

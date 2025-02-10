@@ -49,16 +49,15 @@ local incremental_physical_damage = 12
 local base_attack_speed = 2700
 local incremental_attack_speed = 900
 
-local base_movement_speed = 0.15
-local incremental_movement_speed = 0.125
+local base_movement_speed = 0.25
+local incremental_movement_speed = 0.2
 
 -- Misc settings
 
 local pollution_to_join_attack = 120
 local distraction_cooldown = 300
 
--- Animation Settings
-local unit_scale = 1
+
 
 local collision_box = { { -0.9, -1.3 }, { 0.9, 1.3 } }
 local selection_box = { { -0.9, -1.3 }, { 0.9, 1.3 } }

@@ -50,9 +50,10 @@ local cannon_explosive_projectile = WeaponRig.standardize_explosive_cannon_proje
 cannon_explosive_projectile['force_condition'] = "not-same"
 cannon_explosive_projectile['hit_collision_mask'] = { layers = {player = true, train = true,   [DataHelper.getFlyingLayerName()] = true}}
 
-local rocket = WeaponRig.standardize_rocket_damage(
-        util.table.deepcopy(data.raw['projectile']['rocket']),
-        MOD_NAME..'--rocket'
+local rocket = WeaponRig.standardize_explosive_rocket_damage(
+        util.table.deepcopy(data.raw['projectile']['explosive-rocket']),
+        MOD_NAME..'--explosive-rocket',
+        3
 )
 rocket['turn_speed'] = nil
 rocket['turning_speed_increases_exponentially_with_projectile_speed'] = false
@@ -62,28 +63,24 @@ rocket['action']['action_delivery']['target_effects'][2] = {
     type = "damage",
     damage = { amount = 3.5, type = "explosion" },
 }
-table.insert(rocket['action']['action_delivery']['target_effects'], {
-    type = "nested-result",
-    action = {
-        type = "area",
-        force = "not-same",
-        radius = 3,
-        action_delivery = {
-            type = "instant",
-            target_effects = {
-                {
-                    type = "damage",
-                    damage = { amount = 6.5, type = "explosion" }
-                },
-            }
-        }
-    }
-})
 
 data:extend({ cannon_projectile, cannon_explosive_projectile, rocket })
 
+local fire_stream = util.table.deepcopy(data.raw['stream']['flamethrower-fire-stream'])
+fire_stream['name'] = MOD_NAME..'--flamethrower-fire-stream'
+fire_stream['action'][1]['action_delivery']['target_effects'][1]['sticker'] = MOD_NAME..'--fire-stickerer'
+
+local fire_sticker = util.table.deepcopy(data.raw['sticker']['fire-sticker'])
+fire_sticker['name'] = MOD_NAME..'--fire-stickerer'
+
+data.extend({
+    fire_sticker,
+    fire_stream,
+})
+
 require "prototypes.building.gun-turret"
 require "prototypes.building.laser-turret"
+require "prototypes.building.rocket-turret"
 require "prototypes.building.lab"
 require "prototypes.building.electric-furnace"
 require "prototypes.building.assemble-machine"
@@ -95,7 +92,7 @@ require "prototypes.enemy.human-machinegun"
 require "prototypes.enemy.human-engineer"
 require "prototypes.enemy.human-sniper"
 require "prototypes.enemy.human-shotgun"
-require "prototypes.enemy.human-heavy-machinegun"
+require "prototypes.enemy.human-flamethrower"
 require "prototypes.enemy.tank-cannon"
 require "prototypes.enemy.tank-explosive-cannon"
 require "prototypes.enemy.plane-gunner"
@@ -133,3 +130,6 @@ data.erm_land_scout[MOD_NAME] = 'human-miner'
 
 data.erm_aerial_scout = data.erm_aerial_scout or {}
 data.erm_aerial_scout[MOD_NAME] = 'plane-gunner'
+
+
+require "prototypes.planets"

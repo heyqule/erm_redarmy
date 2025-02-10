@@ -20,7 +20,7 @@ local HumanAnimation = require('prototypes.human_animation')
 
 local name = 'human-machinegun'
 
-local hitpoint = 200
+local hitpoint = 250
 local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.66
 
 
@@ -42,31 +42,29 @@ local incremental_cold_resistance = 65
 
 -- Handles physical damages
 
-local base_physical_damage = 1
-local incremental_physical_damage = 4
+local base_physical_damage = 2
+local incremental_physical_damage = 6
 
 -- Handles Attack Speed
 
 local base_attack_speed = 60
 local incremental_attack_speed = 45
 
-
-local base_movement_speed = 0.125
-local incremental_movement_speed = 0.1
+local base_movement_speed = 0.075
+local incremental_movement_speed = 0.15
 
 -- Misc settings
 
-local pollution_to_join_attack = 25
+local pollution_to_join_attack = 40
 local distraction_cooldown = 300
 
 -- Animation Settings
-local unit_scale = 1
 
 local collision_box = { { -0.2, -0.2 }, { 0.2, 0.2 } }
 local selection_box = { { -0.4, -1.4 }, { 0.4, 0.2 } }
 local sticker_box = { { -0.2, -1 }, { 0.2, 0 } }
 
-function ErmRedArmy.make_human_machinegun(level)
+function ErmRedArmy.make_human_heavy_machinegun(level)
     level = level or 1
     local attack_range = ERM_UnitHelper.get_attack_range(level, 0.75)
     local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
@@ -74,14 +72,14 @@ function ErmRedArmy.make_human_machinegun(level)
     local human_animation = HumanAnimation.get_animation()
     --Level 1 animation, level 2 and 3 are armored animations
     -- types: running, running_with_gun, mining_with_tool
-    local running_animation = human_animation['animations'][2]['running']
-    ERM_UnitTint.mask_tint(running_animation['layers'][2], ERM_UnitTint.tint_red_crimson())
-    ERM_UnitTint.mask_tint(running_animation['layers'][4], ERM_UnitTint.tint_red_crimson())
+    local running_animation = human_animation['animations'][3]['running']
+    ERM_UnitTint.mask_tint(running_animation['layers'][2], ERM_UnitTint.tint_red())
+    ERM_UnitTint.mask_tint(running_animation['layers'][4], ERM_UnitTint.tint_red())
     ERM_AnimationRig.adjust_still_frame_all(running_animation['layers'], CHARACTER_RIG_STILL_FRAME)
 
-    local gun_animation = human_animation['animations'][2]['idle_with_gun']
-    ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red_crimson())
-    ERM_UnitTint.mask_tint(gun_animation['layers'][4], ERM_UnitTint.tint_red_crimson())
+    local gun_animation = human_animation['animations'][3]['idle_with_gun']
+    ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red())
+    ERM_UnitTint.mask_tint(gun_animation['layers'][4], ERM_UnitTint.tint_red())
 
     data:extend({
         {
@@ -128,6 +126,7 @@ function ErmRedArmy.make_human_machinegun(level)
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
             ai_settings = biter_ai_settings,
+            spawning_time_modifier = 2,
             attack_parameters = {
                 type = "projectile",
                 ammo_category = "redarmy-damage",
@@ -146,14 +145,14 @@ function ErmRedArmy.make_human_machinegun(level)
                     starting_frame_speed_deviation = 0.1
                 },
                 projectile_creation_distance = 1.125,
-                sound = ERM_Sound.machine_gun(),
+                sound = ERM_Sound.heavy_machine_gun(),
                 ammo_type = ERM_WeaponRig.get_bullet('redarmy-damage'),
                 animation = gun_animation
             },
             distance_per_frame = 0.1,
             run_animation = running_animation,
             dying_sound = ERM_Sound.death(0.75),
-            corpse = "common-red-army-corpse-2"
+            corpse = "common-red-army-corpse-3"
         }
     })
 end

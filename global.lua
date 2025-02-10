@@ -15,5 +15,6 @@ CHARACTER_RIG_STILL_FRAME = 12
 
 DROPSHIP_ATTACK = 'emrmy-dsh'
 ENGINEER_ATTACK = 'emrmy-gin'
+GUERRILLA_ATTACK = 'emrmy-grl'
 
 REDARMY_MAP_COLOR = { r = 200, g = 0, b = 33, a = 255 }

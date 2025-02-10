@@ -30,6 +30,9 @@ local createRace = function()
     end
 
     ForceHelper.set_neutral_force(game, FORCE_NAME)
+
+    --- for guerrilla tactic processing
+    storage.guerrilla_distances = storage.guerrilla_distances or {}
 end
 
 local addRaceSettings = function()
@@ -40,18 +43,18 @@ local addRaceSettings = function()
 
     race_settings.race = race_settings.race or MOD_NAME
     race_settings.label = { 'gui.label-erm_redarmy' }
-    race_settings.level = race_settings.level or 1
     race_settings.tier = race_settings.tier or 1
-    race_settings.evolution_point = race_settings.evolution_point or 0
-    race_settings.evolution_base_point = race_settings.evolution_base_point or 0
+    race_settings.is_primitive = race_settings.is_primitive or false
+    race_settings.autoplace_name = race_settings.autoplace_name or AUTOCONTROL_NAME
     race_settings.attack_meter = race_settings.attack_meter or 0
     race_settings.attack_meter_total = race_settings.attack_meter_total or 0
+    race_settings.last_attack_meter_total = race_settings.last_attack_meter_total or 0
     race_settings.next_attack_threshold = race_settings.next_attack_threshold or 0
 
     race_settings.units = {
         { 'human-miner', 'human-pistol', 'human-machinegun' },
         { 'human-sniper', 'tank-cannon', 'plane-dropship', 'human-engineer' },
-        { 'human-heavy-machinegun', 'human-shotgun', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' },
+        { 'human-flamethrower', 'human-shotgun', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' },
     }
     race_settings.turrets = {
         { 'gun-turret', 'laser-turret' },
@@ -79,7 +82,7 @@ local addRaceSettings = function()
     race_settings.droppable_units = {
         { { 'human-miner', 'human-pistol' }, { 3, 1 } },
         { { 'human-machinegun', 'tank-cannon' }, { 4, 2 } },
-        { { 'human-heavy-machinegun', 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon' }, { 4, 2, 1, 1 } },
+        { { 'human-flamethrower', 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon' }, { 4, 2, 1, 1 } },
     }
     race_settings.construction_buildings = {
         { { 'gun-turret-short' }, { 1 } },
@@ -88,8 +91,8 @@ local addRaceSettings = function()
     }
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost
-        { { 'human-heavy-machinegun', 'human-shotgun', 'human-sniper', 'human-engineer' }, { 2, 2, 1, 1 }, 20 },
-        { { 'human-machinegun', 'human-heavy-machinegun', 'human-sniper', 'tank-explosive-cannon' }, { 2, 2, 1, 1 }, 25 },
+        { { 'human-flamethrower', 'human-shotgun', 'human-sniper', 'human-engineer' }, { 2, 2, 1, 1 }, 20 },
+        { { 'human-machinegun', 'human-flamethrower', 'human-sniper', 'tank-explosive-cannon' }, { 2, 2, 1, 1 }, 25 },
         { { 'tank-cannon', 'tank-explosive-cannon' }, { 2, 1 }, 35 },
         { { 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' }, { 2, 1, 1, 1, 1 }, 25 },
         { { 'human-sniper', 'tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' }, { 2, 1, 1, 1, 1 }, 25 },
@@ -97,9 +100,14 @@ local addRaceSettings = function()
     race_settings.featured_flying_groups = {
         { { 'plane-gunner', 'plane-bomber' }, { 3, 2 }, 75 },
         { { 'plane-gunner', 'plane-dropship' }, { 2, 1 }, 75 },
-        { { 'plane-bomber' }, { 1 }, 75 },
-        { { 'plane-gunner' }, { 1 }, 50 }
+        { { 'plane-gunner', 'plane-bomber','plane-dropship' }, { 3, 2, 1}, 75 },
     }
+    race_settings.home_planet = "earth"
+    race_settings.interplanetary_attack_active = race_settings.interplanetary_attack_active or false
+
+    race_settings.boss_tier = race_settings.boss_tier or 1
+    race_settings.boss_kill_count = race_settings.boss_kill_count or 0
+    
     race_settings.structure_killed_count_by_planet = race_settings.structure_killed_count_by_planet or {}
     race_settings.unit_killed_count_by_planet = race_settings.unit_killed_count_by_planet or {}
 
@@ -127,6 +135,9 @@ local attack_functions = {
     end,
     [ENGINEER_ATTACK] = function(args)
         CustomAttacks.process_engineer(args)
+    end,
+    [GUERRILLA_ATTACK] = function(args)
+        CustomAttacks.process_guerrilla(args)
     end
 }
 script.on_event(defines.events.on_script_trigger_effect, function(event)

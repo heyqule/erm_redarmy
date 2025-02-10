@@ -1,4 +1,4 @@
-# ERM Redarmy (Beta release)
+# ERM Redarmy
 
 This mod adds the player character and vehicles as an enemy force. They have heavy firepower on single target with minor
 AOE attacks.
@@ -8,6 +8,7 @@ They have flat resistances. 75% for unit, turret and 50% for spawners
 ### Changes in 2.0
 - Support Factorio 2.0
 - They have a flat resistances without any weakness.
+- Support "Factorio World" to generate a proper planet Earth.
 - This is an experimental release.
 ### Future updates
 - The red army will get new toys.
@@ -57,9 +58,9 @@ ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.y
 
 - Attack: Physical
 
-###### Heavy Machine gunner
+###### Flamethrower
 
-- Attack: Physical
+- Attack: Fire
 
 ###### Shotgunner
 
@@ -77,6 +78,4 @@ ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.y
 
 - Attack: Physical / Explosion (3 radius AOE)
 
-Physical resistance: 95
-Weak elemental resistance: 85
-Elemental resistance: 90
+All resistance @ Legendary: 75
