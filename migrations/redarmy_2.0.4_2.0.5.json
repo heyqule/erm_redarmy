@@ -1,10 +1,10 @@
 ﻿{
   "entity":
   [
-    ["erm-redarmy--heavy-machine-gun--1", "erm-redarmy--flamethrower--1"],
-    ["erm-redarmy--heavy-machine-gun--2", "erm-redarmy--flamethrower--2"],
-    ["erm-redarmy--heavy-machine-gun--3", "erm-redarmy--flamethrower--3"],
-    ["erm-redarmy--heavy-machine-gun--4", "erm-redarmy--flamethrower--4"],
-    ["erm-redarmy--heavy-machine-gun--5", "erm-redarmy--flamethrower--5"]
+    ["enemy_erm_redarmy--heavy-machine-gun--1", "enemy_erm_redarmy--flamethrower--1"],
+    ["enemy_erm_redarmy--heavy-machine-gun--2", "enemy_erm_redarmy--flamethrower--2"],
+    ["enemy_erm_redarmy--heavy-machine-gun--3", "enemy_erm_redarmy--flamethrower--3"],
+    ["enemy_erm_redarmy--heavy-machine-gun--4", "enemy_erm_redarmy--flamethrower--4"],
+    ["enemy_erm_redarmy--heavy-machine-gun--5", "enemy_erm_redarmy--flamethrower--5"]
   ]
 }

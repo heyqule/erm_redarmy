@@ -122,6 +122,9 @@ for i = 1, max_level do
     ErmRedArmy.make_lab(i)
     ErmRedArmy.make_furnace(i)
     ErmRedArmy.make_machine(i)
+    if feature_flags.space_travel then
+        ErmRedArmy.make_rocket_turret(i)
+    end
 end
 
 
@@ -133,3 +136,4 @@ data.erm_aerial_scout[MOD_NAME] = 'plane-gunner'
 
 
 require "prototypes.planets"
+require "prototypes.tips_and_tricks.prototypes"

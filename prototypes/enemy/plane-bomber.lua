@@ -139,7 +139,7 @@ function ErmRedArmy.make_bomber_plane(level)
                 ammo_category = "redarmy-damage",
                 range = attack_range,
                 min_attack_distance = attack_range - 1,
-                cooldown = 5,
+                cooldown = 15,
                 projectile_creation_distance = 1.6,
                 projectile_center = { -0.15625, -0.07812 },
                 damage_modifier = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, level),

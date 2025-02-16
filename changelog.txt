@@ -6,20 +6,20 @@ Date: 2025-02-xx
     - Re-added interplanetary attack support.
     - Added planet earth. If you have Factorio World installed, it generates with the Earth landscape.
     - When other mod adds planet earth, redarmy will use that planet and replaces its enemy. 
-    - [ Optional Factorio World Compatibility ]
-    - Added support mod "Factorio World" to generate earth landscape on planet earth
-    - If "Factorio world" enable, this mod forces it to generate only on Planet Earth.
+    - Added "Factorio World" dependency to generate earth landscape on planet earth
     - Raises minimum Factorio world map scale from 6 to 10.
     - Raises minimum Factorio world safe map distance from 5 chunks to 12 chunks.
-    - Added interplanetary attack support.
+    - Added interplanetary attack support.    
 
   Changes:
     - Add flamethrower soldiers, replaced heavy machine gun soldiers.
     - Use heavy machine gun soldiers properties on machine gun soldiers with minor reduced in HP.
-    - Added rocket turret, spawn when planet evolution is over 0.5.
+    - [space-age] Added rocket turret, spawn when evolution factor is over 0.5.
     - bomber plane is now close range attack unit.
     - bomber plane learnt lousy hit and run tactic.   
     - increased plane movement speed to match other enemy force.
+    - Added advanced_target_priorities mod support.
+    - Added tip and tricks
 
   Optimizations:
     - Fixed an issue that higher level base building group they can't path to destination. 

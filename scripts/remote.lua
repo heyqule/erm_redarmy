@@ -51,4 +51,35 @@ function RemoteAPI.interplanetary_attack_ignore_planets()
     return {'earth'}
 end
 
+function RemoteAPI.advanced_target_priorities_register_section_data()
+    local data =  {
+        {
+            delimiter = '--',
+            name = "erm_redarmy",
+            prefix = 'enemy_erm_redarmy',
+            suffix = nil,
+            --- 4 type of options 'size', 'unit_type', 'tier','variant'
+            options = {
+                { 'human-miner', 'human-pistol', 
+                  'human-machinegun', 'human-sniper',
+                  'human-flamethrower', 'human-shotgun',
+                  'tank-cannon',  'tank-explosive-cannon',
+                  'plane-dropship', 'human-engineer',
+                  'plane-gunner', 'plane-bomber' 
+                },
+                {1,2,3,4,5}
+            },
+            unit_type_columns = 2,
+            --- controls order of text concatenation
+            option_titles = {
+                'unit_type', 'tier'
+            },
+            option_delimiters = {
+            }
+        }
+    }
+
+    return data
+end
+
 return RemoteAPI

@@ -129,7 +129,7 @@ function ErmRedArmy.make_human_machinegun(level)
             ai_settings = biter_ai_settings,
             attack_parameters = {
                 type = "stream",
-                cooldown = 5,
+                cooldown = 15,
                 range = attack_range,
                 min_attack_distance = attack_range - 2,
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, level) / 3,
@@ -143,7 +143,7 @@ function ErmRedArmy.make_human_machinegun(level)
                         {
                             type = "stream",
                             stream = MOD_NAME..'--flamethrower-fire-stream',
-                            source_offset = {0.15, -0.5}
+                            source_offset = {0, -5}
                         }
                     }
                 },

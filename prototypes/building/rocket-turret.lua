@@ -51,13 +51,13 @@ local collision_box = { { -1, -1 }, { 1, 1 } }
 local map_generator_bounding_box = { { -2.5, -2.5 }, { 2.5, 2.5 } }
 local selection_box = { { -1, -1 }, { 1, 1 } }
 
-function ErmRedArmy.make_laser_turret(level)
+function ErmRedArmy.make_rocket_turret(level)
     level = level or 1
 
     local attack_range = ERM_UnitHelper.get_attack_range(level) + 16
 
     local redarmy_rocket_turret = util.table.deepcopy(data.raw['ammo-turret']['rocket-turret'])
-
+    
     -- Base changes
     redarmy_rocket_turret['type'] = 'turret'
     redarmy_rocket_turret['subgroup'] = 'enemies'

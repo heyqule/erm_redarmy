@@ -1,7 +1,6 @@
 # ERM Redarmy
 
-This mod adds the player character and vehicles as an enemy force. They have heavy firepower on single target with minor
-AOE attacks.
+This mod adds the player character and vehicles as an enemy force. They have many of your offensive tech and more.
 
 They have flat resistances. 75% for unit, turret and 50% for spawners
 
