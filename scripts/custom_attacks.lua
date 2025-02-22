@@ -9,7 +9,7 @@ local CustomAttackHelper = require('__enemyracemanager__/lib/helper/custom_attac
 local CustomAttacks = CustomAttackHelper
 
 function CustomAttacks.process_engineer(event)
-    CustomAttacks.drop_unit(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, 'construction_buildings'))
+    CustomAttackHelper.build(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, "construction_buildings"))
     event.source_entity.destroy()
 end
 

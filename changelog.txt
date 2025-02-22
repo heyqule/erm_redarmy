@@ -1,15 +1,14 @@
 ---------------------------------------------------------------------------------------------------
 Version: 2.0.5
-Date: 2025-02-xx
+Date: 2025-02-21
 
   Feature:
     - Re-added interplanetary attack support.
-    - Added planet earth. If you have Factorio World installed, it generates with the Earth landscape.
-    - When other mod adds planet earth, redarmy will use that planet and replaces its enemy. 
-    - Added "Factorio World" dependency to generate earth landscape on planet earth
+    - Added advanced_target_priorities mod support.    
+    - Added planet earth. 
+    - Requires Factorio World to be installed as it generates the Earth landscape. 
     - Raises minimum Factorio world map scale from 6 to 10.
-    - Raises minimum Factorio world safe map distance from 5 chunks to 12 chunks.
-    - Added interplanetary attack support.    
+    - Raises minimum Factorio world safe map distance from 5 chunks to 12 chunks.  
 
   Changes:
     - Add flamethrower soldiers, replaced heavy machine gun soldiers.
@@ -18,7 +17,8 @@ Date: 2025-02-xx
     - bomber plane is now close range attack unit.
     - bomber plane learnt lousy hit and run tactic.   
     - increased plane movement speed to match other enemy force.
-    - Added advanced_target_priorities mod support.
+    - Removed min_attack_range for building engineer.
+    - Changed proxy builder's building placement function to use bounding box, instead of radius. It *should* reduce the chance of building on the player's entity ghost.
     - Added tip and tricks
 
   Optimizations:
