@@ -21,13 +21,9 @@ end
 --- Planet earth default setting changes
 if mods["factorio-world"] then
     if feature_flags.space_travel then
-        data.raw["bool-setting"]["only-apply-to-earth"].hidden = true
-        data.raw["bool-setting"]["only-apply-to-earth"].forced_value = true
+        data.raw["bool-setting"]["only-apply-to-earth"].default_value = true
     end
     
-    data.raw["double-setting"]["map-gen-scale"].minimum_value = 10
     data.raw["double-setting"]["map-gen-scale"].default_value = 10
-
-    data.raw["int-setting"]["safe-zone-size"].minimum_value = 12
     data.raw["int-setting"]["safe-zone-size"].default_value = 12
 end

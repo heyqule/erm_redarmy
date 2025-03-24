@@ -68,10 +68,10 @@ data:extend({ cannon_projectile, cannon_explosive_projectile, rocket })
 
 local fire_stream = util.table.deepcopy(data.raw['stream']['flamethrower-fire-stream'])
 fire_stream['name'] = MOD_NAME..'--flamethrower-fire-stream'
-fire_stream['action'][1]['action_delivery']['target_effects'][1]['sticker'] = MOD_NAME..'--fire-stickerer'
+fire_stream['action'][1]['action_delivery']['target_effects'][1]['sticker'] = MOD_NAME..'--fire-sticker'
 
 local fire_sticker = util.table.deepcopy(data.raw['sticker']['fire-sticker'])
-fire_sticker['name'] = MOD_NAME..'--fire-stickerer'
+fire_sticker['name'] = MOD_NAME..'--fire-sticker'
 
 data.extend({
     fire_sticker,
@@ -122,7 +122,7 @@ for i = 1, max_level do
     ErmRedArmy.make_lab(i)
     ErmRedArmy.make_furnace(i)
     ErmRedArmy.make_machine(i)
-    if feature_flags.space_travel then
+    if mods["space-age"] then
         ErmRedArmy.make_rocket_turret(i)
     end
 end

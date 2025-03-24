@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.6
+Date: 2025-03-24
+
+  Changes:
+    - Removed planet earth setting restrictions.
+    - Recommended Factorio World Settings (only apply to earth: true, Map Scaling Factor:10, Size of Safe Zone:12)
+    - Fixed a typo on fire sticker.
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.5
 Date: 2025-02-21
 
