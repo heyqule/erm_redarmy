@@ -1,6 +1,6 @@
 {
   "name": "erm_redarmy",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "date": "2021-07-10",
   "title": "ERM - RedArmy",
   "author": "heyqule",
@@ -9,7 +9,7 @@
   "dependencies": [
     "base >= 2.0.34",
     "?space-age >= 2.0.0",
-    "enemyracemanager >= 2.0.22",
+    "enemyracemanager >= 2.0.26",
     "factorio-world >= 2.1.0"
   ]
 }

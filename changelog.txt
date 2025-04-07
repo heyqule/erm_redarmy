@@ -1,4 +1,18 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.7
+Date: 2025-04-??
+
+  Features:
+    - [space-age] Added support for red-army economy.
+    - [space-age] Exceptional+ tier Labs will drop organs.
+    - [space-age] # of Drops >> Exceptional: 2, Epic: 4, Legendary: 8
+    - [space-age] Exceptional+ tier Assembling Machine and Furnace have 33% to drop organs.
+    - [space-age] # of Drops >> Exceptional: 1, Epic: 2, Legendary: 4
+    - [space-age] organs can transform to biter egg in Biochamber as a captive biter spawner replacement.
+    - [space-age] Added a few other organs recipes.
+    - [space-age] Added trick and tip regarding to redarmy economy.  
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.6
 Date: 2025-03-24
 

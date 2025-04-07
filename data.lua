@@ -134,6 +134,6 @@ data.erm_land_scout[MOD_NAME] = 'human-miner'
 data.erm_aerial_scout = data.erm_aerial_scout or {}
 data.erm_aerial_scout[MOD_NAME] = 'plane-gunner'
 
-
+require "prototypes.economy"
 require "prototypes.planets"
 require "prototypes.tips_and_tricks.prototypes"

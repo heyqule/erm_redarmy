@@ -16,6 +16,8 @@ They have flat resistances. 75% for unit, turret and 50% for spawners
 Credit:
 Human death sound from https://opengameart.org/content/11-male-human-paindeath-sounds
 Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
+Organ icons from https://github.com/malcolmriley/unused-renders/blob/main/item/mipped/part-specimin-1.png
+
 
 Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 

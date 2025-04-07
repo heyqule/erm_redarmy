@@ -26,7 +26,7 @@ data:extend(
         }
 )
 
-if feature_flags.space_travel then
+if mods['space-age'] then
     data:extend(
             {
                 {
@@ -38,6 +38,16 @@ if feature_flags.space_travel then
                     indent = 1,
                     starting_status = "suggested",
                     simulation = simulations.planet_earth
+                },
+                {
+                    type = "tips-and-tricks-item",
+                    tag = "[item=enemy_erm_redarmy--organ]",
+                    name = FORCE_NAME.."-economy",
+                    category = FORCE_NAME,
+                    order = "c",
+                    indent = 1,
+                    starting_status = "suggested",
+                    image = "__erm_redarmy__/graphics/economy/erm-redarmy.png"
                 },
             })
 end
