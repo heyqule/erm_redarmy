@@ -80,3 +80,14 @@ ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.y
 - Attack: Physical / Explosion (3 radius AOE)
 
 All resistance @ Legendary: 75
+
+
+### Redarmy Economy
+- Greater and higher tier spawner drop organs.
+- new recipes for organs.
+- convert organs to biter eggs.
+
+### Planet Earth
+- Rely on https://mods.factorio.com/mod/factorio-world to generate Earth landscape
+- If interplanetary attack is enabled, landing on Aiur will activate it for Protoss.
+- [Coming soon] Boss summoning ritual.
