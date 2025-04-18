@@ -4,7 +4,7 @@
   "date": "2021-07-10",
   "title": "ERM - RedArmy",
   "author": "heyqule",
-  "description": "Add Red Army as new enemy force. Units are painted and dressed in red. It also adds planet Earth, your previous home planet. Did you miss it? But everyone in the planet want to kill you tho.",
+  "description": "Add Red Army as new enemy force. Units are painted and dressed in red. It also adds planet Earth, your previous home planet. Did you miss it? But everyone in Earth want to kill you tho.",
   "factorio_version": "2.0",
   "dependencies": [
     "base >= 2.0.43",
