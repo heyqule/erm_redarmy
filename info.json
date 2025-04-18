@@ -1,15 +1,16 @@
 {
   "name": "erm_redarmy",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "date": "2021-07-10",
   "title": "ERM - RedArmy",
   "author": "heyqule",
-  "description": "Add Red Army as enemy.  Everything is painted in red.",
+  "description": "Add Red Army as new enemy force. Units are painted and dressed in red. It also adds planet Earth, your previous home planet. Did you miss it? But everyone in the planet want to kill you tho.",
   "factorio_version": "2.0",
   "dependencies": [
-    "base >= 2.0.34",
+    "base >= 2.0.43",
     "?space-age >= 2.0.0",
-    "enemyracemanager >= 2.0.28",
-    "factorio-world >= 2.1.0"
+    "enemyracemanager >= 2.0.29",
+    "factorio-world >= 2.1.0",
+    "? starcraft-music >= 1.0.1"
   ]
 }

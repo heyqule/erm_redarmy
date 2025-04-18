@@ -4,12 +4,13 @@
 --- DateTime: 1/19/2025 2:33 PM
 ---
 
-if not feature_flags.space_travel then
+if not mods['space-age'] then
     return
 end
 
 local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
 local MapGenFunctions = require("__erm_libs__/prototypes/map_gen")
+local SoundUtil = require('__erm_libs__/prototypes/sound_util')
 
 local earth = data.raw.planet.earth
 
@@ -105,3 +106,33 @@ if mods["alien-biomes"] then
 
     map_gen.autoplace_controls.rocks = nil
 end
+
+
+if mods['starcraft-music'] then
+    local source_path = "__starcraft-music__/sounds/"
+    data:extend({
+        {
+            type = "ambient-sound",
+            planet = "earth",
+            track_type = "main-track",
+            name = "earth-terran-1",
+            sound = { filename = source_path .. "Terran One.ogg" }
+        },
+        {
+            type = "ambient-sound",
+            planet = "earth",
+            track_type = "main-track",
+            name = "earth-terran-2",
+            sound = { filename = source_path .. "Terran Two.ogg" }
+        },
+        {
+            type = "ambient-sound",
+            planet = "earth",
+            track_type = "main-track",
+            name = "earth-terran-3",
+            sound = { filename = source_path .. "Terran Three.ogg" }
+        },
+    })
+else
+    data:extend(SoundUtil.dupe_planet_music('nauvis','earth'))
+end 
