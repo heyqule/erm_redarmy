@@ -16,6 +16,9 @@ local earth = data.raw.planet.earth
 
 if not earth then
     earth = util.table.deepcopy(data.raw["planet"]["nauvis"])
+    earth.icon = "__erm_redarmy__/graphics/earth-icon.png"
+    earth.starmap_icon = "__erm_redarmy__/graphics/earth.png"
+    earth.starmap_icon_size = 1024
 end    
 
 earth.name = "earth"
@@ -24,16 +27,16 @@ earth.distance = 15
 earth.orientation = 120 / 360
 earth.magnitude = 1
 earth.order = "a[earth]"
-earth.icon = "__erm_redarmy__/graphics/earth-icon.png"
-earth.starmap_icon = "__erm_redarmy__/graphics/earth.png"
-earth.starmap_icon_size = 1024
 earth.surface_properties.gravity = 9.8
 earth.subgroup = "planets"
 earth.pollutant_type = "pollution"
 earth.asteroid_spawn_influence = 1
 earth.asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_gleba, 0.9)
-
-MapGenFunctions.remove_enemy_autoplace_controls(earth.map_gen_settings.autoplace_controls)
+if earth.map_gen_settings.autoplace_controls ~= nil then
+    MapGenFunctions.remove_enemy_autoplace_controls(earth.map_gen_settings.autoplace_controls)
+else
+    earth.map_gen_settings.autoplace_controls = {}    
+end
 earth.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME] = {}
 
 data:extend({earth})

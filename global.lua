@@ -17,4 +17,7 @@ DROPSHIP_ATTACK = 'emrmy-dsh'
 ENGINEER_ATTACK = 'emrmy-gin'
 GUERRILLA_ATTACK = 'emrmy-grl'
 
+--REGISTER_BOSS_RADAR = "embss-rdr"
+--TRIGGER_BOSS_DIES = "embss-die"
+
 REDARMY_MAP_COLOR = { r = 200, g = 0, b = 33, a = 255 }
