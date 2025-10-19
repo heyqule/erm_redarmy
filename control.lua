@@ -78,6 +78,7 @@ local addRaceSettings = function()
         { 'plane-dropship' },
         { 'plane-bomber' }
     }
+    race_settings.builder = 'human-engineer'
     race_settings.dropship = 'plane-dropship'
     race_settings.droppable_units = {
         { { 'human-miner', 'human-pistol' }, { 3, 1 } },

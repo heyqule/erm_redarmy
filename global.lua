@@ -9,8 +9,6 @@ MOD_NAME = 'enemy_erm_redarmy'
 FORCE_NAME = 'enemy_erm_redarmy'
 AUTOCONTROL_NAME = MOD_NAME.."-enemy-base"
 
-DEBUG_MODE = false
-
 CHARACTER_RIG_STILL_FRAME = 12
 
 DROPSHIP_ATTACK = 'emrmy-dsh'
