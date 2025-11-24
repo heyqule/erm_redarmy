@@ -14,13 +14,13 @@ local ERM_WeaponRig = require('__enemyracemanager__/lib/rig/weapon')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 
-local ERM_Sound = require('prototypes.sound')
-local HumanAnimation = require('prototypes.human_animation')
+local HumanSound = require('__enemyracemanager_assets__/sound/human_sound')
+local HumanAnimation = require('__erm_libs__/prototypes/human_animation')
 
 local name = 'human-sniper'
 
 local hitpoint = 150
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 2
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.25
 
 
 -- Handles acid and poison resistance
@@ -41,12 +41,12 @@ local incremental_cold_resistance = 65
 
 -- Handles physical damages
 
-local base_physical_damage = 6
-local incremental_physical_damage = 36
+local base_physical_damage = 12
+local incremental_physical_damage = 73 
 
 -- Handles Attack Speed
 
-local base_attack_speed = 300
+local base_attack_speed = 240
 local incremental_attack_speed = 120
 
 local base_movement_speed = 0.075
@@ -63,7 +63,7 @@ local sticker_box = { { -0.2, -1 }, { 0.2, 0 } }
 
 function ErmRedArmy.make_human_sniper(level)
     level = level or 1
-    local attack_range = ERM_UnitHelper.get_attack_range(level)
+    local attack_range = ERM_UnitHelper.get_attack_range(level) + 2
     local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
 
     local human_animation = HumanAnimation.get_animation()
@@ -119,6 +119,7 @@ function ErmRedArmy.make_human_sniper(level)
             selection_box = selection_box,
             sticker_box = sticker_box,
             vision_distance = vision_distance,
+            can_open_gate = true,
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed, level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
@@ -142,13 +143,13 @@ function ErmRedArmy.make_human_sniper(level)
                     starting_frame_speed_deviation = 0.1
                 },
                 projectile_creation_distance = 1.125,
-                sound = ERM_Sound.sniper(),
+                sound = HumanSound.sniper(),
                 ammo_type = ERM_WeaponRig.get_bullet('redarmy-damage'),
                 animation = gun_animation
             },
             distance_per_frame = 0.1,
             run_animation = running_animation,
-            dying_sound = ERM_Sound.death(0.75),
+            dying_sound = HumanSound.death(0.75),
             corpse = "common-red-army-corpse-2"
         }
     })

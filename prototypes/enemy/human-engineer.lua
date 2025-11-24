@@ -14,8 +14,8 @@ local ERM_WeaponRig = require('__enemyracemanager__/lib/rig/weapon')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 
-local ERM_Sound = require('prototypes.sound')
-local HumanAnimation = require('prototypes.human_animation')
+local HumanSound = require('__enemyracemanager_assets__/sound/human_sound')
+local HumanAnimation = require('__erm_libs__/prototypes/human_animation')
 
 local name = 'human-engineer'
 
@@ -121,6 +121,7 @@ function ErmRedArmy.make_human_engineer(level)
             selection_box = selection_box,
             sticker_box = sticker_box,
             vision_distance = vision_distance,
+            can_open_gate = true,
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed, level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
@@ -152,7 +153,7 @@ function ErmRedArmy.make_human_engineer(level)
             },
             distance_per_frame = 0.1,
             run_animation = running_animation,
-            dying_sound = ERM_Sound.death(0.75),
+            dying_sound = HumanSound.death(0.75),
             corpse = "common-red-army-corpse-2"
         }
     })

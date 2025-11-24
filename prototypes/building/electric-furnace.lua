@@ -10,7 +10,7 @@ require("util")
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
-local ERM_Sound = require('prototypes.sound')
+local HumanSound = require('__enemyracemanager_assets__/sound/human_sound')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 
@@ -77,6 +77,33 @@ function ErmRedArmy.make_furnace(level)
 
     data:extend({
         {
+            type = "corpse",
+            name = "electric-furnace-red-remnants",
+            icon = "__base__/graphics/icons/electric-furnace.png",
+            flags = {"placeable-neutral", "building-direction-8-way", "not-on-map"},
+            hidden_in_factoriopedia = true,
+            subgroup = "smelting-machine-remnants",
+            order = "a-a-a",
+            selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+            tile_width = 3,
+            tile_height = 3,
+            selectable_in_game = false,
+            time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
+            expires = false,
+            final_render_layer = "remnants",
+            remove_on_tile_placement = false,
+            animation =
+            {
+                filename = "__erm_redarmy__/graphics/entity/buildings/electric-furnace-red-remnants.png",
+                line_length = 1,
+                width = 454,
+                height = 448,
+                direction_count = 1,
+                shift = util.by_pixel(-3.25, 7.25),
+                scale = 1
+            }
+        },
+        {
             type = "unit-spawner",
             name = MOD_NAME .. '--' .. name .. '--' .. level,
             localised_name = { 'entity-name.' .. MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] },
@@ -96,7 +123,7 @@ function ErmRedArmy.make_furnace(level)
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier, level),
             order = MOD_NAME .. '--building--' .. name .. '--' .. level,
             subgroup = "enemies",
-            vehicle_impact_sound = ERM_Sound.generic_impact(),
+            vehicle_impact_sound = HumanSound.generic_impact(),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
@@ -111,8 +138,7 @@ function ErmRedArmy.make_furnace(level)
                 animations = {
                     layers = {
                         {
-
-                            filename = "__base__/graphics/entity/electric-furnace/electric-furnace.png",
+                            filename = "__erm_redarmy__/graphics/entity/buildings/electric-furnace-red.png",
                             priority = "high",
                             width = 239,
                             height = 219,
@@ -141,7 +167,7 @@ function ErmRedArmy.make_furnace(level)
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
             absorptions_per_second = { pollution = { absolute = pollution_absorption_absolute, proportional = 0.01 } },
-            corpse = "electric-furnace-remnants",
+            corpse = "electric-furnace-red-remnants",
             dying_explosion = "electric-furnace-explosion",
             max_count_of_owned_units = max_count_of_owned_units,
             max_friends_around_to_spawn = max_friends_around_to_spawn,

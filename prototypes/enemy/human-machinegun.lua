@@ -15,13 +15,13 @@ local ERM_WeaponRig = require('__enemyracemanager__/lib/rig/weapon')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 
-local ERM_Sound = require('prototypes.sound')
-local HumanAnimation = require('prototypes.human_animation')
+local HumanSound = require('__enemyracemanager_assets__/sound/human_sound')
+local HumanAnimation = require('__erm_libs__/prototypes/human_animation')
 
 local name = 'human-machinegun'
 
 local hitpoint = 250
-local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value * 1.66
+local max_hitpoint_multiplier = settings.startup["enemyracemanager-max-hitpoint-multipliers"].value
 
 
 -- Handles acid and poison resistance
@@ -42,8 +42,8 @@ local incremental_cold_resistance = 65
 
 -- Handles physical damages
 
-local base_physical_damage = 2
-local incremental_physical_damage = 6
+local base_physical_damage = 3
+local incremental_physical_damage = 9
 
 -- Handles Attack Speed
 
@@ -122,6 +122,7 @@ function ErmRedArmy.make_human_heavy_machinegun(level)
             selection_box = selection_box,
             sticker_box = sticker_box,
             vision_distance = vision_distance,
+            can_open_gate = true,
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed, level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
@@ -145,13 +146,60 @@ function ErmRedArmy.make_human_heavy_machinegun(level)
                     starting_frame_speed_deviation = 0.1
                 },
                 projectile_creation_distance = 1.125,
-                sound = ERM_Sound.heavy_machine_gun(),
-                ammo_type = ERM_WeaponRig.get_bullet('redarmy-damage'),
+                sound = HumanSound.heavy_machine_gun(),
+                ammo_type = {
+                    category = "redarmy-damage",
+                    target_type = "direction",
+                    clamp_position = true,
+                    action = {
+                        {
+                            type = "direct",
+                            action_delivery = {
+                                type = "instant",
+                                source_effects = {
+                                    {
+                                        type = "create-explosion",
+                                        entity_name = "explosion-gunshot"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            type = "direct",
+                            repeat_count = 1,
+                            action_delivery = {
+                                type = "projectile",
+                                projectile = "shotgun-pellet",
+                                starting_speed = 2,
+                                starting_speed_deviation = 0.1,
+                                direction_deviation = 0.1,
+                                max_range = 32
+                            }
+                        },
+                        {
+                            type = "direct",
+                            action_delivery =
+                            {
+                                {
+                                    type = "instant",
+                                    target_effects =
+                                    {
+                                        {
+                                            type = "damage",
+                                            damage = {amount = 5, type = "physical"}
+                                        },
+                                    }
+                                }
+                            },
+                            probability = 0.2,
+                        }
+                    }
+                },
                 animation = gun_animation
             },
             distance_per_frame = 0.1,
             run_animation = running_animation,
-            dying_sound = ERM_Sound.death(0.75),
+            dying_sound = HumanSound.death(0.75),
             corpse = "common-red-army-corpse-3"
         }
     })

@@ -92,15 +92,17 @@ local addRaceSettings = function()
     }
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost
-        { { 'human-flamethrower', 'human-shotgun', 'human-sniper', 'human-engineer' }, { 2, 2, 1, 1 }, 20 },
-        { { 'human-machinegun', 'human-flamethrower', 'human-sniper', 'tank-explosive-cannon' }, { 2, 2, 1, 1 }, 25 },
+        { { 'human-flamethrower', 'human-shotgun', 'human-sniper', 'human-engineer', 'plane-bomber' }, { 1, 2, 2, 1, 1 }, 20 },
+        { { 'human-machinegun', 'human-flamethrower', 'human-sniper', 'tank-explosive-cannon' }, { 2, 1, 1, 1 }, 25 },
         { { 'tank-cannon', 'tank-explosive-cannon' }, { 2, 1 }, 35 },
-        { { 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' }, { 2, 1, 1, 1, 1 }, 25 },
-        { { 'human-sniper', 'tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' }, { 2, 1, 1, 1, 1 }, 25 },
+        { { 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon', 'human-flamethrower', 'plane-bomber' }, { 2, 2, 1, 2, 1 }, 25 },
+        { { 'human-sniper', 'tank-cannon', 'tank-explosive-cannon', 'human-flamethrower', 'plane-bomber' }, { 2, 2, 1, 2, 1 }, 25 },
+        { { 'human-shotgun', 'human-sniper', 'tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' }, {2, 1, 2, 2, 1, 1 }, 25 },
+        { { 'human-shotgun', 'human-sniper', 'human-flamethrower', 'tank-cannon', 'tank-explosive-cannon', 'plane-bomber' }, {2, 1, 2, 1, 1, 1 }, 25 },
     }
     race_settings.featured_flying_groups = {
-        { { 'plane-gunner', 'plane-bomber' }, { 3, 2 }, 75 },
-        { { 'plane-gunner', 'plane-dropship' }, { 2, 1 }, 75 },
+        { { 'plane-gunner', 'plane-bomber' }, { 3, 1 }, 75 },
+        { { 'plane-gunner', 'plane-dropship' }, { 3, 1 }, 100 },
         { { 'plane-gunner', 'plane-bomber','plane-dropship' }, { 3, 2, 1}, 75 },
     }
     race_settings.home_planet = "earth"

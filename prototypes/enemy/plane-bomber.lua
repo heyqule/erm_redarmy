@@ -15,7 +15,7 @@ local ERM_DataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 
-local ERM_Sound = require('prototypes.sound')
+local HumanSound = require('__enemyracemanager_assets__/sound/human_sound')
 
 local name = 'plane-bomber'
 
@@ -42,7 +42,7 @@ local incremental_cold_resistance = 65
 -- Handles physical damages
 
 local base_explosive_damage = 3.5
-local incremental_explosive_damage = 6.5
+local incremental_explosive_damage = 16.5
 
 -- Handles Attack Speed
 
@@ -129,6 +129,7 @@ function ErmRedArmy.make_bomber_plane(level)
             collision_box = collision_box,
             selection_box = selection_box,
             vision_distance = vision_distance,
+            can_open_gate = true,
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed, level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
@@ -143,7 +144,7 @@ function ErmRedArmy.make_bomber_plane(level)
                 projectile_creation_distance = 1.6,
                 projectile_center = { -0.15625, -0.07812 },
                 damage_modifier = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, level),
-                sound = ERM_Sound.tank_gunshot(),
+                sound = HumanSound.tank_gunshot(),
                 ammo_type = {
                     category = "redarmy-damage",
                     target_type = "direction",

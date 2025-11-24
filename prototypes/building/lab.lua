@@ -10,7 +10,7 @@ require("util")
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
-local ERM_Sound = require('prototypes.sound')
+local HumanSound = require('__enemyracemanager_assets__/sound/human_sound')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 
@@ -58,8 +58,8 @@ local spawn_table = function(level)
     res[6] = { MOD_NAME .. '--plane-gunner--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
     --Tire 3
     res[7] = { MOD_NAME .. '--human-engineer--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
-    res[8] = { MOD_NAME .. '--human-flamethrower--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.05 }, { 0.8, 0.15 }, { 1.0, 0.15 } } }
-    res[9] = { MOD_NAME .. '--human-shotgun--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
+    res[8] = { MOD_NAME .. '--human-flamethrower--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.05 }, { 0.8, 0.15 }, { 1.0, 0.1 } } }
+    res[9] = { MOD_NAME .. '--human-shotgun--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.15 } } }
     res[10] = { MOD_NAME .. '--tank-explosive-cannon--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
     res[11] = { MOD_NAME .. '--plane-bomber--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
     res[12] = { MOD_NAME .. '--plane-dropship--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
@@ -74,6 +74,33 @@ function ErmRedArmy.make_lab(level)
     level = level or 1
 
     data:extend({
+        {
+            type = "corpse",
+            name = "lab-red-remnants",
+            icon = "__base__/graphics/icons/lab.png",
+            flags = {"placeable-neutral", "not-on-map"},
+            hidden_in_factoriopedia = true,
+            subgroup = "production-machine-remnants",
+            order = "a-g-a",
+            selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+            tile_width = 3,
+            tile_height = 3,
+            selectable_in_game = false,
+            time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value,
+            expires = false,
+            final_render_layer = "remnants",
+            remove_on_tile_placement = false,
+            animation = make_rotated_animation_variations_from_sheet (2,
+                    {
+                        filename = "__base__/graphics/entity/lab/remnants/lab-remnants.png",
+                        line_length = 1,
+                        width = 266,
+                        height = 196,
+                        direction_count = 1,
+                        shift = util.by_pixel(7, 5.5),
+                        scale = 1
+                    })
+        },
         {
             type = "unit-spawner",
             name = MOD_NAME .. '--' .. name .. '--' .. level,
@@ -94,7 +121,7 @@ function ErmRedArmy.make_lab(level)
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier, level),
             order = MOD_NAME .. '--building--' .. name .. '--' .. level,
             subgroup = "enemies",
-            vehicle_impact_sound = ERM_Sound.generic_impact(),
+            vehicle_impact_sound = HumanSound.generic_impact(),
             resistances = {
                 { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
                 { type = "poison", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
@@ -164,7 +191,7 @@ function ErmRedArmy.make_lab(level)
             map_generator_bounding_box = map_generator_bounding_box,
             selection_box = selection_box,
             absorptions_per_second = { pollution = { absolute = pollution_absorption_absolute, proportional = 0.01 } },
-            corpse = "lab-remnants",
+            corpse = "lab-red-remnants",
             dying_explosion = "lab-explosion",
             max_count_of_owned_units = max_count_of_owned_units,
             max_friends_around_to_spawn = max_friends_around_to_spawn,

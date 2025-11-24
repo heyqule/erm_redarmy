@@ -21,7 +21,7 @@ local ERM_WeaponRig = require('__enemyracemanager__/lib/rig/weapon')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 
-local ERM_Sound = require('prototypes.sound')
+local HumanSound = require('__enemyracemanager_assets__/sound/human_sound')
 
 local name = 'tank-explosive-cannon'
 
@@ -47,7 +47,7 @@ local incremental_cold_resistance = 65
 -- Handles physical damages
 
 local base_explosive_damage = 5
-local incremental_explosive_damage = 20
+local incremental_explosive_damage = 22
 
 -- Handles Attack Speed
 
@@ -132,6 +132,7 @@ function ErmRedArmy.make_explosive_tank(level)
             collision_box = collision_box,
             selection_box = selection_box,
             vision_distance = vision_distance,
+            can_open_gate = true,
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed, level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
@@ -145,7 +146,7 @@ function ErmRedArmy.make_explosive_tank(level)
                 cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, level),
                 projectile_creation_distance = 1.6,
                 projectile_center = { -0.15625, -0.07812 },
-                sound = ERM_Sound.tank_gunshot(),
+                sound = HumanSound.tank_gunshot(),
                 damage_modifier = ERM_UnitHelper.get_damage(base_explosive_damage, incremental_explosive_damage, level),
                 ammo_type = {
                     category = "redarmy-damage",

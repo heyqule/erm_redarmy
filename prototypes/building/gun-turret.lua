@@ -122,14 +122,23 @@ function ErmRedArmy.make_gun_turret(level)
         }
     }
 
+    redarmy_gun_turret['corpse'] = MOD_NAME .. '--' .. name .. '--corpse'
+
     -- Animation Changes
     ERM_UnitTint.mask_tint(redarmy_gun_turret['graphics_set']['base_visualisation']['animation']['layers'][2], ERM_UnitTint.tint_red())
     ERM_UnitTint.mask_tint(redarmy_gun_turret['folded_animation']['layers'][2], ERM_UnitTint.tint_red())
     ERM_UnitTint.mask_tint(redarmy_gun_turret['preparing_animation']['layers'][2], ERM_UnitTint.tint_red())
     ERM_UnitTint.mask_tint(redarmy_gun_turret['prepared_animation']['layers'][2], ERM_UnitTint.tint_red())
     ERM_UnitTint.mask_tint(redarmy_gun_turret['folding_animation']['layers'][2], ERM_UnitTint.tint_red())
+    
+    local redarmy_gun_turret_corpse = util.table.deepcopy(data.raw['corpse']['gun-turret-remnants'])
+    redarmy_gun_turret_corpse.name = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_gun_turret_corpse.time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
+    redarmy_gun_turret_corpse.hidden = true
+    redarmy_gun_turret_corpse.hidden_in_factoriopedia  = true
 
     data:extend({
+        redarmy_gun_turret_corpse,
         redarmy_gun_turret
     })
 

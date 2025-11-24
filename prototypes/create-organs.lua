@@ -314,6 +314,7 @@ function Organs.create_tech(name)
                     recipe = name.."-to-nutrients",  
                 },
             },
+            prerequisites = {"biochamber"},
             research_trigger =
             {
                 type = "build-entity",

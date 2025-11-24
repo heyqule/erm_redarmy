@@ -114,6 +114,8 @@ function ErmRedArmy.make_rocket_turret(level)
         },
     }
     redarmy_rocket_turret['build_base_evolution_requirement '] = 0.5
+
+    redarmy_rocket_turret['corpse'] = MOD_NAME .. '--' .. name .. '--corpse'
     
 
     -- Animation Changes
@@ -122,7 +124,14 @@ function ErmRedArmy.make_rocket_turret(level)
     ERM_UnitTint.mask_tint(redarmy_rocket_turret['prepared_animation']['layers'][3], ERM_UnitTint.tint_red())
     ERM_UnitTint.mask_tint(redarmy_rocket_turret['folding_animation']['layers'][2], ERM_UnitTint.tint_red())
 
+    local redarmy_rocket_turret_corpse = util.table.deepcopy(data.raw['corpse']['rocket-turret-remnants'])
+    redarmy_rocket_turret_corpse.name = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_rocket_turret_corpse.time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
+    redarmy_rocket_turret_corpse.hidden = true
+    redarmy_rocket_turret_corpse.hidden_in_factoriopedia  = true
+
     data:extend({
+        redarmy_rocket_turret_corpse,
         redarmy_rocket_turret
     })
 end

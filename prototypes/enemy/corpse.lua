@@ -18,7 +18,7 @@ function process_level1()
         character_animations.level1.dead_shadow
     }
     ERM_AnimationRig.adjust_direction_count_all(layers, 1)
-    ERM_UnitTint.mask_tint(layers[2], ERM_UnitTint.tint_red_madder())
+    ERM_UnitTint.mask_tint(layers[2], ERM_UnitTint.tint_red_blood())
     return layers
 end
 
@@ -31,8 +31,8 @@ function process_level2()
         character_animations.level1.dead_shadow
     }
     ERM_AnimationRig.adjust_direction_count_all(layers, 1)
-    ERM_UnitTint.mask_tint(layers[2], ERM_UnitTint.tint_red_crimson())
-    ERM_UnitTint.mask_tint(layers[4], ERM_UnitTint.tint_red_crimson())
+    ERM_UnitTint.mask_tint(layers[2], ERM_UnitTint.tint_red_blood())
+    ERM_UnitTint.mask_tint(layers[4], ERM_UnitTint.tint_red_blood())
     return layers
 end
 
@@ -45,12 +45,13 @@ function process_level3()
         character_animations.level1.dead_shadow
     }
     ERM_AnimationRig.adjust_direction_count_all(layers, 1)
-    ERM_UnitTint.mask_tint(layers[2], ERM_UnitTint.tint_red())
-    ERM_UnitTint.mask_tint(layers[4], ERM_UnitTint.tint_red())
+    ERM_UnitTint.mask_tint(layers[2], ERM_UnitTint.tint_red_blood())
+    ERM_UnitTint.mask_tint(layers[4], ERM_UnitTint.tint_red_blood())
     return layers
 end
 
 if data.raw['corpse']['common-army-corpse'] == nil then
+    local scale = 1
     data:extend({
         {
             type = "corpse",
@@ -64,10 +65,27 @@ if data.raw['corpse']['common-army-corpse'] == nil then
             final_render_layer = "lower-object-above-shadow",
             subgroup = "corpses",
             order = "x-common-red-army-corpse",
+            hidden = true,
+            hidden_in_factoriopedia  = true,
             animation = {
                 {
                     layers = process_level1()
                 }
+            },
+            ground_patch =
+            {
+                sheet =
+                util.sprite_load("__base__/graphics/entity/biter/blood-puddle-var-main",
+                        {
+                            flags = { "low-object" },
+                            variation_count = 4,
+                            scale = scale * 0.5,
+                            tint = {r = 0.6, g = 0.1, b = 0.1, a = 1},
+                            multiply_shift = scale,
+                            allow_forced_downscale = true,
+                        }
+                )
+
             }
         },
         {
@@ -82,10 +100,27 @@ if data.raw['corpse']['common-army-corpse'] == nil then
             final_render_layer = "lower-object-above-shadow",
             subgroup = "corpses",
             order = "x-common-red-army-corpse-2",
+            hidden = true,
+            hidden_in_factoriopedia  = true,
             animation = {
                 {
                     layers = process_level2()
                 }
+            },
+            ground_patch =
+            {
+                sheet =
+                util.sprite_load("__base__/graphics/entity/biter/blood-puddle-var-main",
+                        {
+                            flags = { "low-object" },
+                            variation_count = 4,
+                            scale = scale * 0.5,
+                            tint = {r = 0.6, g = 0.1, b = 0.1, a = 1},
+                            multiply_shift = scale,
+                            allow_forced_downscale = true,
+                        }
+                )
+
             }
         },
         {
@@ -100,10 +135,27 @@ if data.raw['corpse']['common-army-corpse'] == nil then
             final_render_layer = "lower-object-above-shadow",
             subgroup = "corpses",
             order = "x-common-red-army-corpse-3",
+            hidden = true,
+            hidden_in_factoriopedia  = true,
             animation = {
                 {
                     layers = process_level3()
                 }
+            },
+            ground_patch =
+            {
+                sheet =
+                util.sprite_load("__base__/graphics/entity/biter/blood-puddle-var-main",
+                        {
+                            flags = { "low-object" },
+                            variation_count = 4,
+                            scale = scale * 0.5,
+                            tint = {r = 0.6, g = 0.1, b = 0.1, a = 1},
+                            multiply_shift = scale,
+                            allow_forced_downscale = true,
+                        }
+                )
+
             }
         },
     })
@@ -113,6 +165,8 @@ if data.raw['corpse']['erm-tank-remnants'] == nil then
     local tank_corpse = util.table.deepcopy(data.raw['corpse']['tank-remnants'])
     tank_corpse['name'] = 'erm-tank-remnants'
     tank_corpse['time_before_removed'] = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
+    tank_corpse['hidden'] = true
+    tank_corpse['hidden_in_factoriopedia'] = true
     data:extend({
         tank_corpse
     })
@@ -123,6 +177,8 @@ if data.raw['corpse']['erm-medium-remnants'] == nil then
     medium_corpse['name'] = 'erm-medium-remnants'
     medium_corpse['time_before_removed'] = second
     medium_corpse['animation'] = util.empty_sprite()
+    medium_corpse['hidden'] = true
+    medium_corpse['hidden_in_factoriopedia'] = true
 
     data:extend({
         medium_corpse

@@ -1,4 +1,43 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.12
+Date: 2025-11-28
+
+  Graphics:
+    - Tint some spot to red for assembling machine and furnace.
+    - Updated remnants scale size for assembling machine, furnace and lab.
+
+  Changes:
+    - [Human - pistol]
+    - They are now shoot projectiles. Can be blocked by wall.
+    - It has 33% to hit additional hitscan damage.  
+    - Projectiles have 0.05 direction_deviation.   
+    - [Human - machine gun]
+    - They are now shoot projectile.  Can be blocked by wall.
+    - It has 20% to hit additional hitscan damage.
+    - Projectiles have 0.1 direction_deviation.
+    - [Human - sniper]        
+    - Increased based damage by 100%.
+    - Increased overall damage by ~100% (up to 400 physical dmg, 200 DPS, at top tier).  
+    - Increased attack speed from 5s-3s to 4s-2s.
+    - Added 2 to its max attack range. If setting is 14, its range is now 16.
+    - [human - flamethrower]
+    - Slowed its attack speed to 2/s
+    - Reduced spawn rate in featured groups and in lab.
+    - [Featured attack groups] 
+    - Added 2 new featured attack groups.
+    - Adjusted existing featured attack groups.
+    - [Others]
+    - Overall human HP reduced.
+    - Overall damage increased. flamethrower excluded.
+    - Significantly increased plane-bomber damage (guerilla unit buff). 100 -> 200
+    - Changed spawner corpse tint color to blood red.
+    - Changed spawner corpse to use red army variance with time_to_live property.
+    - Added blood puddle to corpses.
+    - Moved sound assets to enemyracemanager_assets.
+    - Added can_open_gate=true to all units.
+    - Added proper prerequisite for organ research.
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.11
 Date: 2025-10-19
 

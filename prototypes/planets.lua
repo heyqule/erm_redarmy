@@ -115,5 +115,8 @@ if mods['starcraft-music'] then
         },
     })
 else
-    data:extend(SoundUtil.dupe_planet_music('nauvis','earth'))
+    local sound_data = SoundUtil.dupe_planet_music('nauvis','earth')
+    if table_size(sound_data) > 0 then
+        data:extend(sound_data) 
+    end
 end 

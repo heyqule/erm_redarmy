@@ -15,7 +15,7 @@ local ERM_DataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 
-local ERM_Sound = require('prototypes.sound')
+local HumanSound = require('__enemyracemanager_assets__/sound/human_sound')
 
 local name = 'plane-gunner'
 
@@ -127,6 +127,7 @@ function ErmRedArmy.make_gunner_plane(level)
             collision_box = collision_box,
             selection_box = selection_box,
             vision_distance = vision_distance,
+            can_open_gate = true,
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed, level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
@@ -141,7 +142,7 @@ function ErmRedArmy.make_gunner_plane(level)
                 damage_modifier = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, level),
                 projectile_creation_distance = 1.75,
                 projectile_center = { -0.3, 0 },
-                sound = ERM_Sound.tank_gunshot(),
+                sound = HumanSound.tank_gunshot(),
                 ammo_type = ERM_WeaponRig.get_bullet('redarmy-damage'),
                 animation = gunship_animation
             },
