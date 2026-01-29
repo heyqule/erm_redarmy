@@ -100,7 +100,7 @@ function ErmRedArmy.make_machine(level)
                         height = 282,
                         direction_count = 1,
                         shift = util.by_pixel(0, 9.5),
-                        scale = 0.5
+                        scale = 1
                     })
         },
         {
