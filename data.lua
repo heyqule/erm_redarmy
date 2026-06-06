@@ -10,10 +10,7 @@ require('__erm_redarmy__/global')
 require "prototypes.noise-functions"
 
 
-local DataHelper = require('__enemyracemanager__/lib/rig/data_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
-
-local WeaponRig = require('__enemyracemanager__/lib/rig/weapon')
 
 -- This set of data is used for set up default autoplace calculation.
 data.erm_registered_race = data.erm_registered_race or {}
@@ -28,62 +25,18 @@ table.insert(data.erm_spawn_specs, {
     temperature = 2, --1,2,3 (1 cold, 2. normal, 3 hot)
 })
 
-data:extend(
-        {
-            {
-                type = "ammo-category",
-                name = "redarmy-damage"
-            },
-        })
-
-local cannon_projectile = WeaponRig.standardize_cannon_projectile(
-        util.table.deepcopy(data.raw['projectile']['cannon-projectile']),
-        MOD_NAME..'--cannon-projectile'
-)
-cannon_projectile['force_condition'] = "not-same"
-cannon_projectile['hit_collision_mask'] = { layers = {player = true, train = true,   [DataHelper.getFlyingLayerName()] = true}}
-
-local cannon_explosive_projectile = WeaponRig.standardize_explosive_cannon_projectile(
-        util.table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
-        MOD_NAME..'--explosive-cannon-projectile'
-)
-cannon_explosive_projectile['force_condition'] = "not-same"
-cannon_explosive_projectile['hit_collision_mask'] = { layers = {player = true, train = true,   [DataHelper.getFlyingLayerName()] = true}}
-
-local rocket = WeaponRig.standardize_explosive_rocket_damage(
-        util.table.deepcopy(data.raw['projectile']['explosive-rocket']),
-        MOD_NAME..'--explosive-rocket',
-        3
-)
-rocket['turn_speed'] = nil
-rocket['turning_speed_increases_exponentially_with_projectile_speed'] = false
-rocket['smoke'][1]['frequency'] = 1 / 5
-
-rocket['action']['action_delivery']['target_effects'][2] = {
-    type = "damage",
-    damage = { amount = 3.5, type = "explosion" },
-}
-
-data:extend({ cannon_projectile, cannon_explosive_projectile, rocket })
-
-local fire_stream = util.table.deepcopy(data.raw['stream']['flamethrower-fire-stream'])
-fire_stream['name'] = MOD_NAME..'--flamethrower-fire-stream'
-fire_stream['action'][1]['action_delivery']['target_effects'][1]['sticker'] = MOD_NAME..'--fire-sticker'
-
-local fire_sticker = util.table.deepcopy(data.raw['sticker']['fire-sticker'])
-fire_sticker['name'] = MOD_NAME..'--fire-sticker'
-
-data.extend({
-    fire_sticker,
-    fire_stream,
-})
-
+require "prototypes.projectiles"
 require "prototypes.building.gun-turret"
 require "prototypes.building.laser-turret"
 require "prototypes.building.rocket-turret"
+require "prototypes.building.tesla-turret"
+require "prototypes.building.artillery-turret"
 require "prototypes.building.lab"
 require "prototypes.building.electric-furnace"
 require "prototypes.building.assemble-machine"
+require "prototypes.building.rocket-silo"
+require "prototypes.building.boss-lab"
+require "prototypes.building.boss-rocket-silo"
 
 require "prototypes.enemy.corpse"
 require "prototypes.enemy.human-miner"
@@ -122,9 +75,161 @@ for i = 1, max_level do
     ErmRedArmy.make_lab(i)
     ErmRedArmy.make_furnace(i)
     ErmRedArmy.make_machine(i)
+    ErmRedArmy.make_artillery_turret(i)
     if mods["space-age"] then
         ErmRedArmy.make_rocket_turret(i)
+        ErmRedArmy.make_tesla_turret(i)
     end
+end
+
+if mods["space-age"] and mods['quality'] then
+    ---
+    --- Register unit with boss levels.
+    --- Replace its AI with boss AI
+    ---
+    local max_boss_tier = GlobalConfig.BOSS_MAX_TIERS
+
+    local boss_unit_ai = { destroy_when_commands_fail = true, allow_try_return_to_spawner = false }
+    local override_units = {
+        "human-miner","human-pistol","human-machinegun","human-engineer","human-flamethrower",
+        "human-shotgun","human-sniper","plane-bomber","plane-dropship","plane-gunner",
+        "tank-cannon","tank-explosive-cannon"
+    }
+
+    local level = GlobalConfig.BOSS_UNIT_TIER
+    ErmRedArmy.make_human_miner(level)
+    ErmRedArmy.make_human_pistol(level)
+    ErmRedArmy.make_human_machinegun(level)
+    ErmRedArmy.make_human_sniper(level)
+    ErmRedArmy.make_human_engineer(level)
+    ErmRedArmy.make_human_shotgun(level)
+    ErmRedArmy.make_human_heavy_machinegun(level)
+    ErmRedArmy.make_tank(level)
+    ErmRedArmy.make_explosive_tank(level)
+    ErmRedArmy.make_gunner_plane(level)
+    ErmRedArmy.make_bomber_plane(level)
+    ErmRedArmy.make_dropship_plane(level)
+    for _, unit in pairs(override_units) do
+        data.raw["unit"][MOD_NAME.."--"..unit.."--"..level]["ai_settings"] = boss_unit_ai
+    end
+
+    --- Define boss prototypes data
+    local boss_data = {}
+
+    --- Rocket silo is not a spawner, hence HP uses direct value from here.
+    --- appox 20mil, 35mil, 50mil, 75mil, 100mil
+    boss_data.rocket_silo_hp = {19000000, 37500000, 55000000, 77500000, 110000000}
+    boss_data.lab_hp = {10000, 15000, 20000, 25000, 30000}
+    --- for spawner's spawning_cooldown
+    boss_data.lab_spawn_timer = {
+        {900,900},
+        {840,840},
+        {750,750},
+        {660,660},
+        {600,600},
+    }
+
+    --- for spawner's max_count_of_owned_units
+    boss_data.lab_units_count = {10, 12, 15, 18, 20}
+
+    for i = 1, max_boss_tier do
+        ErmRedArmy.make_boss_rocket_silo(i, boss_data)
+        ErmRedArmy.make_boss_lab(i, boss_data)
+    end
+
+    --- Boss general attack data
+    --- @see script/boss_attack.lua for attack definitions and pattern.
+    data.extend({
+        {
+            type = 'mod-data',
+            name = MOD_NAME..'--boss-attack-data',
+            data_type = MOD_NAME..'.boss_data',
+            data = {
+                --- Max assist spawner
+                max_buildable_unit_spawner = {5, 6, 8, 10, 12},
+                --- Phase_change, Ulitmate, Special, Assist, Heavy, Basic
+                defense_attacks={1000000, 2500000, 250000, 100000, 69000, 20000},
+                --- max defense attacks per heartbeat.
+                max_attacks_per_heartbeat={3,4,4,5,5},
+                --- Idle attack (in ticks)
+                idle_attack_interval = {90 * second, 85 * second, 60 * second, 53 * second, 45 * second}
+            }
+        },
+    })
+
+    --- Boss reward data
+    data.extend({
+        {
+            type = 'mod-data',
+            name = MOD_NAME..'--boss-reward-data',
+            data_type = MOD_NAME..'.boss_reward_data',
+            data = {
+                reward_data = {
+                    "uranium-238",
+                    "sulfuric-acid-barrel",
+                    "plastic-bar",
+                    "sulfur",
+                    "steel-plate",
+                    "solid-fuel",
+                    "piercing-rounds-magazine",
+                    "stone-wall",
+                    "light-oil-barrel",
+                    "petroleum-gas-barrel",
+                    "copper-plate",
+                    "iron-plate",
+                    "stone-brick",
+                    "crude-oil-barrel",
+                    "iron-gear-wheel",
+                    "iron-stick",
+                    "electronic-circuit",
+                    "coal",
+                    "concrete",
+                    "explosives",
+                    "battery",
+                    "nutrients",
+                    "express-transport-belt",
+                }
+            }
+        },
+    })
+
+    if DEBUG then
+        --- For debug
+        data.raw['mod-data'][MOD_NAME..'--boss-attack-data'].data.idle_attack_interval = {5 * second, 5 * second, 5 * second, 5 * second, 5 * second,}
+    end
+
+    --data.extend({
+    --    {
+    --        type = "kill-achievement",
+    --        name = MOD_NAME.."--god-poke",
+    --        to_kill = "enemy_erm_toss--boss_warpgate--1",
+    --        amount = 1,
+    --        icon = "__erm_toss_hd_assets__/graphics/entity/icons/units/zealot.png",
+    --        icon_size = 64,
+    --        allow_without_fight = false,
+    --        order = "z["..MOD_NAME.."]--01-god-poke"
+    --    },
+    --    {
+    --        type = "kill-achievement",
+    --        name = MOD_NAME.."--god-like",
+    --        to_kill = "enemy_erm_toss--boss_warpgate--3",
+    --        amount = 1,
+    --        icon = "__erm_toss_hd_assets__/graphics/entity/icons/units/darktemplar.png",
+    --        icon_size = 64,
+    --        allow_without_fight = false,
+    --        order = "z["..MOD_NAME.."]--02-god-like"
+    --    },
+    --    {
+    --        type = "kill-achievement",
+    --        name = MOD_NAME.."--god-kill",
+    --        to_kill = "enemy_erm_toss--boss_warpgate--5",
+    --        amount = 1,
+    --        icon = "__erm_toss_hd_assets__/graphics/entity/icons/units/archon.png",
+    --        icon_size = 64,
+    --        allow_without_fight = false,
+    --        order = "z["..MOD_NAME.."]--03-god-kill"
+    --    },
+    --})
 end
 
 

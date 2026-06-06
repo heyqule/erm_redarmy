@@ -15,7 +15,7 @@ local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 
 local enemy_autoplace = require("__enemyracemanager__/prototypes/enemy-autoplace")
-local name = 'lab'
+local name = 'boss_lab'
 
 -- Hitpoints
 
@@ -70,7 +70,7 @@ local collision_box = { { -2, -1.875 }, { 2, 1.875 } }
 local map_generator_bounding_box = { { -3, -3 }, { 3, 3 } }
 local selection_box = { { -2.25, -2.25 }, { 2.25, 2.25 } }
 
-function ErmRedArmy.make_lab(level)
+function ErmRedArmy.make_boss_lab(level, boss_data)
     level = level or 1
 
     data:extend({
@@ -118,7 +118,7 @@ function ErmRedArmy.make_lab(level)
                 },
             },
             flags = { "placeable-player", "placeable-enemy" },
-            max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier, level),
+            max_health = boss_data.lab_hp[level],
             order = MOD_NAME .. '--building--' .. name .. '--' .. level,
             subgroup = "enemies",
             vehicle_impact_sound = HumanSound.generic_impact(),
@@ -193,11 +193,11 @@ function ErmRedArmy.make_lab(level)
             absorptions_per_second = { pollution = { absolute = pollution_absorption_absolute, proportional = 0.01 } },
             corpse = "lab-red-remnants",
             dying_explosion = "lab-explosion",
-            max_count_of_owned_units = max_count_of_owned_units,
-            max_friends_around_to_spawn = max_friends_around_to_spawn,
+            max_count_of_owned_units = boss_data.lab_units_count[level],
+            max_friends_around_to_spawn = boss_data.lab_units_count[level],
             result_units = spawn_table(level),
             -- With zero evolution the spawn rate is 6 seconds, with max evolution it is 2.5 seconds
-            spawning_cooldown = spawning_cooldown,
+            spawning_cooldown = boss_data.lab_spawn_timer[level],
             spawning_radius = spawning_radius,
             spawning_spacing = 3,
             max_spawn_shift = 0,
@@ -205,13 +205,27 @@ function ErmRedArmy.make_lab(level)
             -- distance_factor used to be 1, but Twinsen says:
             -- "The number or spitter spwners should be roughly equal to the number of biter spawners(regardless of difficulty)."
             -- (2018-12-07)
-            autoplace =  enemy_autoplace.enemy_spawner_autoplace({
-                probability_expression = "erm_redarmy_autoplace_base(0, 7)",
-                force = FORCE_NAME,
-                control = AUTOCONTROL_NAME
-            }),
+            autoplace = nil,
             call_for_help_radius = 50,
             spawn_decorations_on_expansion = false,
+            dying_trigger_effect = {
+                {
+                    type = "script",
+                    effect_id = TRIGGER_BOSS_ASSIST_DIES,
+                }
+            },
+            created_effect = {
+                type = "direct",
+                action_delivery = {
+                    type = "instant",
+                    source_effects = {
+                        {
+                            type = "script",
+                            effect_id = TRIGGER_BOSS_ASSIST_SPAWNED
+                        }
+                    }
+                }
+            },
         }
     })
 end

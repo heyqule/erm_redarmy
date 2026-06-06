@@ -4,6 +4,8 @@
 --- DateTime: 12/22/2020 7:15 PM
 ---
 
+DEBUG_MODE = true
+
 -- Globals within the mod
 MOD_NAME = 'enemy_erm_redarmy'
 FORCE_NAME = 'enemy_erm_redarmy'
@@ -14,5 +16,13 @@ CHARACTER_RIG_STILL_FRAME = 12
 DROPSHIP_ATTACK = 'emrmy-dsh'
 ENGINEER_ATTACK = 'emrmy-gin'
 GUERRILLA_ATTACK = 'emrmy-grl'
+
+--- This set must be the same string for boss to function properly.
+REGISTER_BOSS_RADAR = "embss-rdr"
+TRIGGER_BOSS_SPAWNED = "embss-spn"
+TRIGGER_BOSS_DIES = "embss-die"
+TRIGGER_BOSS_ASSIST_SPAWNED = "embas_spn"
+TRIGGER_BOSS_ASSIST_DIES = "embas-die"
+BOSS_SEGMENT_UNIT_DIES = "embsu-die"
 
 REDARMY_MAP_COLOR = { r = 200, g = 0, b = 33, a = 255 }

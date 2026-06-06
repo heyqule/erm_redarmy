@@ -5,6 +5,7 @@
 ---
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 local CustomAttacks = require('scripts/custom_attacks')
+local Position = require("__erm_libs__/stdlib/position")
 
 local RemoteAPI = {}
 
@@ -36,6 +37,13 @@ function RemoteAPI.milestones_preset_addons()
     --}
 
     return preset
+end
+
+---
+--- Print global for debug purpose when you run remote.call("enemyracemanager_debug", "print_global")"
+---
+function RemoteAPI.print_global()
+    helpers.write_file("erm_redarmy/erm-global.json", helpers.table_to_json(util.copy(storage)))
 end
 
 function RemoteAPI.register_new_enemy_race()
@@ -84,6 +92,46 @@ function RemoteAPI.advanced_target_priorities_register_section_data()
     }
 
     return data
+end
+
+--- grab nearest nuclear silo, turn it into boss.
+--- return true or message for reject
+function RemoteAPI.boss_custom_spawn(radar, is_test)
+    game.print('calling boss_custom_spawn')
+    if not radar and not radar.valid then
+        return {"","boss_radar.radar_invalid"}
+    end
+    
+    local surface = radar.surface
+    local silos = surface.find_entities_filtered { name = MOD_NAME .. '--rocket_silo--5'}
+    local valid_silo = nil
+    for _, silo in pairs(silos) do
+        local player_spawn = silo.force.get_spawn_position(surface) or {0, 0}
+        if Position.distance(silo.position, player_spawn) > 512 or is_test == true then
+            game.print('pass boss_custom_spawn')
+            valid_silo = silo
+            break
+        end
+    end
+
+    if not valid_silo then
+        return {"", "boss_radar.rocket_silo_too_close_to_radar"}
+    end
+    
+    local position = valid_silo.position
+    valid_silo.destroy()
+
+    CustomAttacks.get_race_settings(FORCE_NAME, game.forces[FORCE_NAME])
+    local boss_silo = surface.create_entity {
+        name = MOD_NAME .. '--boss_rocket_silo--' .. storage.custom_attack_race_settings[FORCE_NAME].boss_tier,
+        position = position,
+        force = FORCE_NAME,
+        raise_built = true
+    }
+    if boss_silo then
+        game.print('generated boss_custom_spawn')
+    end
+    return boss_silo
 end
 
 return RemoteAPI
