@@ -31,6 +31,7 @@ local createRace = function()
     storage.guerrilla_distances = storage.guerrilla_distances or {}
 
     storage.building_entities = storage.building_entities or {}
+    storage.landfill_queue = storage.landfill_queue or {}
     storage.base_area_removal = storage.base_area_removal or {}
 
     --- Attack job fires once per second, for nuclear silos and artilleries manual target.

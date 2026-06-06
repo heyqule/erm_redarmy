@@ -27,6 +27,7 @@ local can_build_town_surfaces = {
 local table_deepcopy = util.table.deepcopy
 local table_insert = table.insert
 local math_random = math.random
+local group_tile = "ground_tile"
 
 local convert_name = function(name, quality)
     if entity_conversions[name] then
@@ -73,10 +74,12 @@ local build_entities =  function(event)
     end
     
     if next(storage.building_entities) then
+        local profile = game.create_profiler()
+        
         local i = 0
         local surface
         for idx, entity in pairs(storage.building_entities) do
-            if i == 35 then
+            if i == 24 then
                 break
             end
 
@@ -85,13 +88,63 @@ local build_entities =  function(event)
             end
 
             if surface and surface.valid then
-                surface.create_entity(entity)
+                local created = surface.create_entity(entity)
+                if created then
+                    local tile = surface.get_tile(created.position.x, created.position.y)
+                    if i % 3 == 0 and tile and tile.collides_with(group_tile) == false then
+                        table_insert(storage.landfill_queue, {
+                            surface = surface,
+                            position = created.position
+                        })
+                    end
+                end
             end
 
             storage.building_entities[idx] = nil
             i = i + 1
         end
+        
+        profile.stop()
+        log({'','build_entities:',profile})
     end
+end
+
+local LANDFILL_RADIUS = 2
+local process_landfill_queue = function()
+    if not next(storage.landfill_queue) then
+        return
+    end
+
+    local profile = game.create_profiler()
+    
+    local tiles = {}
+    local surface
+    for idx = 1, 16 do
+        local entry = storage.landfill_queue[idx]
+        if not entry then
+            break
+        end
+
+        surface = entry.surface
+        local pos = entry.position
+        for dx = -LANDFILL_RADIUS, LANDFILL_RADIUS do
+            for dy = -LANDFILL_RADIUS, LANDFILL_RADIUS do
+                local tile = surface.get_tile(pos.x + dx, pos.y + dy)
+                if tile and tile.collides_with(group_tile) == false then
+                    table_insert(tiles, {name = "landfill", position = {pos.x + dx, pos.y + dy}})
+                end
+            end
+        end
+
+        storage.landfill_queue[idx] = nil
+    end
+
+    if surface and next(tiles) then
+        surface.set_tiles(tiles, true, false, false, false)
+    end
+
+    profile.stop()
+    log({'','process_landfill_queue:',profile})
 end
 
 local build_blueprint_base = function(data)
@@ -258,7 +311,8 @@ BaseBuilding.events = {
 }
 
 BaseBuilding.on_nth_tick = {
-    [29] = build_entities
+    [29] = build_entities,
+    [61] = process_landfill_queue
 }
 
 return BaseBuilding
