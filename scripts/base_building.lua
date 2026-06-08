@@ -6,6 +6,7 @@ local Bases = require('__erm_redarmy__/bases')
 -- Constants
 local CHUNK_SIZE = 32
 
+local random_bit = 1
 --- Entity that need reformat
 local entity_conversions = {
     ['gun-turret'] = true,
@@ -18,7 +19,11 @@ local entity_conversions = {
     ['assembling-machine-1'] = 'assemble-machine',
     ['electric-furnace'] = true,
     ['lab'] = true,
+    ['beacon'] = random_bit
 }
+--- replace beacon with spawners
+local spawners = {'assemble-machine', 'lab', 'electric-furnace'}
+local spawners_count = #spawners
 
 local can_build_town_surfaces = {
     earth = true
@@ -31,10 +36,12 @@ local group_tile = "ground_tile"
 
 local convert_name = function(name, quality)
     if entity_conversions[name] then
-        if type(entity_conversions[name]) == 'string' then
-            return MOD_NAME .. '--' ..  entity_conversions[name] .. '--' .. quality
-        else
+        if entity_conversions[name] == true then
             return MOD_NAME .. '--' ..  name .. '--' .. quality
+        elseif random_bit then
+            return MOD_NAME .. '--' ..  spawners[math_random(1, spawners_count)] .. '--' .. quality
+        else
+            return MOD_NAME .. '--' ..  entity_conversions[name] .. '--' .. quality
         end
     end
     
@@ -46,7 +53,8 @@ local removable_type = {
     ["simple-entity"] = true,
     ["unit"] = true,
     ["unit-spawner"] = true,
-    ["turret"] = true
+    ["turret"] = true,
+    ["wall"] = true
 }
 
 local build_entities =  function(event)
@@ -79,7 +87,7 @@ local build_entities =  function(event)
         local i = 0
         local surface
         for idx, entity in pairs(storage.building_entities) do
-            if i == 24 then
+            if i == 12 then
                 break
             end
 
@@ -91,7 +99,7 @@ local build_entities =  function(event)
                 local created = surface.create_entity(entity)
                 if created then
                     local tile = surface.get_tile(created.position.x, created.position.y)
-                    if i % 3 == 0 and tile and tile.collides_with(group_tile) == false then
+                    if tile and tile.collides_with(group_tile) == false then
                         table_insert(storage.landfill_queue, {
                             surface = surface,
                             position = created.position
@@ -110,6 +118,11 @@ local build_entities =  function(event)
 end
 
 local LANDFILL_RADIUS = 2
+local remove_lanfill_queue_at = function(key)
+    if key then
+        storage.landfill_queue[key] = nil
+    end
+end
 local process_landfill_queue = function()
     if not next(storage.landfill_queue) then
         return
@@ -119,9 +132,10 @@ local process_landfill_queue = function()
     
     local tiles = {}
     local surface
-    for idx = 1, 16 do
-        local entry = storage.landfill_queue[idx]
-        if not entry then
+    for idx = 1, 12 do
+        local key, entry = next(storage.landfill_queue)
+        if not entry or not entry.surface.valid then
+            remove_lanfill_queue_at(key)
             break
         end
 
@@ -136,7 +150,7 @@ local process_landfill_queue = function()
             end
         end
 
-        storage.landfill_queue[idx] = nil
+        remove_lanfill_queue_at(key)
     end
 
     if surface and next(tiles) then
@@ -192,23 +206,68 @@ end
 local TOWN_BEACON = 'erm_town_beacon'
 local TOWN_BEACON_SEARCH_RANGE = 7 * CHUNK_SIZE
 local TOWN_MIN_SPAWN_DISTANCE = 16 * CHUNK_SIZE
-local ARTILLERY_TOWN_CHANCE = 25
-local ARTILLERY_TOWN_MIN_DISTANCE = 24 * CHUNK_SIZE
+local LARGE_TOWN_CHANCE = 40
+local LARGE_TOWN_MIN_SPAWN_DISTANCE = 32 * CHUNK_SIZE
+local ARTILLERY_TOWN_CHANCE = 15
+local ARTILLERY_TOWN_GAP_DISTANCE = 16 * CHUNK_SIZE
 local ARTILLERY_MIN_SPAWN_DISTANCE = 48 * CHUNK_SIZE
 local CITY_BEACON = 'erm_city_beacon'
+--- Normal city - under 32 chunks
+local ARTILLERY_CITY_CHANCE = 50
+local ARTILLERY_CITY_MIN_SPAWN_DISTANCE = 32 * CHUNK_SIZE
 local NUCLEAR_CITY_CHANCE = 50
-local NUCLEAR_CITY_MIN_DISTANCE= 48 * CHUNK_SIZE
-local NUCLEAR_CITY_MIN_SPAWN_DISTANCE = 32 * CHUNK_SIZE
+local NUCLEAR_CITY_MIN_SPAWN_DISTANCE = 64 * CHUNK_SIZE
 
-local build_base = function(event, beacon)
+local get_town_type = function(surface, town_position, spawn_location)
+    local distance = Position.distance(town_position, spawn_location)
+    if CustomAttacks.can_spawn(ARTILLERY_TOWN_CHANCE) and distance >= ARTILLERY_MIN_SPAWN_DISTANCE then
+        local count = surface.count_entities_filtered {
+            type = "artillery-turret",
+            force = FORCE_NAME,
+            radius = ARTILLERY_TOWN_GAP_DISTANCE,
+            position = town_position,
+        }
+
+        if count < 1 then
+            return Bases.types.artillery_towns
+        end
+    elseif CustomAttacks.can_spawn(LARGE_TOWN_CHANCE) and distance >= LARGE_TOWN_MIN_SPAWN_DISTANCE then
+        return Bases.types.large_towns
+    end
+    
+    return Bases.types.towns
+end
+
+local get_city_type = function(surface, town_position, spawn_location)
+    local distance = Position.distance(town_position, spawn_location)
+    if CustomAttacks.can_spawn(NUCLEAR_CITY_CHANCE) and distance >= NUCLEAR_CITY_MIN_SPAWN_DISTANCE then
+        return Bases.types.nuclear_cities
+    elseif distance >= ARTILLERY_CITY_MIN_SPAWN_DISTANCE and CustomAttacks.can_spawn(ARTILLERY_CITY_CHANCE) then
+        local count = surface.count_entities_filtered {
+            type = "artillery-turret",
+            force = FORCE_NAME,
+            radius = ARTILLERY_TOWN_GAP_DISTANCE,
+            position = town_position,
+        }
+
+        if count < 1 then
+            return Bases.types.artillery_cities
+        end
+    end
+    
+    return Bases.types.cities
+end
+
+local build_base = function(event, beacon, town_type)
     local profile = game.create_profiler()
     local surface = event.surface
     local chunk_center = center_beacon_position(event.area)
+    local town_data, town_width = Bases.get_town(town_type)
     build_blueprint_base({
         surface = surface, 
-        blueprint_string = Bases.towns[math_random(1, Bases.towns_size)],
+        blueprint_string = town_data,
         position = chunk_center, 
-        town_size = Bases.towns_length,
+        town_size = town_width,
     })
 
     surface.create_entity({
@@ -272,12 +331,18 @@ end
 
 local on_chunk_generated = function(event)
     local surface = event.surface
-    local left_top = center_beacon_position(event.area)
+    local trunk_center = center_beacon_position(event.area)
     --- don't let it build towns near spawn locations
-    for _, force in pairs(game.forces) do
-        local spawn_position = force.get_spawn_position(surface)
-        if spawn_position and Position.distance(spawn_position, left_top) < TOWN_MIN_SPAWN_DISTANCE then
+    local player_forces = remote.call('enemyracemanager', 'get_player_forces')
+    local spawn_location 
+    for _, force in pairs(player_forces) do
+        local spawn_position = game.forces[force].get_spawn_position(surface)
+        if spawn_position and Position.distance(spawn_position, trunk_center) < TOWN_MIN_SPAWN_DISTANCE then
             return
+        end
+        --- Pull "player" spawn as spawn calculation
+        if not spawn_location then
+            spawn_location = spawn_position
         end
     end
 
@@ -286,21 +351,23 @@ local on_chunk_generated = function(event)
             sprite = "entity/"..CITY_BEACON,
             x_scale = 10,
             y_scale = 10,
-            target = left_top,
+            target = trunk_center,
             surface = surface,
             render_mode="chart",
         })
-        build_base(event, CITY_BEACON)
+        local city_type = get_city_type(surface, trunk_center, spawn_location)
+        build_base(event, CITY_BEACON, city_type)
     elseif can_spawn_town(event) then
         local town_circle = rendering.draw_sprite({
             sprite = "entity/"..TOWN_BEACON,
             x_scale = 10,
             y_scale = 10,
-            target = left_top,
+            target = trunk_center,
             surface = surface,
             render_mode="chart",
         })
-        build_base(event, TOWN_BEACON)
+        local town_type = get_town_type(surface, trunk_center, spawn_location)
+        build_base(event, TOWN_BEACON, town_type)
     end
 end
 

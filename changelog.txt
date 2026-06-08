@@ -3,26 +3,12 @@ Version: 2.0.14
 Date: 2026-01-29
 
   Features:
-    - Added Tesla turret, default 32 range.
-    - [Artillery]
-    - may placed in town or city.
-    - activates immediately.
-    - it receive X shells every minute.
-    - minimal spawn distance is 1KM from {0,0}
-    - Range: 640.
-    - [nuclear missile rocket-silo]
-    - may placed only in city.
-    - activates when any player force charts its position.
-    - it receive X rocket parts every 5 minutes.
-    - when it has enough rocket parts, it launches a ballistic nuke.
-    - minimal spawn distance is 1KM from {0,0}     
-    - Range: it targets random attack beacon on whole planet.
-    - [/nuclear missile rocket-silo]
-    - [custom town / city building]
-    - They are custom built with predefined blueprint strings.
-    - only applicable on planet earth and factorio-world surface.     
-    - [Boss Mode]
-    - Artillery has automated 1200 range.
+    - Added Tesla turret, 32 range.
+    - Added artillery turret with auto fire and conditional script fire.    
+    - Added custom town / city building block for planet Earth.
+    - Added nuclear missile rocket-silo, only in city.
+    - Added Boss: Nuclear missile rocket-silo.     
+    - Please see tip and tricks for additional details
   
   Changes:  
     - Added Red Alert music pack optional dependency.  It's used for planet earth music.

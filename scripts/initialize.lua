@@ -116,7 +116,7 @@ local addRaceSettings = function()
 
 
     race_settings.boss_custom_spawn = true
-    race_settings.boss_building = "boss_rocket_silo"
+    race_settings.boss_building = "boss_rocket-silo"
     race_settings.boss_assisted_spawner = "boss_lab"
     race_settings.pathing_unit = "human-miner"
     race_settings.colliding_unit = "tank-cannon"

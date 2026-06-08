@@ -97,13 +97,12 @@ end
 --- grab nearest nuclear silo, turn it into boss.
 --- return true or message for reject
 function RemoteAPI.boss_custom_spawn(radar, is_test)
-    game.print('calling boss_custom_spawn')
     if not radar and not radar.valid then
         return {"","boss_radar.radar_invalid"}
     end
     
     local surface = radar.surface
-    local silos = surface.find_entities_filtered { name = MOD_NAME .. '--rocket_silo--5'}
+    local silos = surface.find_entities_filtered { name = MOD_NAME .. '--rocket-silo--5'}
     local valid_silo = nil
     for _, silo in pairs(silos) do
         local player_spawn = silo.force.get_spawn_position(surface) or {0, 0}
@@ -123,14 +122,11 @@ function RemoteAPI.boss_custom_spawn(radar, is_test)
 
     CustomAttacks.get_race_settings(FORCE_NAME, game.forces[FORCE_NAME])
     local boss_silo = surface.create_entity {
-        name = MOD_NAME .. '--boss_rocket_silo--' .. storage.custom_attack_race_settings[FORCE_NAME].boss_tier,
+        name = MOD_NAME .. '--boss_rocket-silo--' .. storage.custom_attack_race_settings[FORCE_NAME].boss_tier,
         position = position,
         force = FORCE_NAME,
         raise_built = true
     }
-    if boss_silo then
-        game.print('generated boss_custom_spawn')
-    end
     return boss_silo
 end
 

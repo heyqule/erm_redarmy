@@ -6,8 +6,8 @@
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local rocket_silo = table.deepcopy(data.raw["rocket-silo"]["rocket-silo"])
 
-rocket_silo.name = MOD_NAME.."--rocket_silo--5"
-rocket_silo.minable.result = MOD_NAME.."--rocket_silo--5"
+rocket_silo.name = MOD_NAME.."--rocket-silo--5"
+rocket_silo.minable.result = MOD_NAME.."--rocket-silo--5"
 rocket_silo.max_health = ERM_UnitHelper.get_health(
     rocket_silo.max_health * 10 , 
     settings.startup["enemyracemanager-max-hitpoint-multipliers"].value, 
@@ -29,7 +29,7 @@ data:extend({
 
 -- Create the item for the new rocket silo
 local rocket_silo_item = table.deepcopy(data.raw.item["rocket-silo"])
-rocket_silo_item.name = MOD_NAME.."--rocket_silo--5"
-rocket_silo_item.place_result = MOD_NAME.."--rocket_silo--5"
+rocket_silo_item.name = MOD_NAME.."--rocket-silo--5"
+rocket_silo_item.place_result = MOD_NAME.."--rocket-silo--5"
 
 data:extend({rocket_silo_item})

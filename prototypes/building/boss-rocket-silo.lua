@@ -10,8 +10,8 @@ function ErmRedArmy.make_boss_rocket_silo(level, boss_data)
     level = level or 1
     
     local rocket_silo = table.deepcopy(data.raw["rocket-silo"]["rocket-silo"])
-    rocket_silo.name = MOD_NAME .. "--boss_rocket_silo--"..level
-    rocket_silo.minable.result = MOD_NAME .. "--boss_rocket_silo--"..level
+    rocket_silo.name = MOD_NAME .. "--boss_rocket-silo--"..level
+    rocket_silo.minable.result = MOD_NAME .. "--boss_rocket-silo--"..level
     rocket_silo.max_health = boss_data.rocket_silo_hp[level]
 
     -- Remove power requirements
@@ -48,8 +48,8 @@ function ErmRedArmy.make_boss_rocket_silo(level, boss_data)
 
     -- Create the item for the new rocket silo
     local rocket_silo_item = table.deepcopy(data.raw.item["rocket-silo"])
-    rocket_silo_item.name = MOD_NAME.."--boss_rocket_silo--"..level
-    rocket_silo_item.place_result = MOD_NAME.."--boss_rocket_silo--"..level
+    rocket_silo_item.name = MOD_NAME.."--boss_rocket-silo--"..level
+    rocket_silo_item.place_result = MOD_NAME.."--boss_rocket-silo--"..level
 
     data:extend({rocket_silo_item})
 end

@@ -43,7 +43,7 @@ local incremental_attack_speed = 50
 function ErmRedArmy.make_artillery_turret(level)
     level = level or 1
 
-    local attack_range = 640
+    local attack_range = 512
 
     local redarmy_artillery_turret = util.table.deepcopy(data.raw['artillery-turret']['artillery-turret'])
 
