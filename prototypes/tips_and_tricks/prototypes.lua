@@ -49,5 +49,43 @@ if mods['space-age'] then
                     starting_status = "suggested",
                     image = "__erm_redarmy__/graphics/economy/erm-redarmy.png"
                 },
+                {
+                    type = "tips-and-tricks-item",
+                    name = FORCE_NAME.."-city-and-town",
+                    category = FORCE_NAME,
+                    order = "d",
+                    indent = 2,
+                    starting_status = "suggested",
+                    simulation = simulations.city_town
+                },
+                {
+                    type = "tips-and-tricks-item",
+                    tag = "[item=rocket-silo]",
+                    name = FORCE_NAME.."-rocket-silo",
+                    category = FORCE_NAME,
+                    order = "e",
+                    indent = 2,
+                    starting_status = "suggested",
+                    simulation = simulations.rocket_silo
+                },
+                {
+                    type = "tips-and-tricks-item",
+                    name = FORCE_NAME.."-boss-rocket-silo",
+                    category = FORCE_NAME,
+                    order = "e1",
+                    indent = 3,
+                    starting_status = "suggested",
+                    simulation = simulations.rocket_silo
+                },
+                {
+                    type = "tips-and-tricks-item",
+                    tag = "[item=artillery-turret]",
+                    name = FORCE_NAME.."-artillery-turret",
+                    category = FORCE_NAME,
+                    order = "f",
+                    indent = 2,
+                    starting_status = "suggested",
+                    simulation = simulations.artillery
+                },
             })
 end

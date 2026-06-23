@@ -66,9 +66,9 @@ local spawn_table = function(level)
     return res
 end
 
-local collision_box = { { -2.5, -2.5 }, { 2.5, 2.5 } }
-local map_generator_bounding_box = { { -4, -4 }, { 4, 4 } }
-local selection_box = { { -3, -3 }, { 3, 3 } }
+local collision_box = { { -1.875, -1.875 }, { 1.875, 1.875 } }
+local map_generator_bounding_box = { { -3, -3 }, { 3, 3 } }
+local selection_box = { { -2, -2 }, { 2, 2 } }
 
 function ErmRedArmy.make_machine(level)
     level = level or 1
@@ -85,7 +85,7 @@ function ErmRedArmy.make_machine(level)
             flags = {"placeable-neutral", "not-on-map"},
             subgroup = "production-machine-remnants",
             order = "a-a-a",
-            selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+            selection_box = selection_box,
             tile_width = 3,
             tile_height = 3,
             selectable_in_game = false,
@@ -100,7 +100,7 @@ function ErmRedArmy.make_machine(level)
                         height = 282,
                         direction_count = 1,
                         shift = util.by_pixel(0, 9.5),
-                        scale = 1
+                        scale = 0.75
                     })
         },
         {
@@ -145,7 +145,7 @@ function ErmRedArmy.make_machine(level)
                             frame_count = 1,
                             line_length = 8,
                             shift = util.by_pixel(0, 2),
-                            scale = 1
+                            scale = 0.75
                         },
                         {
                             filename = "__base__/graphics/entity/assembling-machine-1/assembling-machine-1-shadow.png",
@@ -157,7 +157,7 @@ function ErmRedArmy.make_machine(level)
                             repeat_count = 1,
                             draw_as_shadow = true,
                             shift = util.by_pixel(8.5, 5),
-                            scale = 1
+                            scale = 0.75
                         }
                     }
                 },                

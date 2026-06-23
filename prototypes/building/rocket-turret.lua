@@ -54,7 +54,7 @@ local selection_box = { { -1, -1 }, { 1, 1 } }
 function ErmRedArmy.make_rocket_turret(level)
     level = level or 1
 
-    local attack_range = ERM_UnitHelper.get_attack_range(level) + 16
+    local attack_range = ERM_UnitHelper.get_attack_range(level) + 20
 
     local redarmy_rocket_turret = util.table.deepcopy(data.raw['ammo-turret']['rocket-turret'])
     
@@ -84,7 +84,7 @@ function ErmRedArmy.make_rocket_turret(level)
     redarmy_rocket_turret['selection_box'] = selection_box
     redarmy_rocket_turret['map_generator_bounding_box'] = map_generator_bounding_box
     redarmy_rocket_turret['autoplace'] = enemy_autoplace.enemy_worm_autoplace({
-        probability_expression = "erm_redarmy_autoplace_base(0, 5)",
+        probability_expression = "erm_redarmy_autoplace_base(0, 9)",
         force = FORCE_NAME,
         control = AUTOCONTROL_NAME
     })

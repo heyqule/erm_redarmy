@@ -1,4 +1,26 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.14
+Date: 2026-06-22
+
+  Features:
+    - The following features are only for Planet Earth.
+    - [Experimental] Added custom town / city buildings block.
+    - [Experimental] Added Tesla turret, 32 range, only spawn in town & city.
+    - [Experimental] Added artillery turret with auto fire and scripted fire. only spawn in town & city.    
+    - [Experimental] Added nuclear missile rocket-silo, only in city.
+    - [Experimental] Added Boss: nuclear missile rocket-silo with custom boss radar placement. 
+    - Added achievements for killing tier 1,3,5 boss.
+    - Added many startup settings to adjust the town/city spawn rates.
+    - Please see tip and tricks for additional details.
+    - For existing saves: New town/city will only roll on new chunk discovery.
+
+  Changes:
+    - Added Red Alert music pack as optional dependency.  It's used as planet earth music.
+    - Removed the optional terran music and starcraft_music mod as optional dependency
+    - Change rocket turret default range from 30 -> 34.
+    - Change graphic scale for assemble-machine, electric-furnace and lab from 1.0 -> 0.75 to fit the town builder.
+
+---------------------------------------------------------------------------------------------------
 Version: 2.0.13
 Date: 2026-01-29
 

@@ -27,3 +27,8 @@ if mods["factorio-world"] then
     data.raw["double-setting"]["map-gen-scale"].default_value = 10
     data.raw["int-setting"]["safe-zone-size"].default_value = 12
 end
+
+
+if mods["redalert_music"] then
+    data.raw["bool-setting"]["redalert-music-add-to-nauvis"].default_value = false
+end 

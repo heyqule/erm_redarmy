@@ -9,15 +9,12 @@ They have flat resistances. 75% for unit, turret and 50% for spawners
 - They have a flat resistances without any weakness.
 - Support "Factorio World" to generate a proper planet Earth.
 - This is an experimental release.
-### Future updates
-- The red army will get new toys.
-- Planet earth will be their home planet.
 
 Credit:
 Human death sound from https://opengameart.org/content/11-male-human-paindeath-sounds
 Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
 Organ icons from https://github.com/malcolmriley/unused-renders/blob/main/item/mipped/part-specimin-1.png
-
+Red army icon from https://en.wikipedia.org/wiki/Red_Army#/media/File:Soviet_Red_Army_Hammer_and_Sickle.svg
 
 Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
@@ -89,5 +86,5 @@ All resistance @ Legendary: 75
 
 ### Planet Earth
 - Rely on https://mods.factorio.com/mod/factorio-world to generate Earth landscape
-- If interplanetary attack is enabled, landing on Aiur will activate it for Protoss.
+- If interplanetary attack is enabled, landing on Earth will activate it for Red Army.
 - [Coming soon] Boss summoning ritual.

@@ -11,12 +11,22 @@ end
 local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
 local MapGenFunctions = require("__erm_libs__/prototypes/map_gen")
 local SoundUtil = require('__erm_libs__/prototypes/sound_util')
+local PsiRadar = require('__erm_libs__/prototypes/psi_scanner')
+local UnitHelper = require("__enemyracemanager__/lib/rig/unit_helper")
 
 local earth = data.raw.planet.earth
 
 if not earth then
     earth = util.table.deepcopy(data.raw["planet"]["nauvis"])
-end    
+end
+
+data.extend({
+    {
+        type = "surface-property",
+        name = "redarmy_influence",
+        default_value = 0
+    }
+})
 
 earth.name = "earth"
 earth.gravity_pull = 9.8
@@ -28,6 +38,7 @@ earth.icon = "__erm_redarmy__/graphics/earth-icon.png"
 earth.starmap_icon = "__erm_redarmy__/graphics/earth.png"
 earth.starmap_icon_size = 1024
 earth.surface_properties.gravity = 9.8
+earth.surface_properties.redarmy_influence = 100
 earth.subgroup = "planets"
 earth.pollutant_type = "pollution"
 earth.asteroid_spawn_influence = 1
@@ -37,6 +48,74 @@ MapGenFunctions.remove_enemy_autoplace_controls(earth.map_gen_settings.autoplace
 earth.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME] = {}
 
 data:extend({earth})
+
+local icons = {
+    {
+        icon = "__enemyracemanager_assets__/graphics/psi_emitter/psi_emitter_icon.png",
+        icon_size = 64,
+        scale = 0.5,
+        shift = {-9,-9}
+    },
+    {
+        icon = "__erm_redarmy__/graphics/organ/part-specimin-1.png",
+        icon_size = 64,
+        scale = 0.5,
+        shift = {9, 9},
+    },
+}
+local surface_conditions = {
+    { property = 'redarmy_influence', min=90, max=100 }
+}
+local ingredients = {
+    {type= "item", name= "steel-plate", amount= 100},
+    {type= "item", name= "refined-concrete", amount= 100},
+    {type = "item", name = "quantum-processor", amount = 1},
+    {type = "item", name = "superconductor", amount = 1},
+    {type = "item", name = "supercapacitor", amount = 1},
+    {type= "item", name= MOD_NAME..'--organ', amount= 1000}
+}
+local teamcolor = UnitHelper.format_team_color(settings.startup["enemy_erm_redarmy-map-color"].value)
+local animations = {
+    layers =
+    {
+        {
+            filename = "__enemyracemanager_assets__/graphics/psi_emitter/psi_emitter.png",
+            priority = "low",
+            width = 100,
+            height = 100,
+            apply_projection = false,
+            direction_count = 6,
+            line_length = 6,
+            scale = 0.8
+        },
+        {
+            filename = "__enemyracemanager_assets__/graphics/psi_emitter/psi_emitter.png",
+            priority = "low",
+            width = 100,
+            height = 100,
+            apply_projection = false,
+            direction_count = 6,
+            line_length = 6,
+            scale = 0.8,
+            shift = util.by_pixel(5, -1),
+            draw_as_shadow = true,
+        },
+        {
+            filename = "__enemyracemanager_assets__/graphics/psi_emitter/psi_emitter_mask.png",
+            priority = "low",
+            width = 100,
+            height = 100,
+            apply_projection = false,
+            direction_count = 6,
+            line_length = 6,
+            scale = 0.8,
+            tint = teamcolor
+        }
+    }
+}
+PsiRadar.make_entity(MOD_NAME, icons, surface_conditions, animations)
+PsiRadar.make_item(MOD_NAME, icons)
+PsiRadar.make_recipe(MOD_NAME, ingredients)
 
 data.extend({
     --- space connection
@@ -88,32 +167,9 @@ data.extend({
     },
 })
 
-
-if mods['starcraft-music'] then
-    local source_path = "__starcraft-music__/sounds/"
-    data:extend({
-        {
-            type = "ambient-sound",
-            planet = "earth",
-            track_type = "main-track",
-            name = "earth-terran-1",
-            sound = { filename = source_path .. "Terran One.ogg" }
-        },
-        {
-            type = "ambient-sound",
-            planet = "earth",
-            track_type = "main-track",
-            name = "earth-terran-2",
-            sound = { filename = source_path .. "Terran Two.ogg" }
-        },
-        {
-            type = "ambient-sound",
-            planet = "earth",
-            track_type = "main-track",
-            name = "earth-terran-3",
-            sound = { filename = source_path .. "Terran Three.ogg" }
-        },
-    })
+if mods['redalert_music'] then
+    local MusicSetup = require('__redalert_music__/music_setup')
+    MusicSetup.add_to('earth')
 else
     local sound_data = SoundUtil.dupe_planet_music('nauvis','earth')
     if table_size(sound_data) > 0 then

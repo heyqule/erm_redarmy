@@ -45,3 +45,7 @@ luac.out
 *.ogg
 sounds
 graphics
+sounds
+
+*.txt
+*.json

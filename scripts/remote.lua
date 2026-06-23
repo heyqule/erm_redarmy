@@ -5,6 +5,7 @@
 ---
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 local CustomAttacks = require('scripts/custom_attacks')
+local Position = require("__erm_libs__/stdlib/position")
 
 local RemoteAPI = {}
 
@@ -15,27 +16,33 @@ function RemoteAPI.milestones_preset_addons()
             required_mods = { "erm_redarmy" },
             milestones = {
                 { type = "group", name = "Kills" },
-                { type = "kill", name = "erm_redarmy/lab/5", quantity = 1 },
-                { type = "kill", name = "erm_redarmy/lab/10", quantity = 1 },
-                { type = "kill", name = "erm_redarmy/lab/15", quantity = 1 },
-                { type = "kill", name = "erm_redarmy/lab/20", quantity = 1, next = "x10" },
+                { type = "kill", name = MOD_NAME.."--lab--1", quantity = 1 },
+                { type = "kill", name = MOD_NAME.."--lab--3", quantity = 1 },
+                { type = "kill", name = MOD_NAME.."--lab--5", quantity = 1, next = "x10" },
             }
         },
     }
 
-    --preset["erm_redarmy_boss"] = {
-    --    required_mods = {"erm_redarmy"},
-    --    milestones = {
-    --        {type="group", name="ERM Boss Kills"},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[1],  quantity=1},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[2],  quantity=1},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[3],  quantity=1},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[4],  quantity=1},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[5],  quantity=1},
-    --    }
-    --}
+    preset["erm_redarmy_boss"] = {
+        required_mods = {"erm_redarmy"},
+        milestones = {
+            {type="group", name="ERM Boss Kills"},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--1",  quantity=1},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--2",  quantity=1},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--3",  quantity=1},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--4",  quantity=1},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--5",  quantity=1},
+        }
+    }
 
     return preset
+end
+
+---
+--- Print global for debug purpose when you run remote.call("enemyracemanager_debug", "print_global")"
+---
+function RemoteAPI.print_global()
+    helpers.write_file("erm_redarmy/erm-global.json", helpers.table_to_json(util.copy(storage)))
 end
 
 function RemoteAPI.register_new_enemy_race()
@@ -84,6 +91,49 @@ function RemoteAPI.advanced_target_priorities_register_section_data()
     }
 
     return data
+end
+
+--- grab nearest nuclear silo, turn it into boss.
+--- return true or message for reject
+function RemoteAPI.boss_custom_spawn(radar, is_test)
+    if not radar and not radar.valid then
+        -- Inherited from ERM locale.
+        return {"radar-rejects.radar-placement-error"}
+    end
+    
+    local surface = radar.surface
+    local max_search_distance = 1200
+    local max_allowed_distance = 1000
+    local silos = surface.find_entities_filtered { name = MOD_NAME .. '--rocket-silo--5', position = radar.position, radius = max_search_distance, limit = 1 }
+    local valid_silo = nil
+    local distance = -1
+    for _, silo in pairs(silos) do
+        distance = Position.distance(silo.position, radar.position)
+        if distance >= max_allowed_distance / 2 and distance <= max_allowed_distance or is_test == true then
+            valid_silo = silo
+            break
+        end
+    end
+
+    if not valid_silo then
+        if distance ~= -1 then
+            return {"radar-rejects.invalid-rocket-silo-distance", distance}
+        else
+            return {"radar-rejects.no-rocket-silo-nearby"}
+        end
+    end
+    
+    local position = valid_silo.position
+    valid_silo.destroy()
+
+    CustomAttacks.get_race_settings(FORCE_NAME, game.forces[FORCE_NAME])
+    local boss_silo = surface.create_entity {
+        name = MOD_NAME .. '--boss_rocket-silo--' .. storage.custom_attack_race_settings[FORCE_NAME].boss_tier,
+        position = position,
+        force = FORCE_NAME,
+        raise_built = true
+    }
+    return boss_silo
 end
 
 return RemoteAPI

@@ -67,9 +67,9 @@ local spawn_table = function(level)
     return res
 end
 
-local collision_box = { { -3, -3 }, { 3, 3 } }
-local map_generator_bounding_box = { { -4.5, -4.5 }, { 4.5, 4.5 } }
-local selection_box = { { -3, -3 }, { 3, 3 } }
+local collision_box = { { -2, -2 }, { 2, 2 } }
+local map_generator_bounding_box = { { -3, -3 }, { 3, 3 } }
+local selection_box = { { -2.25, -2.25 }, { 2.25, 2.25 } }
 
 
 function ErmRedArmy.make_furnace(level)
@@ -100,7 +100,7 @@ function ErmRedArmy.make_furnace(level)
                 height = 448,
                 direction_count = 1,
                 shift = util.by_pixel(-3.25, 7.25),
-                scale = 1
+                scale = 0.75
             }
         },
         {
@@ -144,7 +144,7 @@ function ErmRedArmy.make_furnace(level)
                             height = 219,
                             frame_count = 1,
                             shift = util.by_pixel(0.75, 5.75),
-                            scale = 1
+                            scale = 0.75
 
                         },
                         {
@@ -156,7 +156,7 @@ function ErmRedArmy.make_furnace(level)
                             frame_count = 1,
                             draw_as_shadow = true,
                             shift = util.by_pixel(11.25, 7.75),
-                            scale = 1
+                            scale = 0.75
                         }
                     }
                 },
