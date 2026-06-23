@@ -1,3 +1,7 @@
+-----
+--- Different between this and base_build.lua is that this one doesn't depends on factorio-world remote calls
+--- It serve as sample implementation for other races.  It also has additional documentations.
+--- Not tested, used at your own risk.
 require('__erm_redarmy__/global')
 local CustomAttacks = require('__erm_redarmy__/scripts/custom_attacks')
 local Position = require("__erm_libs__/stdlib/position")
@@ -7,8 +11,11 @@ local Bases = require('__erm_redarmy__/bases')
 local CHUNK_SIZE = 32
 
 --- This allow placement of one of assembling-machine, lab or electric-furnace
-local random_bit = 1
---- Entity that need reformat
+local random_bit_spawner = 1
+local random_bit_turret = 2
+--- Entities that need conversion
+--- The size of both entities should be the same or similar.  Otherwise, they may collide.
+--- You have to test conversion to see whether the city look fine.
 local entity_conversions = {
     ['gun-turret'] = true,
     ['laser-turret'] = true,
@@ -16,16 +23,25 @@ local entity_conversions = {
     ['rocket-turret'] = true,
     ['electric-turret'] = true,
     ['rocket-silo'] = true,
+    --- same name use true, e.g. gun-turret >> "enemy_erm_redarmy--gun-turret--1"
     ['artillery-turret'] = true,
+    --- different name use string map, e.g. "assembling-machine-1" >> "enemy_erm_redarmy--assemble-machine--1"
     ['assembling-machine-1'] = 'assemble-machine',
     ['electric-furnace'] = true,
     ['lab'] = true,
-    --- beacon handle random spawner placement.
-    ['beacon'] = random_bit
+    --- beacon handle random spawner placement.  
+    ['beacon'] = random_bit_spawner
+    
+    --- You can do random_bit for random turret as well, it'll need a new random_bit number and minor change to convert_name function.
+    --- ['something_else'] = random_bit_turret
 }
---- spawner list for beacon's random pick
+--- spawner list for random pick
 local spawners = {'assemble-machine', 'lab', 'electric-furnace'}
 local spawners_count = #spawners
+
+--- turret list for beacon's random pick
+---local turrets = {'gun-turret', 'laser-turret'}
+---local turrets_count = #turrets
 
 --- set which surface can build town
 local can_build_town_surfaces = {
@@ -41,8 +57,10 @@ local convert_name = function(name, quality)
     if entity_conversions[name] then
         if entity_conversions[name] == true then
             return MOD_NAME .. '--' ..  name .. '--' .. quality
-        elseif random_bit then
+        elseif entity_conversions[name] == random_bit_spawner then
             return MOD_NAME .. '--' ..  spawners[math_random(1, spawners_count)] .. '--' .. quality
+        --- elseif entity_conversions[name] == random_bit_turret then
+        ---     return MOD_NAME .. '--' ..  turrets[math_random(1, turrets_count)] .. '--' .. quality            
         else
             return MOD_NAME .. '--' ..  entity_conversions[name] .. '--' .. quality
         end
@@ -55,6 +73,7 @@ local is_invalid_surface = function(surface)
     return not surface or not surface.valid or not can_build_town_surfaces[surface.name]
 end
 
+--- All matching entity should be wipe before the base being build.
 local removable_type = {
     tree = true,
     ["simple-entity"] = true,
@@ -156,7 +175,6 @@ local process_landfill_queue = function()
     if surface and next(tiles) then
         surface.set_tiles(tiles, true, false, false, false)
     end
-
 end
 
 local build_blueprint_base = function(data)
@@ -215,9 +233,11 @@ local ARTILLERY_TOWN_CHANCE = settings.startup[FORCE_NAME.."-artillery-town-spaw
 --- Minimal gap between each artillery town
 local ARTILLERY_TOWN_GAP_DISTANCE = 16 * CHUNK_SIZE
 --- Minimal distance to build large town from spawn point, ~1500 tile
-local ARTILLERY_MIN_SPAWN_DISTANCE = 48 * CHUNK_SIZE
-local CITY_BEACON = 'erm_city_beacon'
+local ARTILLERY_TOWN_MIN_SPAWN_DISTANCE = 48 * CHUNK_SIZE
 
+
+local CITY_BEACON = 'erm_city_beacon'
+local CITY_BEACON_SEARCH_RANGE = 16 * CHUNK_SIZE
 --- Normal city - under 32 chunks
 local ARTILLERY_CITY_CHANCE = settings.startup[FORCE_NAME.."-artillery-city-spawn-chance"].value
 local ARTILLERY_CITY_MIN_SPAWN_DISTANCE = 32 * CHUNK_SIZE
@@ -227,7 +247,7 @@ local NUCLEAR_CITY_MIN_SPAWN_DISTANCE = 64 * CHUNK_SIZE
 
 local get_town_type = function(surface, town_position, spawn_location)
     local distance = Position.distance(town_position, spawn_location)
-    if CustomAttacks.can_spawn(ARTILLERY_TOWN_CHANCE) and distance >= ARTILLERY_MIN_SPAWN_DISTANCE then
+    if CustomAttacks.can_spawn(ARTILLERY_TOWN_CHANCE) and distance >= ARTILLERY_TOWN_MIN_SPAWN_DISTANCE then
         local count = surface.count_entities_filtered {
             type = "artillery-turret",
             force = FORCE_NAME,
@@ -266,6 +286,7 @@ local get_city_type = function(surface, town_position, spawn_location)
     return Bases.types.cities
 end
 
+--- Get blueprint to build and setup a city/town beacon
 local build_base = function(surface, chunk_center, beacon, town_type)
     local town_data, town_width = Bases.get_town(town_type)
     build_blueprint_base({
@@ -282,6 +303,7 @@ local build_base = function(surface, chunk_center, beacon, town_type)
     })
 end
 
+--- Setup condition to allow building a town
 local can_spawn_town = function(surface, area)
     if not CustomAttacks.can_spawn(5) then
         return false
@@ -294,11 +316,12 @@ local can_spawn_town = function(surface, area)
         position = left_top,
         limit = 1
     })
-
+    
     if next(beacons) then
         return false
     end
 
+    --- Check water tile
     local offset = 24
     local positions = {
         {x = left_top.x + offset,y = left_top.y + offset},
@@ -308,7 +331,8 @@ local can_spawn_town = function(surface, area)
     }
 
     for _, position in pairs(positions) do
-        if string.find(remote.call('factorio-world', 'get_world_tile_name',position.x, position.y),'water',nil, true) then
+        local tile = surface.get_tile(position.x, position.y)
+        if tile.prototype.collision_mask.layers.water_tile then
             return false
         end
     end
@@ -316,8 +340,41 @@ local can_spawn_town = function(surface, area)
     return true
 end
 
+--- Setup condition to allow building a city
 local can_spawn_city = function(surface, area)
-    return remote.call('factorio-world', 'has_town_spawn_point', surface, area)
+    if not CustomAttacks.can_spawn(1) then
+        return false
+    end
+
+    local left_top = area.left_top
+    local beacons = surface.find_entities_filtered({
+        name = {CITY_BEACON},
+        radius = CITY_BEACON_SEARCH_RANGE,
+        position = left_top,
+        limit = 1
+    })
+
+    if next(beacons) then
+        return false
+    end
+
+    --- Check water tile
+    local offset = 24
+    local positions = {
+        {x = left_top.x + offset,y = left_top.y + offset},
+        {x = left_top.x - offset,y = left_top.y - offset},
+        {x = left_top.x + offset,y = left_top.y - offset},
+        {x = left_top.x - offset,y = left_top.y + offset},
+    }
+
+    for _, position in pairs(positions) do
+        local tile = surface.get_tile(position.x, position.y)
+        if tile.prototype.collision_mask.layers.water_tile then
+            return false
+        end
+    end
+    
+    return true
 end
 
 local get_earth_landing_location = function(surface, chunk_center)
@@ -343,7 +400,6 @@ local on_chunk_generated = function(event)
         return
     end
     
-    local area = event.area
     local chunk_center = center_beacon_position(event.area)
     --- don't let it build towns near spawn locations
     local spawn_location = get_earth_landing_location(surface, chunk_center)
@@ -352,7 +408,7 @@ local on_chunk_generated = function(event)
         return
     end
 
-    if can_spawn_city(surface, area) then
+    if can_spawn_city(surface, event.area) then
         local city_circle = rendering.draw_sprite({
             sprite = "entity/"..CITY_BEACON,
             x_scale = scale,
@@ -368,7 +424,7 @@ local on_chunk_generated = function(event)
         }
         local city_type = get_city_type(surface, chunk_center, spawn_location)
         build_base(surface, chunk_center, CITY_BEACON, city_type)
-    elseif can_spawn_town(surface, area) then
+    elseif can_spawn_town(surface, event.area) then
         local town_circle = rendering.draw_sprite({
             sprite = "entity/"..TOWN_BEACON,
             x_scale = scale,
@@ -387,7 +443,8 @@ local on_chunk_generated = function(event)
     end
 end
 
---- When enemy base build reach its destination and is close to a previous town and city location.  They build a town/city block instead
+--- When enemy base builder reach its destination and is close to a previous town and city location.  
+--- They build a town/city block instead
 local on_build_base_arrived = function(event)
     local entity = event.group
     if not entity or not entity.valid then

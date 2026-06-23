@@ -198,38 +198,38 @@ if mods["space-age"] and mods['quality'] then
         data.raw['mod-data'][MOD_NAME..'--boss-attack-data'].data.idle_attack_interval = {5 * second, 5 * second, 5 * second, 5 * second, 5 * second,}
     end
 
-    --data.extend({
-    --    {
-    --        type = "kill-achievement",
-    --        name = MOD_NAME.."--god-poke",
-    --        to_kill = "enemy_erm_toss--boss_warpgate--1",
-    --        amount = 1,
-    --        icon = "__erm_toss_hd_assets__/graphics/entity/icons/units/zealot.png",
-    --        icon_size = 64,
-    --        allow_without_fight = false,
-    --        order = "z["..MOD_NAME.."]--01-god-poke"
-    --    },
-    --    {
-    --        type = "kill-achievement",
-    --        name = MOD_NAME.."--god-like",
-    --        to_kill = "enemy_erm_toss--boss_warpgate--3",
-    --        amount = 1,
-    --        icon = "__erm_toss_hd_assets__/graphics/entity/icons/units/darktemplar.png",
-    --        icon_size = 64,
-    --        allow_without_fight = false,
-    --        order = "z["..MOD_NAME.."]--02-god-like"
-    --    },
-    --    {
-    --        type = "kill-achievement",
-    --        name = MOD_NAME.."--god-kill",
-    --        to_kill = "enemy_erm_toss--boss_warpgate--5",
-    --        amount = 1,
-    --        icon = "__erm_toss_hd_assets__/graphics/entity/icons/units/archon.png",
-    --        icon_size = 64,
-    --        allow_without_fight = false,
-    --        order = "z["..MOD_NAME.."]--03-god-kill"
-    --    },
-    --})
+    data.extend({
+        {
+            type = "kill-achievement",
+            name = MOD_NAME.."--rebellion",
+            to_kill = "enemy_erm_redarmy--boss_rocket-silo--1",
+            amount = 1,
+            icon = "__erm_redarmy__/graphics/red_army_icon.png",
+            icon_size = 64,
+            allow_without_fight = false,
+            order = "z["..MOD_NAME.."]--01-rebellion"
+        },
+        {
+            type = "kill-achievement",
+            name = MOD_NAME.."--revolution",
+            to_kill = "enemy_erm_redarmy--boss_rocket-silo--3",
+            amount = 1,
+            icon = "__erm_redarmy__/graphics/red_army_icon.png",
+            icon_size = 64,
+            allow_without_fight = false,
+            order = "z["..MOD_NAME.."]--02-revolution"
+        },
+        {
+            type = "kill-achievement",
+            name = MOD_NAME.."--liberation",
+            to_kill = "enemy_erm_redarmy--boss_rocket-silo--5",
+            amount = 1,
+            icon = "__erm_redarmy__/graphics/red_army_icon.png",
+            icon_size = 64,
+            allow_without_fight = false,
+            order = "z["..MOD_NAME.."]--03-liberation"
+        },
+    })
 end
 
 

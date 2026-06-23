@@ -3,6 +3,21 @@
 --- Created by heyqule.
 --- DateTime: 4/12/2026 11:52 PM
 ---
+local Position = require("__erm_libs__/stdlib/position")
+local CustomAttacks = require('__erm_redarmy__/scripts/custom_attacks')
+local AttackGroupBeaconConstants = require("__enemyracemanager__/lib/attack_group_beacon_constants")
+
+local table_insert = table.insert
+local draw_text = rendering.draw_text
+local notification_enabled = settings.startup[FORCE_NAME.."-orbital-surveillance"].value
+
+local is_valid_artillery = function(event)
+    local entity = event.created_entity or event.entity
+    if entity and entity.valid and entity.type == "artillery-turret" and entity.force.name == FORCE_NAME then
+        return true
+    end
+    return false
+end
 
 local Artillery = {}
 
@@ -11,22 +26,30 @@ function Artillery.register(artillery_turret)
         local prototype = artillery_turret.prototype
         storage.active_artilleries[artillery_turret.unit_number] = {
             entity = artillery_turret,
-            manual_range_modifier = prototype.manual_range_modifier,
-            turret_range = prototype.attack_parameters.range
+            manual_range = prototype.attack_parameters.range * prototype.manual_range_modifier
         }
         return true
     end
     return false
 end
 
+local shell_name = "artillery-shell"
+local script_fire_chance = settings.startup[FORCE_NAME.."-artillery-manual-fire-chance"].value
 function Artillery.add_ammo(event)
     local active_artilleries = storage.active_artilleries
+
     for unit_number, data in pairs(active_artilleries) do
         if data and data.entity.valid then
             local active_artillery = data.entity
             if active_artillery then
                 local ammo_inventory = active_artillery.get_inventory(defines.inventory.artillery_turret_ammo)
-                local shell = {name="artillery-shell", count = 6}
+                local shell_count = ammo_inventory.get_item_count(shell_name)
+                
+                if shell_count and CustomAttacks.can_spawn(script_fire_chance) then
+                    table_insert(storage.targeting_queue, active_artillery)
+                end
+                
+                local shell = {name= shell_name, count = 10}
                 if ammo_inventory and ammo_inventory.can_insert(shell) then
                     ammo_inventory.insert(shell)
                 end
@@ -37,16 +60,91 @@ function Artillery.add_ammo(event)
     end
 end
 
-local is_valid_artillery = function(event)
-    local entity = event.created_entity or event.entity
-    if entity and entity.valid and entity.type == "artillery-turret" and entity.force.name == FORCE_NAME then
-        return true
+local process_attack = function()
+    local index, entity = next(storage.attack_queue)
+    if entity and entity.valid then
+        entity.surface.create_entity({
+            name = "artillery-flare",
+            force = FORCE_NAME,
+            position = entity.position,
+            movement = {0, 0}, -- Flares require a movement vector, even if static
+            height = 0,
+            vertical_speed = 0,
+            frame_speed = 1
+        })
     end
-    return false
+
+    if index then
+        storage.attack_queue[index] = nil
+    end
 end
 
+local process_targeting = function()
+    local index, active_artillery = next(storage.targeting_queue)
+    if active_artillery and active_artillery.valid then
+        local entity_data = storage.active_artilleries[active_artillery.unit_number]
+        local beacon_data = remote.call('enemyracemanager','pick_random_attack_beacon', active_artillery.surface, active_artillery.force )
+        local surface = active_artillery.surface
+        if beacon_data and
+           Position.distance(active_artillery.position, beacon_data.position) < entity_data.manual_range
+        then
+            local entities
+            if CustomAttacks.can_spawn(40) then
+                entities = surface.find_entities_filtered {
+                    type = AttackGroupBeaconConstants.ATTACKABLE_ENTITY_TYPES,
+                    position = beacon_data.position,
+                    radius = 48,
+                    limit = 6,
+                }
+            else
+                entities = surface.find_entities_filtered {
+                    position = beacon_data.position,
+                    radius = 64,
+                    is_military_target = true,
+                    limit = 12,
+                }
+            end
+
+            if entities then
+                for _, entity in pairs(entities) do
+                    if not storage.attack_queue[entity.unit_number] then
+                        table_insert(storage.attack_queue, entity)
+                    end
+                end
+
+                if notification_enabled then
+                    draw_text({
+                        text = "[entity=artillery-turret]",
+                        color = {r = 1, g = 1, b = 1},
+                        scale = 2,
+                        target = active_artillery.position,
+                        surface = surface,
+                        render_mode = "chart",
+                        use_rich_text = true,
+                        time_to_live = 2 * minute,
+                        scale_with_zoom = true,
+                        blink_interval = 30,
+                    })
+                end
+            end
+        end
+    end
+
+    if index then
+        storage.targeting_queue[index] = nil
+    end
+end
+
+Artillery.process_attack = function(event)
+    process_attack()
+    process_targeting()
+end
+
+
+local refuel = settings.startup[FORCE_NAME.."-artillery-refuel"].value
 Artillery.on_nth_tick = {
-    [minute] = Artillery.add_ammo
+    [refuel * minute + 1] = Artillery.add_ammo,
+    [33] = Artillery.process_attack 
 }
 
 Artillery.events = {
@@ -57,5 +155,15 @@ Artillery.events = {
         end
     end
 }
+
+local init = function(event)
+    storage.active_artilleries = storage.active_artilleries or {}
+    storage.targeting_queue = storage.targeting_queue or {}
+    storage.attack_queue = storage.attack_queue or {}
+end
+
+Artillery.on_configuration_changed = init
+
+Artillery.on_init = init
 
 return Artillery

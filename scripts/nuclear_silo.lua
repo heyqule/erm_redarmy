@@ -6,6 +6,9 @@
 
 local NuclearSilo = {}
 
+local draw_text = rendering.draw_text
+local notification_enabled = settings.startup[FORCE_NAME.."-orbital-surveillance"].value
+
 function NuclearSilo.register(silo)
     if silo then
         silo.send_to_orbit_automatically = true
@@ -13,7 +16,6 @@ function NuclearSilo.register(silo)
         -- Add to active silos table
         table.insert(storage.active_nuclear_silos, {
             entity = silo,
-            charted = false,
         })
         
         return true
@@ -28,7 +30,7 @@ function NuclearSilo.spawn_nuclear_rocket(surface, launch_position, target_posit
         name = "atomic-rocket",
         position = launch_position,
         target = target_position,
-        speed = 1
+        speed = 3
     })
 
     return nuclear_rocket
@@ -39,32 +41,34 @@ function NuclearSilo.launch_rocket_from_silo(silo)
         return false
     end
     
-    return silo.launch_rocket()
+    local launched = silo.launch_rocket()
+    
+    if launched and notification_enabled then
+        draw_text({
+            text = "[item=atomic-bomb]",
+            color = {r = 1, g = 1, b = 1},
+            scale = 2,
+            target = silo.position,
+            surface = silo.surface,
+            render_mode = "chart",
+            use_rich_text = true,
+            time_to_live = 120 * second,
+            scale_with_zoom = true,
+            blink_interval = 30,
+        })
+    end
+    
+    return launched
 end
 
 function NuclearSilo.add_parts(event)
     local active_silos = storage.active_nuclear_silos
-    local player_forces = remote.call('enemyracemanager', 'get_player_forces')
     
     for index, active_silo_data in pairs(active_silos) do
         local active_silo = active_silo_data.entity
         if active_silo.valid then
-            if active_silo_data.is_charted then
-                NuclearSilo.launch_rocket_from_silo(active_silo)
-                active_silo.rocket_parts = active_silo.rocket_parts + 10
-            else
-                for _, player_force in pairs(player_forces) do
-                    local force = game.forces[player_force]
-                    if force and force.is_chunk_charted(active_silo.surface,
-                            {
-                                x = math.floor(active_silo.position.x / 32),
-                                y = math.floor(active_silo.position.y / 32)
-                            }
-                    ) then
-                        storage.active_nuclear_silos[index].is_charted = true
-                    end
-                end
-            end
+            NuclearSilo.launch_rocket_from_silo(active_silo)
+            active_silo.rocket_parts = active_silo.rocket_parts + 10
         else
             table.remove(storage.active_nuclear_silos, index)
         end
@@ -79,8 +83,9 @@ local is_valid_silo = function(event)
     return false
 end
 
+local refuel = settings.startup[FORCE_NAME.."-atomic-rocket-refuel"].value
 NuclearSilo.on_nth_tick = {
-    [5 * minute] = NuclearSilo.add_parts
+    [refuel * minute + 1] = NuclearSilo.add_parts
 }
 
 
@@ -98,5 +103,13 @@ NuclearSilo.events = {
         end
     end
 }
+
+local init = function(event)
+    storage.active_nuclear_silos = storage.active_nuclear_silos or {}
+end
+
+NuclearSilo.on_configuration_changed = init
+
+NuclearSilo.on_init = init
 
 return NuclearSilo

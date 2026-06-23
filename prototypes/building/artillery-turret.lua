@@ -57,6 +57,7 @@ function ErmRedArmy.make_artillery_turret(level)
     redarmy_artillery_turret['order'] = MOD_NAME .. '--building--' .. name .. '--'.. level
     redarmy_artillery_turret['minable'] = nil
     redarmy_artillery_turret['next_upgrade'] = nil
+    redarmy_artillery_turret['manual_range_modifier'] = 3
     redarmy_artillery_turret['resistances'] = {
         { type = "acid", percent = ERM_UnitHelper.get_resistance(base_acid_resistance, incremental_acid_resistance, level) },
         { type = "physical", percent = ERM_UnitHelper.get_resistance(base_physical_resistance, incremental_physical_resistance, level) },

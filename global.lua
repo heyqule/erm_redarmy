@@ -4,7 +4,7 @@
 --- DateTime: 12/22/2020 7:15 PM
 ---
 
-DEBUG_MODE = true
+DEBUG_MODE = false
 
 -- Globals within the mod
 MOD_NAME = 'enemy_erm_redarmy'

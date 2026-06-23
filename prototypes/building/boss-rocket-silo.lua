@@ -5,14 +5,17 @@
 ---
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
+local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 
 function ErmRedArmy.make_boss_rocket_silo(level, boss_data)
     level = level or 1
     
     local rocket_silo = table.deepcopy(data.raw["rocket-silo"]["rocket-silo"])
     rocket_silo.name = MOD_NAME .. "--boss_rocket-silo--"..level
+    rocket_silo.localised_name = { "entity-name." .. MOD_NAME .. "--boss_rocket-silo", GlobalConfig.QUALITY_MAPPING[level] }
     rocket_silo.minable.result = MOD_NAME .. "--boss_rocket-silo--"..level
     rocket_silo.max_health = boss_data.rocket_silo_hp[level]
+    rocket_silo.subgroup = 'enemies'
 
     -- Remove power requirements
     rocket_silo.energy_source = {
@@ -50,6 +53,7 @@ function ErmRedArmy.make_boss_rocket_silo(level, boss_data)
     local rocket_silo_item = table.deepcopy(data.raw.item["rocket-silo"])
     rocket_silo_item.name = MOD_NAME.."--boss_rocket-silo--"..level
     rocket_silo_item.place_result = MOD_NAME.."--boss_rocket-silo--"..level
+    rocket_silo_item.subgroup = 'enemies'
 
     data:extend({rocket_silo_item})
 end

@@ -29,16 +29,6 @@ local createRace = function()
 
     --- for guerrilla tactic processing
     storage.guerrilla_distances = storage.guerrilla_distances or {}
-
-    storage.building_entities = storage.building_entities or {}
-    storage.landfill_queue = storage.landfill_queue or {}
-    storage.base_area_removal = storage.base_area_removal or {}
-
-    --- Attack job fires once per second, for nuclear silos and artilleries manual target.
-    storage.attack_jobs = storage.attack_jobs or {}
-
-    storage.active_artilleries = storage.active_artilleries or {}
-    storage.active_nuclear_silos = storage.active_nuclear_silos or {}
 end
 
 local addRaceSettings = function()

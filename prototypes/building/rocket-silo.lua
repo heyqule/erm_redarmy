@@ -3,6 +3,7 @@
 --- Created by heyqule.
 --- DateTime: 4/4/2026 1:38 PM
 ---
+local GlobalConfig = require("__enemyracemanager__/lib/global_config")
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local rocket_silo = table.deepcopy(data.raw["rocket-silo"]["rocket-silo"])
 
@@ -12,7 +13,9 @@ rocket_silo.max_health = ERM_UnitHelper.get_health(
     rocket_silo.max_health * 10 , 
     settings.startup["enemyracemanager-max-hitpoint-multipliers"].value, 
     5
-) 
+)
+rocket_silo.localised_name = { "entity-name." .. MOD_NAME .. "--rocket-silo", GlobalConfig.QUALITY_MAPPING[5] }
+rocket_silo.subgroup = 'enemies'
 
 -- Remove power requirements
 rocket_silo.energy_source = {
@@ -27,9 +30,11 @@ data:extend({
   rocket_silo
 })
 
--- Create the item for the new rocket silo
+---- Create the item for the new rocket silo
+---- Item required b/c it's not an enemy entity by default.
 local rocket_silo_item = table.deepcopy(data.raw.item["rocket-silo"])
 rocket_silo_item.name = MOD_NAME.."--rocket-silo--5"
 rocket_silo_item.place_result = MOD_NAME.."--rocket-silo--5"
+rocket_silo_item.subgroup = 'enemies'
 
 data:extend({rocket_silo_item})

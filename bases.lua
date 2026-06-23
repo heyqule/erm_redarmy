@@ -9,6 +9,7 @@ local RedArmyBases = {}
 local math_random = math.random
 local table_insert = table.insert
 
+--- setup type of town and cities
 RedArmyBases.types = {
     towns = "towns", 
     large_towns = "large_towns",
@@ -22,7 +23,9 @@ RedArmyBases.towns = {
     data = {
         -- 4 beacon(random), laser & gun, 32 tile width
         {
+            --- blueprint string
             buildings = "0eNqVmt1O4zAQhd8l1wHZTpzYfZUVWhU2QpVKivqzuwj13bcFiVarfsycGwSIfozHJ8fjybw3j+vD9Lpdzftm8d6snjbzrln8eG92q+d5uT7/bl6+TM2ieT7Md/vDdjvtm2PbrOZf099mEY/tjT/d7TfzdPdnuV5f/Wk6PrTNNO9X+9X0+S8+fnj7OR9eHqftidXe+HzbvG52p49s5jP/hLmL/X1um7fzd/k+H88B/AdKTlC2QJ0TlCxQ7wR1Fig7QcECDU5QtECjD1QsTvFxqsWpPs5gcWLwgUYT5NS1Kevo1LUp6+jTtc3xydpemE/VdqZ9ora33qdpU4rRp2nz0Yg+TdvPavJp2naP5NO07WfJp2nbYZNP07bnJ5+oHadQlo+hDkiDTOqBdFH21XF+84wNX6Rwk3TR9nq5m7bfsJLJqs6ogkXqgo9UTJBs2rB3XfLmaTBj6tSYQAWd6tu0tixyKJ7BmSM7RT5929tfXByHIKtzafZT0gfV4WDb+uhbnOkBfVIjAgH0nWxwEUi9TEpAym6DuyQqQaIGNVG0vNErJzumosZEiapqyivcbYK8dwFIUT7mwu0sZVXitLZOfeYooF7dNsqRXJ6MAJKrkwIguTgpkCNV2rSyKm4axDOozg0JGqKaabr8yx2SAUCdbpIDJOki7Mdp+XT65Dc3W1pXNhkmQrVq4uhOTYlR1Ux7VdX+GpzWo+zTBIpqW4xASbyOEke9RBJHvUMSJ4tbRhzVookzihtGnKLtF2Gqtl2AKUHbLcKo7gzPaVHNmRqqujeDAxXBmikYvzMTQTRmyq7sy5QU0ZZpWWr1DLVBVU0Zap6qls5Q81SxcKZliXUzRSNWzZQctWam4ruqhgzXiqqWzHStqKKacWFiyUzxxCDWzJXe4qiuTNfcGFRfpkt8DLoz0y0+BlHZvLysGiPHJFo1J2pUU94TqaikjkhVfeSgexav3jB6W+jMimILnUlJa6EzSGxX495dvWZ0ttA5pizGRCpwvmq01zZqHIyniC10TlGVWujISUFroTMoqi10RolFCW5bEssSjki1bxJAUq+KPGWg1iZMGsX5GSYV8eLJpCpO0PAQRRBHaJgUtRkaBiVtiIZBnTZFw6Bem6JhkOrcCBq0KRoGjdIUDXOKdgQgp0pTNDzUE6QpGuZEaYqGOUmaomFOp03RMKjXpmgYlLU2GIMGbYqGQaN4HCGoaD21T9BD26z208u5SfQ1lNo2v6ft7uMjeUi1rzWXfhhPX47Hf3iFjpI=",
+            --- weight determine to spawn probability.
             weight = 30,
         },
         -- 4 beacon(random), 4 rocket & 1 tesla, laser & gun, 32 tile width
@@ -41,7 +44,7 @@ RedArmyBases.towns = {
             weight = 2,
         }
     },
-    --- Base length + 8
+    --- Base width + 8  (32 + 8)
     base_width = 40
 }
 
@@ -139,10 +142,6 @@ RedArmyBases.init_data = function()
         dataset.weight = weight
         dataset.weight_size = #weight
         dataset.data_size = #dataset.data
-        if DEBUG_MODE then
-            print(town_type.." data:")
-            print(serpent.block(dataset))
-        end
     end
 end
 RedArmyBases.init_data()

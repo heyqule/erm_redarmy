@@ -16,25 +16,24 @@ function RemoteAPI.milestones_preset_addons()
             required_mods = { "erm_redarmy" },
             milestones = {
                 { type = "group", name = "Kills" },
-                { type = "kill", name = "erm_redarmy/lab/5", quantity = 1 },
-                { type = "kill", name = "erm_redarmy/lab/10", quantity = 1 },
-                { type = "kill", name = "erm_redarmy/lab/15", quantity = 1 },
-                { type = "kill", name = "erm_redarmy/lab/20", quantity = 1, next = "x10" },
+                { type = "kill", name = MOD_NAME.."--lab--1", quantity = 1 },
+                { type = "kill", name = MOD_NAME.."--lab--3", quantity = 1 },
+                { type = "kill", name = MOD_NAME.."--lab--5", quantity = 1, next = "x10" },
             }
         },
     }
 
-    --preset["erm_redarmy_boss"] = {
-    --    required_mods = {"erm_redarmy"},
-    --    milestones = {
-    --        {type="group", name="ERM Boss Kills"},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[1],  quantity=1},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[2],  quantity=1},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[3],  quantity=1},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[4],  quantity=1},
-    --        {type="kill", name="erm_redarmy/warpgate/"..boss_level[5],  quantity=1},
-    --    }
-    --}
+    preset["erm_redarmy_boss"] = {
+        required_mods = {"erm_redarmy"},
+        milestones = {
+            {type="group", name="ERM Boss Kills"},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--1",  quantity=1},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--2",  quantity=1},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--3",  quantity=1},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--4",  quantity=1},
+            {type="kill", name= MOD_NAME.."--boss_rocket-silo--5",  quantity=1},
+        }
+    }
 
     return preset
 end
@@ -98,23 +97,30 @@ end
 --- return true or message for reject
 function RemoteAPI.boss_custom_spawn(radar, is_test)
     if not radar and not radar.valid then
-        return {"","boss_radar.radar_invalid"}
+        -- Inherited from ERM locale.
+        return {"radar-rejects.radar-placement-error"}
     end
     
     local surface = radar.surface
-    local silos = surface.find_entities_filtered { name = MOD_NAME .. '--rocket-silo--5'}
+    local max_search_distance = 1200
+    local max_allowed_distance = 1000
+    local silos = surface.find_entities_filtered { name = MOD_NAME .. '--rocket-silo--5', position = radar.position, radius = max_search_distance, limit = 1 }
     local valid_silo = nil
+    local distance = -1
     for _, silo in pairs(silos) do
-        local player_spawn = silo.force.get_spawn_position(surface) or {0, 0}
-        if Position.distance(silo.position, player_spawn) > 512 or is_test == true then
-            game.print('pass boss_custom_spawn')
+        distance = Position.distance(silo.position, radar.position)
+        if distance >= max_allowed_distance / 2 and distance <= max_allowed_distance or is_test == true then
             valid_silo = silo
             break
         end
     end
 
     if not valid_silo then
-        return {"", "boss_radar.rocket_silo_too_close_to_radar"}
+        if distance ~= -1 then
+            return {"radar-rejects.invalid-rocket-silo-distance", distance}
+        else
+            return {"radar-rejects.no-rocket-silo-nearby"}
+        end
     end
     
     local position = valid_silo.position

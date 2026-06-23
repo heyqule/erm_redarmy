@@ -8,9 +8,9 @@
 
 local handler = require("event_handler")
 handler.add_lib(require('scripts/initialize'))
-handler.add_lib(require('scripts/base_building'))
 handler.add_lib(require('scripts/nuclear_silo'))
 handler.add_lib(require('scripts/artillery'))
+handler.add_lib(require('scripts/base_building'))
 
 local RemoteApi = require('scripts/remote')
 remote.add_interface("erm_redarmy", RemoteApi)

@@ -17,9 +17,10 @@ end
 if mapgen["erm-debug"] then
     mapgen["erm-debug"]["basic_settings"]["autoplace_controls"][AUTOCONTROL_NAME] = { frequency = 5, size = 5 }
 end
-
+local NAUVIS_MIXED = "Mixed Races"
 local nauvis_planet = data.raw.planet.nauvis
 local map_gen_settings = nauvis_planet.map_gen_settings
+
 if map_gen_settings then
     local nauvis_autocontrols = map_gen_settings.autoplace_controls
     local nauvis_enemy_settings = settings.startup["enemyracemanager-nauvis-enemy"].value
