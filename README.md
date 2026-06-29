@@ -8,6 +8,10 @@ They have flat resistances. 75% for unit, turret and 50% for spawners
 - Support Factorio 2.0
 - They have a flat resistances without any weakness.
 - Support "Factorio World" to generate a proper planet Earth.
+- New economy / recipe from fighting red army
+- Added custom towns and cities on planet Earth
+- Added artillery and nuclear missile silo on planet Earth
+- Added Red army boss: Nuclear missile silo.
 - This is an experimental release.
 
 Credit:
@@ -87,4 +91,5 @@ All resistance @ Legendary: 75
 ### Planet Earth
 - Rely on https://mods.factorio.com/mod/factorio-world to generate Earth landscape
 - If interplanetary attack is enabled, landing on Earth will activate it for Red Army.
-- [Coming soon] Boss summoning ritual.
+- Custom cities and towns from red army with artillery and nuclear weapons.
+- Spawn boss with PSI radar.
