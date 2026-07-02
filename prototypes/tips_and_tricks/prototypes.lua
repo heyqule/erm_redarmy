@@ -5,19 +5,20 @@
 ---
 
 local simulations = require("__erm_redarmy__/prototypes/tips_and_tricks/simulations")
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 data:extend(
         {
             {
                 type = "tips-and-tricks-item-category",
-                name = FORCE_NAME,
-                order = "n02-["..FORCE_NAME.."]"
+                name = ERM_REDARMY.FORCE_NAME,
+                order = "n02-["..ERM_REDARMY.FORCE_NAME.."]"
             },
             {
                 type = "tips-and-tricks-item",
-                name = FORCE_NAME.."-general-info",
-                tag = "[entity="..FORCE_NAME.."--human-flamethrower--1]",
-                category = FORCE_NAME,
+                name = ERM_REDARMY.FORCE_NAME.."-general-info",
+                tag = "[entity="..ERM_REDARMY.FORCE_NAME.."--human-flamethrower--1]",
+                category = ERM_REDARMY.FORCE_NAME,
                 order = "a",
                 is_title = true,
                 starting_status = "suggested",
@@ -32,8 +33,8 @@ if mods['space-age'] then
                 {
                     type = "tips-and-tricks-item",
                     tag = "[planet=earth]",
-                    name = FORCE_NAME.."-planet-earth",
-                    category = FORCE_NAME,
+                    name = ERM_REDARMY.FORCE_NAME.."-planet-earth",
+                    category = ERM_REDARMY.FORCE_NAME,
                     order = "c",
                     indent = 1,
                     starting_status = "suggested",
@@ -42,8 +43,8 @@ if mods['space-age'] then
                 {
                     type = "tips-and-tricks-item",
                     tag = "[item=enemy_erm_redarmy--organ]",
-                    name = FORCE_NAME.."-economy",
-                    category = FORCE_NAME,
+                    name = ERM_REDARMY.FORCE_NAME.."-economy",
+                    category = ERM_REDARMY.FORCE_NAME,
                     order = "c",
                     indent = 1,
                     starting_status = "suggested",
@@ -51,8 +52,8 @@ if mods['space-age'] then
                 },
                 {
                     type = "tips-and-tricks-item",
-                    name = FORCE_NAME.."-city-and-town",
-                    category = FORCE_NAME,
+                    name = ERM_REDARMY.FORCE_NAME.."-city-and-town",
+                    category = ERM_REDARMY.FORCE_NAME,
                     order = "d",
                     indent = 2,
                     starting_status = "suggested",
@@ -61,8 +62,8 @@ if mods['space-age'] then
                 {
                     type = "tips-and-tricks-item",
                     tag = "[item=rocket-silo]",
-                    name = FORCE_NAME.."-rocket-silo",
-                    category = FORCE_NAME,
+                    name = ERM_REDARMY.FORCE_NAME.."-rocket-silo",
+                    category = ERM_REDARMY.FORCE_NAME,
                     order = "e",
                     indent = 2,
                     starting_status = "suggested",
@@ -70,8 +71,8 @@ if mods['space-age'] then
                 },
                 {
                     type = "tips-and-tricks-item",
-                    name = FORCE_NAME.."-boss-rocket-silo",
-                    category = FORCE_NAME,
+                    name = ERM_REDARMY.FORCE_NAME.."-boss-rocket-silo",
+                    category = ERM_REDARMY.FORCE_NAME,
                     order = "e1",
                     indent = 3,
                     starting_status = "suggested",
@@ -80,8 +81,8 @@ if mods['space-age'] then
                 {
                     type = "tips-and-tricks-item",
                     tag = "[item=artillery-turret]",
-                    name = FORCE_NAME.."-artillery-turret",
-                    category = FORCE_NAME,
+                    name = ERM_REDARMY.FORCE_NAME.."-artillery-turret",
+                    category = ERM_REDARMY.FORCE_NAME,
                     order = "f",
                     indent = 2,
                     starting_status = "suggested",

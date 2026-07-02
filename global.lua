@@ -4,25 +4,25 @@
 --- DateTime: 12/22/2020 7:15 PM
 ---
 
-DEBUG_MODE = false
+local ERM_REDARMY = {
+    MOD_NAME = 'enemy_erm_redarmy',
+    FORCE_NAME = 'enemy_erm_redarmy',
+    AUTOCONTROL_NAME = nil, -- filled below after MOD_NAME is set
+    CHARACTER_RIG_STILL_FRAME = 12,
+    DROPSHIP_ATTACK = 'emrmy-dsh',
+    ENGINEER_ATTACK = 'emrmy-gin',
+    GUERRILLA_ATTACK = 'emrmy-grl',
+    --- This set must be the same string for boss to function properly.
+    REGISTER_BOSS_RADAR = "embss-rdr",
+    TRIGGER_BOSS_SPAWNED = "embss-spn",
+    TRIGGER_BOSS_DIES = "embss-die",
+    TRIGGER_BOSS_ASSIST_SPAWNED = "embas_spn",
+    TRIGGER_BOSS_ASSIST_DIES = "embas-die",
+    BOSS_SEGMENT_UNIT_DIES = "embsu-die",
+    REDARMY_MAP_COLOR = { r = 200, g = 0, b = 33, a = 255 },
+    DEBUG_MODE = true,
+}
 
--- Globals within the mod
-MOD_NAME = 'enemy_erm_redarmy'
-FORCE_NAME = 'enemy_erm_redarmy'
-AUTOCONTROL_NAME = MOD_NAME.."-enemy-base"
+ERM_REDARMY.AUTOCONTROL_NAME = ERM_REDARMY.MOD_NAME.."-enemy-base"
 
-CHARACTER_RIG_STILL_FRAME = 12
-
-DROPSHIP_ATTACK = 'emrmy-dsh'
-ENGINEER_ATTACK = 'emrmy-gin'
-GUERRILLA_ATTACK = 'emrmy-grl'
-
---- This set must be the same string for boss to function properly.
-REGISTER_BOSS_RADAR = "embss-rdr"
-TRIGGER_BOSS_SPAWNED = "embss-spn"
-TRIGGER_BOSS_DIES = "embss-die"
-TRIGGER_BOSS_ASSIST_SPAWNED = "embas_spn"
-TRIGGER_BOSS_ASSIST_DIES = "embas-die"
-BOSS_SEGMENT_UNIT_DIES = "embsu-die"
-
-REDARMY_MAP_COLOR = { r = 200, g = 0, b = 33, a = 255 }
+return ERM_REDARMY

@@ -5,24 +5,25 @@
 ---
 
 local CustomAttackHelper = require('__enemyracemanager__/lib/helper/custom_attack_helper')
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 local CustomAttacks = CustomAttackHelper
 
 function CustomAttacks.process_engineer(event)
-    CustomAttackHelper.build(event, MOD_NAME, CustomAttackHelper.get_unit(MOD_NAME, "construction_buildings"))
+    CustomAttackHelper.build(event, ERM_REDARMY.MOD_NAME, CustomAttackHelper.get_unit(ERM_REDARMY.MOD_NAME, "construction_buildings"))
     event.source_entity.destroy()
 end
 
 function CustomAttacks.process_dropship(event)
-    local race_settings = CustomAttacks.get_race_settings(MOD_NAME)
-    CustomAttacks.drop_unit(event, MOD_NAME, 'human-machinegun', 3)
+    local race_settings = CustomAttacks.get_race_settings(ERM_REDARMY.MOD_NAME)
+    CustomAttacks.drop_unit(event, ERM_REDARMY.MOD_NAME, 'human-machinegun', 3)
     if CustomAttacks.can_spawn(75) then
-        CustomAttacks.drop_unit(event, MOD_NAME, CustomAttacks.get_unit(MOD_NAME, 'droppable_units'))
+        CustomAttacks.drop_unit(event, ERM_REDARMY.MOD_NAME, CustomAttacks.get_unit(ERM_REDARMY.MOD_NAME, 'droppable_units'))
     end
     if race_settings.tier == 3 and CustomAttacks.can_spawn(40) then
-        CustomAttacks.drop_unit(event, MOD_NAME, 'human-shotgun', 2)
+        CustomAttacks.drop_unit(event, ERM_REDARMY.MOD_NAME, 'human-shotgun', 2)
         if CustomAttacks.can_spawn(20) then
-            CustomAttacks.drop_unit(event, MOD_NAME, CustomAttacks.get_unit(MOD_NAME, 'droppable_units'), 1)
+            CustomAttacks.drop_unit(event, ERM_REDARMY.MOD_NAME, CustomAttacks.get_unit(ERM_REDARMY.MOD_NAME, 'droppable_units'), 1)
         end
     end
 end

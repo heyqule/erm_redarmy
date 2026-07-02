@@ -1,4 +1,4 @@
-require('__erm_redarmy__/global')
+local ERM_REDARMY = require('__erm_redarmy__/global')
 local CustomAttacks = require('__erm_redarmy__/scripts/custom_attacks')
 local Position = require("__erm_libs__/stdlib/position")
 local Bases = require('__erm_redarmy__/bases')
@@ -40,11 +40,11 @@ local group_tile = "ground_tile"
 local convert_name = function(name, quality)
     if entity_conversions[name] then
         if entity_conversions[name] == true then
-            return MOD_NAME .. '--' ..  name .. '--' .. quality
+            return ERM_REDARMY.MOD_NAME .. '--' ..  name .. '--' .. quality
         elseif random_bit then
-            return MOD_NAME .. '--' ..  spawners[math_random(1, spawners_count)] .. '--' .. quality
+            return ERM_REDARMY.MOD_NAME .. '--' ..  spawners[math_random(1, spawners_count)] .. '--' .. quality
         else
-            return MOD_NAME .. '--' ..  entity_conversions[name] .. '--' .. quality
+            return ERM_REDARMY.MOD_NAME .. '--' ..  entity_conversions[name] .. '--' .. quality
         end
     end
     
@@ -180,14 +180,14 @@ local build_blueprint_base = function(data)
         type = QUEUE_TYPE_REMOVE_ENTITY,
     })
 
-    local quality = remote.call('enemyracemanager', 'roll_quality', FORCE_NAME, surface.name)
+    local quality = remote.call('enemyracemanager', 'roll_quality', ERM_REDARMY.FORCE_NAME, surface.name)
 
     for _, entity in pairs(bp_entities) do
         if entity.name then
             entity.name = convert_name(entity.name, quality)
         end
         entity.position = { entity.position.x + x_offset, entity.position.y + y_offset}
-        entity.force = FORCE_NAME
+        entity.force = ERM_REDARMY.FORCE_NAME
         entity.raise_built = true
         entity.surface = surface
         entity.type = QUEUE_TYPE_BUILD_BASE,
@@ -204,25 +204,28 @@ end
 
 
 local TOWN_BEACON = 'erm_town_beacon'
+local CITY_BEACON = 'erm_city_beacon'
+--- Minimal distance between each town/city.
 local TOWN_BEACON_SEARCH_RANGE = 7 * CHUNK_SIZE
 --- Minimal distance to build town from spawn point, 512 tile
 local TOWN_MIN_SPAWN_DISTANCE = 16 * CHUNK_SIZE
 
+--- YOu may want to change the following to the type of your towns.
+
 --- Minimal distance to build large town from spawn point, ~1000 tile
 local LARGE_TOWN_MIN_SPAWN_DISTANCE = 32 * CHUNK_SIZE
-local LARGE_TOWN_CHANCE = settings.startup[FORCE_NAME.."-large-town-spawn-chance"].value
-local ARTILLERY_TOWN_CHANCE = settings.startup[FORCE_NAME.."-artillery-town-spawn-chance"].value
+local LARGE_TOWN_CHANCE = settings.startup[ERM_REDARMY.FORCE_NAME.."-large-town-spawn-chance"].value
+local ARTILLERY_TOWN_CHANCE = settings.startup[ERM_REDARMY.FORCE_NAME.."-artillery-town-spawn-chance"].value
 --- Minimal gap between each artillery town
 local ARTILLERY_TOWN_GAP_DISTANCE = 16 * CHUNK_SIZE
 --- Minimal distance to build large town from spawn point, ~1500 tile
 local ARTILLERY_MIN_SPAWN_DISTANCE = 48 * CHUNK_SIZE
-local CITY_BEACON = 'erm_city_beacon'
 
 --- Normal city - under 32 chunks
-local ARTILLERY_CITY_CHANCE = settings.startup[FORCE_NAME.."-artillery-city-spawn-chance"].value
+local ARTILLERY_CITY_CHANCE = settings.startup[ERM_REDARMY.FORCE_NAME.."-artillery-city-spawn-chance"].value
 local ARTILLERY_CITY_MIN_SPAWN_DISTANCE = 32 * CHUNK_SIZE
 
-local NUCLEAR_CITY_CHANCE = settings.startup[FORCE_NAME.."-atomic-city-spawn-chance"].value
+local NUCLEAR_CITY_CHANCE = settings.startup[ERM_REDARMY.FORCE_NAME.."-atomic-city-spawn-chance"].value
 local NUCLEAR_CITY_MIN_SPAWN_DISTANCE = 64 * CHUNK_SIZE
 
 local get_town_type = function(surface, town_position, spawn_location)
@@ -230,7 +233,7 @@ local get_town_type = function(surface, town_position, spawn_location)
     if CustomAttacks.can_spawn(ARTILLERY_TOWN_CHANCE) and distance >= ARTILLERY_MIN_SPAWN_DISTANCE then
         local count = surface.count_entities_filtered {
             type = "artillery-turret",
-            force = FORCE_NAME,
+            force = ERM_REDARMY.FORCE_NAME,
             radius = ARTILLERY_TOWN_GAP_DISTANCE,
             position = town_position,
         }
@@ -252,7 +255,7 @@ local get_city_type = function(surface, town_position, spawn_location)
     elseif distance >= ARTILLERY_CITY_MIN_SPAWN_DISTANCE and CustomAttacks.can_spawn(ARTILLERY_CITY_CHANCE) then
         local count = surface.count_entities_filtered {
             type = "artillery-turret",
-            force = FORCE_NAME,
+            force = ERM_REDARMY.FORCE_NAME,
             radius = ARTILLERY_TOWN_GAP_DISTANCE,
             position = town_position,
             limit = 1
@@ -277,7 +280,7 @@ local build_base = function(surface, chunk_center, beacon, town_type)
 
     surface.create_entity({
         name = beacon,
-        force = FORCE_NAME,
+        force = ERM_REDARMY.FORCE_NAME,
         position = chunk_center
     })
 end

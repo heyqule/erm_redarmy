@@ -19,6 +19,7 @@ Human death sound from https://opengameart.org/content/11-male-human-paindeath-s
 Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
 Organ icons from https://github.com/malcolmriley/unused-renders/blob/main/item/mipped/part-specimin-1.png
 Red army icon from https://en.wikipedia.org/wiki/Red_Army#/media/File:Soviet_Red_Army_Hammer_and_Sickle.svg
+Planet Earth projection: https://svs.gsfc.nasa.gov/3615/
 
 Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 

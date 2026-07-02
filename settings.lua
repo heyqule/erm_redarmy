@@ -3,22 +3,22 @@
 --- Created by heyqule.
 --- DateTime: 7/29/2023 11:02 PM
 ---
-require('global')
+local ERM_REDARMY = require('global')
 
 data:extend {
-    --- Startup Tab
-    {
-        type = "color-setting",
-        name = FORCE_NAME.."-map-color",
-        description = FORCE_NAME.."-map-color",
-        setting_type = "startup",
-        default_value = REDARMY_MAP_COLOR,
-        order = "erm_redarmy-100"
-    },
-    {
-        type = "int-setting",
-        name = FORCE_NAME.."-artillery-refuel",
-        description = FORCE_NAME.."-artillery-refuel",
+--- Startup Tab
+{
+type = "color-setting",
+name = ERM_REDARMY.FORCE_NAME.."-map-color",
+description = ERM_REDARMY.FORCE_NAME.."-map-color",
+setting_type = "startup",
+default_value = ERM_REDARMY.REDARMY_MAP_COLOR,
+order = "erm_redarmy-100"
+},
+{
+type = "int-setting",
+name = ERM_REDARMY.FORCE_NAME.."-artillery-refuel",
+description = ERM_REDARMY.FORCE_NAME.."-artillery-refuel",
         setting_type = "startup",
         default_value = 6,
         allowed_values = {3,5,6,9,12},
@@ -26,8 +26,8 @@ data:extend {
     },
     {
         type = "int-setting",
-        name = FORCE_NAME.."-artillery-manual-fire-chance",
-        description = FORCE_NAME.."-artillery-manual-fire-chance",
+        name = ERM_REDARMY.FORCE_NAME.."-artillery-manual-fire-chance",
+        description = ERM_REDARMY.FORCE_NAME.."-artillery-manual-fire-chance",
         setting_type = "startup",
         default_value = 25,
         allowed_values = {20,25,33,50,66,75,80},
@@ -35,8 +35,8 @@ data:extend {
     },
     {
         type = "int-setting",
-        name = FORCE_NAME.."-large-town-spawn-chance",
-        description = FORCE_NAME.."-large-town-spawn-chance",
+        name = ERM_REDARMY.FORCE_NAME.."-large-town-spawn-chance",
+        description = ERM_REDARMY.FORCE_NAME.."-large-town-spawn-chance",
         setting_type = "startup",
         default_value = 50,
         allowed_values = {20,25,33,50,66,75,80},
@@ -44,8 +44,8 @@ data:extend {
     },
     {
         type = "int-setting",
-        name = FORCE_NAME.."-artillery-town-spawn-chance",
-        description = FORCE_NAME.."-artillery-town-spawn-chance",
+        name = ERM_REDARMY.FORCE_NAME.."-artillery-town-spawn-chance",
+        description = ERM_REDARMY.FORCE_NAME.."-artillery-town-spawn-chance",
         setting_type = "startup",
         default_value = 33,
         allowed_values = {20,25,33,50,66,75,80},
@@ -53,8 +53,8 @@ data:extend {
     },
     {
         type = "int-setting",
-        name = FORCE_NAME.."-artillery-city-spawn-chance",
-        description = FORCE_NAME.."-artillery-city-spawn-chance",
+        name = ERM_REDARMY.FORCE_NAME.."-artillery-city-spawn-chance",
+        description = ERM_REDARMY.FORCE_NAME.."-artillery-city-spawn-chance",
         setting_type = "startup",
         default_value = 50,
         allowed_values = {20,25,33,50,66,75,80},
@@ -62,8 +62,8 @@ data:extend {
     },
     {
         type = "int-setting",
-        name = FORCE_NAME.."-atomic-rocket-refuel",
-        description = FORCE_NAME.."-atomic-rocket-refuel",
+        name = ERM_REDARMY.FORCE_NAME.."-atomic-rocket-refuel",
+        description = ERM_REDARMY.FORCE_NAME.."-atomic-rocket-refuel",
         setting_type = "startup",
         default_value = 6,
         allowed_values = {1,2,3,5,6,9,12},
@@ -71,8 +71,8 @@ data:extend {
     },
     {
         type = "int-setting",
-        name = FORCE_NAME.."-atomic-city-spawn-chance",
-        description = FORCE_NAME.."-atomic-city-spawn-chance",
+        name = ERM_REDARMY.FORCE_NAME.."-atomic-city-spawn-chance",
+        description = ERM_REDARMY.FORCE_NAME.."-atomic-city-spawn-chance",
         setting_type = "startup",
         default_value = 50,
         allowed_values = {20,25,33,50,66,75,80},
@@ -80,8 +80,8 @@ data:extend {
     },
     {
         type = "bool-setting",
-        name = FORCE_NAME.."-orbital-surveillance",
-        description = FORCE_NAME.."-orbital-surveillance",
+        name = ERM_REDARMY.FORCE_NAME.."-orbital-surveillance",
+        description = ERM_REDARMY.FORCE_NAME.."-orbital-surveillance",
         setting_type = "startup",
         default_value = true,
         order = "erm_redarmy-130",

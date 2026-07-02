@@ -6,13 +6,13 @@
 local ForceHelper = require('__enemyracemanager__/lib/helper/force_helper')
 local CustomAttacks = require('__erm_redarmy__/scripts/custom_attacks')
 local EmotionConstants = require('__enemyracemanager__/lib/emotion_constants')
-require('__erm_redarmy__/global')
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 
 local createRace = function()
-    local force = game.forces[FORCE_NAME]
+    local force = game.forces[ERM_REDARMY.FORCE_NAME]
     if not force then
-        force = game.create_force(FORCE_NAME)
+        force = game.create_force(ERM_REDARMY.FORCE_NAME)
     end
 
     force.ai_controllable = true;
@@ -20,28 +20,28 @@ local createRace = function()
     force.friendly_fire = false;
 
     if settings.startup['enemyracemanager-free-for-all'].value then
-        ForceHelper.set_friends(game, FORCE_NAME, false)
+        ForceHelper.set_friends(game, ERM_REDARMY.FORCE_NAME, false)
     else
-        ForceHelper.set_friends(game, FORCE_NAME, true)
+        ForceHelper.set_friends(game, ERM_REDARMY.FORCE_NAME, true)
     end
 
-    ForceHelper.set_neutral_force(game, FORCE_NAME)
+    ForceHelper.set_neutral_force(game, ERM_REDARMY.FORCE_NAME)
 
     --- for guerrilla tactic processing
     storage.guerrilla_distances = storage.guerrilla_distances or {}
 end
 
 local addRaceSettings = function()
-    local race_settings = remote.call('enemyracemanager', 'get_race', MOD_NAME)
+    local race_settings = remote.call('enemyracemanager', 'get_race', ERM_REDARMY.MOD_NAME)
     if race_settings == nil then
         race_settings = {}
     end
 
-    race_settings.race = race_settings.race or MOD_NAME
+    race_settings.race = race_settings.race or ERM_REDARMY.MOD_NAME
     race_settings.label = { 'gui.label-erm_redarmy' }
     race_settings.tier = race_settings.tier or 1
     race_settings.is_primitive = race_settings.is_primitive or false
-    race_settings.autoplace_name = race_settings.autoplace_name or AUTOCONTROL_NAME
+    race_settings.autoplace_name = race_settings.autoplace_name or ERM_REDARMY.AUTOCONTROL_NAME
     race_settings.attack_meter = race_settings.attack_meter or 0
     race_settings.attack_meter_total = race_settings.attack_meter_total or 0
     race_settings.last_attack_meter_total = race_settings.last_attack_meter_total or 0
@@ -88,18 +88,18 @@ local addRaceSettings = function()
     }
     race_settings.featured_groups = {
         -- Unit list, spawn ratio, unit attack point cost
-        { { 'human-flamethrower', 'human-shotgun', 'human-sniper', 'human-engineer', 'plane-bomber' }, { 1, 2, 2, 1, 1 }, 20 },
-        { { 'human-machinegun', 'human-flamethrower', 'human-sniper', 'tank-explosive-cannon' }, { 2, 1, 1, 1 }, 25 },
-        { { 'tank-cannon', 'tank-explosive-cannon' }, { 2, 1 }, 35 },
-        { { 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon', 'human-flamethrower', 'plane-bomber' }, { 2, 2, 1, 2, 1 }, 25 },
-        { { 'human-sniper', 'tank-cannon', 'tank-explosive-cannon', 'human-flamethrower', 'plane-bomber' }, { 2, 2, 1, 2, 1 }, 25 },
-        { { 'human-shotgun', 'human-sniper', 'tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' }, {2, 1, 2, 2, 1, 1 }, 25 },
-        { { 'human-shotgun', 'human-sniper', 'human-flamethrower', 'tank-cannon', 'tank-explosive-cannon', 'plane-bomber' }, {2, 1, 2, 1, 1, 1 }, 25 },
+        { { 'human-flamethrower', 'human-shotgun', 'human-sniper', 'human-engineer', 'plane-bomber' }, { 1, 2, 2, 1, 1 }, 1.1 },
+        { { 'human-machinegun', 'human-flamethrower', 'human-sniper', 'tank-explosive-cannon' }, { 2, 1, 1, 1 }, 1 },
+        { { 'tank-cannon', 'tank-explosive-cannon' }, { 2, 1 }, 0.8 },
+        { { 'human-shotgun', 'tank-cannon', 'tank-explosive-cannon', 'human-flamethrower', 'plane-bomber' }, { 2, 2, 1, 2, 1 }, 1.1 },
+        { { 'human-sniper', 'tank-cannon', 'tank-explosive-cannon', 'human-flamethrower', 'plane-bomber' }, { 2, 2, 1, 2, 1 }, 1.1 },
+        { { 'human-shotgun', 'human-sniper', 'tank-cannon', 'tank-explosive-cannon', 'plane-gunner', 'plane-bomber' }, {2, 1, 2, 2, 1, 1 }, 1.1 },
+        { { 'human-shotgun', 'human-sniper', 'human-flamethrower', 'tank-cannon', 'tank-explosive-cannon', 'plane-bomber' }, {2, 1, 2, 1, 1, 1 }, 1.1 },
     }
     race_settings.featured_flying_groups = {
-        { { 'plane-gunner', 'plane-bomber' }, { 3, 1 }, 75 },
-        { { 'plane-gunner', 'plane-dropship' }, { 3, 1 }, 100 },
-        { { 'plane-gunner', 'plane-bomber','plane-dropship' }, { 3, 2, 1}, 75 },
+        { { 'plane-gunner', 'plane-bomber' }, { 3, 1 }, 0.6 },
+        { { 'plane-gunner', 'plane-dropship' }, { 3, 1 }, 0.5 },
+        { { 'plane-gunner', 'plane-bomber','plane-dropship' }, { 3, 2, 1}, 0.6 },
     }
     race_settings.home_planet = "earth"
     race_settings.interplanetary_attack_active = race_settings.interplanetary_attack_active or false
@@ -133,7 +133,7 @@ local addRaceSettings = function()
     }
     
     for _, item in pairs(prototypes.mod_data) do
-        if item.data_type == MOD_NAME..'.boss_data' then
+        if item.data_type == ERM_REDARMY.MOD_NAME..'.boss_data' then
             race_settings.boss_settings = {}
             race_settings.boss_settings = item.data
         end
@@ -141,7 +141,7 @@ local addRaceSettings = function()
     
     remote.call('enemyracemanager', 'register_race', race_settings)
 
-    CustomAttacks.get_race_settings(MOD_NAME, true)
+    CustomAttacks.get_race_settings(ERM_REDARMY.MOD_NAME, true)
 end
 
 local on_init = function(event)
@@ -155,20 +155,20 @@ local on_configuration_changed = function(event)
 end
 
 local attack_functions = {
-    [DROPSHIP_ATTACK] = function(args)
+    [ERM_REDARMY.DROPSHIP_ATTACK] = function(args)
         CustomAttacks.process_dropship(args)
     end,
-    [ENGINEER_ATTACK] = function(args)
+    [ERM_REDARMY.ENGINEER_ATTACK] = function(args)
         CustomAttacks.process_engineer(args)
     end,
-    [GUERRILLA_ATTACK] = function(args)
+    [ERM_REDARMY.GUERRILLA_ATTACK] = function(args)
         CustomAttacks.process_guerrilla(args)
     end
 }
 
 local on_script_trigger_effect =  function(event)
     if attack_functions[event.effect_id] and
-            CustomAttacks.valid(event, MOD_NAME)
+            CustomAttacks.valid(event, ERM_REDARMY.MOD_NAME)
     then
         attack_functions[event.effect_id](event)
     end

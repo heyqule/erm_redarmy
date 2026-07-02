@@ -6,7 +6,8 @@
 
 
 require('util')
-local biter_ai_settings = require ("__base__.prototypes.entity.biter-ai-settings")
+local AiHelper = require ("__erm_libs__/prototypes/ai_helper")
+local ERM_REDARMY = require('__erm_redarmy__/global')
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local ERM_AnimationRig = require('__enemyracemanager__/lib/rig/animation')
@@ -65,6 +66,9 @@ function ErmRedArmy.make_human_sniper(level)
     level = level or 1
     local attack_range = ERM_UnitHelper.get_attack_range(level) + 2
     local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
+    local buildable_entities = ERM_UnitHelper.get_buildable_entities(ERM_REDARMY.MOD_NAME, {
+        "assemble-machine", "electric-furnace", "lab", "gun-turret", "laser-turret", "tesla-turret"
+    }, level)
 
     local human_animation = HumanAnimation.get_animation()
     --Level 1 animation, level 2 and 3 are armored animations
@@ -72,7 +76,7 @@ function ErmRedArmy.make_human_sniper(level)
     local running_animation = human_animation['animations'][2]['running']
     ERM_UnitTint.mask_tint(running_animation['layers'][2], ERM_UnitTint.tint_red_crimson())
     ERM_UnitTint.mask_tint(running_animation['layers'][4], ERM_UnitTint.tint_red_crimson())
-    ERM_AnimationRig.adjust_still_frame_all(running_animation['layers'], CHARACTER_RIG_STILL_FRAME)
+    ERM_AnimationRig.adjust_still_frame_all(running_animation['layers'], ERM_REDARMY.CHARACTER_RIG_STILL_FRAME)
 
     local gun_animation = human_animation['animations'][2]['idle_with_gun']
     ERM_UnitTint.mask_tint(gun_animation['layers'][2], ERM_UnitTint.tint_red_crimson())
@@ -81,8 +85,8 @@ function ErmRedArmy.make_human_sniper(level)
     data:extend({
         {
             type = "unit",
-            name = MOD_NAME .. '--' .. name .. '--' .. level,
-            localised_name = { 'entity-name.' .. MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--' .. level,
+            localised_name = { 'entity-name.' .. ERM_REDARMY.MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icons = {
                 {
                     icon = "__core__/graphics/icons/entity/character.png",
@@ -99,7 +103,7 @@ function ErmRedArmy.make_human_sniper(level)
             flags = { "placeable-enemy", "placeable-player", "placeable-off-grid", "breaths-air" },
             has_belt_immunity = false,
             max_health = ERM_UnitHelper.get_health(hitpoint, max_hitpoint_multiplier, level),
-            order = MOD_NAME .. '--unit--' .. name .. '--' .. level,
+            order = ERM_REDARMY.MOD_NAME .. '--unit--' .. name .. '--' .. level,
             subgroup = "enemies",
             shooting_cursor_size = 2,
             resistances = {
@@ -112,7 +116,7 @@ function ErmRedArmy.make_human_sniper(level)
                 { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
                 { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, level) }
             },
-            map_color = ERM_UnitHelper.format_map_color(settings.startup[FORCE_NAME.."-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup[ERM_REDARMY.FORCE_NAME.."-map-color"].value),
             healing_per_tick = ERM_UnitHelper.get_healing(hitpoint, max_hitpoint_multiplier, level),
             --collision_mask = { "player-layer" },
             collision_box = collision_box,
@@ -123,7 +127,16 @@ function ErmRedArmy.make_human_sniper(level)
             movement_speed = ERM_UnitHelper.get_movement_speed(base_movement_speed, incremental_movement_speed, level),
             absorptions_to_join_attack = { pollution = ERM_UnitHelper.get_pollution_attack(pollution_to_join_attack, level)},
             distraction_cooldown = distraction_cooldown,
-            ai_settings = biter_ai_settings,
+            ai_settings = AiHelper.get_enemy_unit_settings(2),
+            buildable_entities = buildable_entities,
+            steering =  {
+                move = {
+                    radius = 2
+                },
+                stay = {
+                    radius = 3.5
+                },
+            },
             spawning_time_modifier = 1.5,
             attack_parameters = {
                 type = "projectile",

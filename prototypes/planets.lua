@@ -5,9 +5,10 @@
 ---
 
 if not mods['space-age'] then
-    return
+  return
 end
 
+local ERM_REDARMY = require('__erm_redarmy__/global')
 local asteroid_util = require("__space-age__.prototypes.planet.asteroid-spawn-definitions")
 local MapGenFunctions = require("__erm_libs__/prototypes/map_gen")
 local SoundUtil = require('__erm_libs__/prototypes/sound_util')
@@ -45,9 +46,63 @@ earth.asteroid_spawn_influence = 1
 earth.asteroid_spawn_definitions = asteroid_util.spawn_definitions(asteroid_util.nauvis_gleba, 0.9)
 
 MapGenFunctions.remove_enemy_autoplace_controls(earth.map_gen_settings.autoplace_controls)
-earth.map_gen_settings.autoplace_controls[AUTOCONTROL_NAME] = {}
+earth.map_gen_settings.autoplace_controls[ERM_REDARMY.AUTOCONTROL_NAME] = {}
 
 data:extend({earth})
+
+data.raw.planet["earth"].platform_surface_render_parameters = util.table.deepcopy(data.raw.planet["nauvis"].platform_surface_render_parameters)
+data.raw.planet["earth"].platform_surface_render_parameters.platform_backdrop = 
+{
+    emission_scales_with_shadow = false,
+    radius = 800,
+    rotation_seconds = data.raw.planet["nauvis"].platform_surface_render_parameters.platform_backdrop.rotation_seconds / 0.6,
+    light_radius = data.raw.planet["nauvis"].platform_surface_render_parameters.platform_backdrop.light_radius * 0.75,
+    cloudiness = 0.2,
+    surface_vertical_offset = 0.1,
+    cloud_vertical_offset = 0.05,
+    specular_intensity = 1,
+    atmosphere_color = { 0.0186, 0.0398, 0.0954, 0.1},
+    cloud_flow_intensity = 0.8,
+    cloud_panning_rate = -0.01,
+    planet_axis = {3.0, 13.0},
+    planet_axis_deviation_amplitude = {10.0, 10.0},
+    planet_axis_deviation_seconds = {890.5/0.6, 753.7/0.6},
+    position = {-680, 601},
+    parallax_strength = {0.95, 0.95},
+    light_direction = {-0.42, 0.23, 0.67},
+    light_intensity_contrast = 0.3,
+    light_radius = 13.9,
+    planet_surface =
+    {
+        filename = "__erm_redarmy__/graphics/planet/earth-projection.png",
+        width = 2048,
+        height = 1024
+    },
+    planet_reflectivity =
+    {
+        filename = "__erm_redarmy__/graphics/planet/earth-projection-reflectivity.png",
+        width = 2048,
+        height = 1024
+    },
+    global_cloud =
+    {
+        filename = "__space-age__/graphics/space/nauvis-cloud.png",
+        width = 2048,
+        height = 1024
+    },
+    global_cloud_normal =
+    {
+        filename = "__space-age__/graphics/space/nauvis-cloud-normal.png",
+        width = 2048,
+        height = 1024
+    },
+    global_cloud_flow =
+    {
+        filename = "__space-age__/graphics/space/nauvis-cloud-flow.png",
+        width = 2048,
+        height = 1024
+    }
+}
 
 local icons = {
     {
@@ -72,7 +127,7 @@ local ingredients = {
     {type = "item", name = "quantum-processor", amount = 1},
     {type = "item", name = "superconductor", amount = 1},
     {type = "item", name = "supercapacitor", amount = 1},
-    {type= "item", name= MOD_NAME..'--organ', amount= 1000}
+    {type= "item", name= ERM_REDARMY.MOD_NAME..'--organ', amount= 1000}
 }
 local teamcolor = UnitHelper.format_team_color(settings.startup["enemy_erm_redarmy-map-color"].value)
 local animations = {
@@ -113,9 +168,9 @@ local animations = {
         }
     }
 }
-PsiRadar.make_entity(MOD_NAME, icons, surface_conditions, animations)
-PsiRadar.make_item(MOD_NAME, icons)
-PsiRadar.make_recipe(MOD_NAME, ingredients)
+PsiRadar.make_entity(ERM_REDARMY.MOD_NAME, icons, surface_conditions, animations)
+PsiRadar.make_item(ERM_REDARMY.MOD_NAME, icons)
+PsiRadar.make_recipe(ERM_REDARMY.MOD_NAME, ingredients)
 
 data.extend({
     --- space connection
@@ -152,6 +207,10 @@ data.extend({
                 space_location = "earth",
                 use_icon_overlay_constant = true
             },
+            {
+                type = "unlock-recipe",
+                recipe = ERM_REDARMY.MOD_NAME.."--psi-radar"
+            }
         },
         prerequisites = { "space-platform-thruster", "landfill" },
         unit = {

@@ -12,6 +12,7 @@ local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 
 local enemy_autoplace = require("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 local name = 'laser-turret'
 
@@ -61,12 +62,12 @@ function ErmRedArmy.make_laser_turret(level)
     -- Base changes
     redarmy_laser_turret['type'] = 'turret'
     redarmy_laser_turret['subgroup'] = 'enemies'
-    redarmy_laser_turret['name'] = MOD_NAME .. '--' .. name .. '--' .. level
-    redarmy_laser_turret['localised_name'] = { 'entity-name.' .. MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
+    redarmy_laser_turret['name'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--' .. level
+    redarmy_laser_turret['localised_name'] = { 'entity-name.' .. ERM_REDARMY.MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
     redarmy_laser_turret['flags'] = { "placeable-player", "placeable-enemy" }
     redarmy_laser_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier, level)
     redarmy_laser_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, level)
-    redarmy_laser_turret['order'] = MOD_NAME .. '--building--' .. name .. '--'.. level
+    redarmy_laser_turret['order'] = ERM_REDARMY.MOD_NAME .. '--building--' .. name .. '--'.. level
     redarmy_laser_turret['minable'] = nil
     redarmy_laser_turret['next_upgrade'] = nil
     redarmy_laser_turret['resistances'] = {
@@ -79,14 +80,14 @@ function ErmRedArmy.make_laser_turret(level)
         { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
         { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, level) }
     }
-    redarmy_laser_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[FORCE_NAME.."-map-color"].value)
+    redarmy_laser_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[ERM_REDARMY.FORCE_NAME.."-map-color"].value)
     redarmy_laser_turret['collision_box'] = collision_box
     redarmy_laser_turret['selection_box'] = selection_box
     redarmy_laser_turret['map_generator_bounding_box'] = map_generator_bounding_box
     redarmy_laser_turret['autoplace'] = enemy_autoplace.enemy_worm_autoplace({
         probability_expression = "erm_redarmy_autoplace_base(0, 4)",
-        force = FORCE_NAME,
-        control = AUTOCONTROL_NAME
+        force = ERM_REDARMY.FORCE_NAME,
+        control = ERM_REDARMY.AUTOCONTROL_NAME
     })
     redarmy_laser_turret['call_for_help_radius'] = 50
     redarmy_laser_turret['spawn_decorations_on_expansion'] = false
@@ -113,7 +114,7 @@ function ErmRedArmy.make_laser_turret(level)
         }
     }
 
-    redarmy_laser_turret['corpse'] = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_laser_turret['corpse'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
 
     -- Animation Changes
     ERM_UnitTint.mask_tint(redarmy_laser_turret['folded_animation']['layers'][3], ERM_UnitTint.tint_red())
@@ -122,7 +123,7 @@ function ErmRedArmy.make_laser_turret(level)
     ERM_UnitTint.mask_tint(redarmy_laser_turret['folding_animation']['layers'][2], ERM_UnitTint.tint_red())
 
     local redarmy_laser_turret_corpse = util.table.deepcopy(data.raw['corpse']['laser-turret-remnants'])
-    redarmy_laser_turret_corpse.name = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_laser_turret_corpse.name = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
     redarmy_laser_turret_corpse.time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
     redarmy_laser_turret_corpse.hidden = true
     redarmy_laser_turret_corpse.hidden_in_factoriopedia  = true

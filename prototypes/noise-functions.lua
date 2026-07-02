@@ -4,11 +4,13 @@
 --- DateTime: 10/28/2024 10:53 PM
 ---
 
+local ERM_REDARMY = require('__erm_redarmy__/global')
+
 data:extend{
-    {
+{
         type = "autoplace-control",
-        name = AUTOCONTROL_NAME,
-        order = AUTOCONTROL_NAME,
+        name = ERM_REDARMY.AUTOCONTROL_NAME,
+        order = ERM_REDARMY.AUTOCONTROL_NAME,
         category = "enemy",
         can_be_disabled = false
     },
@@ -21,12 +23,12 @@ data:extend{
     {
         type = "noise-expression",
         name = "erm_redarmy_base_radius",
-        expression = "sqrt(var('control:"..AUTOCONTROL_NAME..":size')) * (15 + 4 * erm_redarmy_base_intensity)"
+        expression = "sqrt(var('control:"..ERM_REDARMY.AUTOCONTROL_NAME..":size')) * (15 + 4 * erm_redarmy_base_intensity)"
     },
     {
         type = "noise-expression",
         name = "erm_redarmy_base_frequency",
-        expression = "(0.00001 + 0.000003 * erm_redarmy_base_intensity) * var('control:"..AUTOCONTROL_NAME..":frequency')"
+        expression = "(0.00001 + 0.000003 * erm_redarmy_base_intensity) * var('control:"..ERM_REDARMY.AUTOCONTROL_NAME..":frequency')"
     },
     {
         type = "noise-expression",
