@@ -47,8 +47,8 @@ local incremental_physical_damage = 2
 
 -- Handles Attack Speed
 
-local base_attack_speed = 300
-local incremental_attack_speed = 240
+local base_attack_speed = 480
+local incremental_attack_speed = 180
 
 
 local base_movement_speed = 0.125

@@ -28,58 +28,57 @@ ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.y
 ### Features
 
 #### Tier 1 Units
-
-###### Miner
-
+##### Miner
 - Attack: Physical
+- Unit Supply: 1
 
-###### Pistol
-
+##### Pistol
 - Attack: Physical
+- Unit Supply: 2 
 
-###### Machine gunner
-
+##### Machine gunner
 - Attack: Physical
+- Unit Supply: 2
 
 #### Tier 2 Units
 
-###### Sniper
-
+##### Sniper
 - Attack: Physical
+- Unit Supply: 2
 
-###### Tank
-
+##### Tank
 - Attack: Physical / Explosion
+- Unit Supply: 4
 
-###### Dropship
-
+##### Dropship
 - Drop units
+- Unit Supply: 4
 
 #### Tier 3 Units
 
-###### Engineer
-
+##### Engineer
 - Attack: Physical
+- Unit Supply: 2 
 
-###### Flamethrower
-
+##### Flamethrower
 - Attack: Fire
+- Unit Supply: 2 
 
-###### Shotgunner
-
+##### Shotgunner
 - Attack: Physical
+- Unit Supply: 2 
 
-###### Plane - Gunner
-
+##### Plane - Gunner
 - Attack: Physical
+- Unit Supply: 3
 
-###### Tank - explosive rounds
-
+##### Tank - explosive rounds
 - Attack: Physical / Explosion (3 radius AOE)
+- Unit Supply: 4
 
-###### Plane - Bomber
-
+##### Plane - Bomber
 - Attack: Physical / Explosion (3 radius AOE)
+- Unit Supply: 3 
 
 All resistance @ Legendary: 75
 
