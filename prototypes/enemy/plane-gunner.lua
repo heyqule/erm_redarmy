@@ -66,9 +66,16 @@ function ErmRedArmy.make_gunner_plane(level)
     level = level or 1
     local attack_range = ERM_UnitHelper.get_attack_range(level)
     local vision_distance = ERM_UnitHelper.get_vision_distance(attack_range)
-    local buildable_entities = ERM_UnitHelper.get_buildable_entities(ERM_REDARMY.MOD_NAME, {
-        "assemble-machine", "electric-furnace", "lab", "gun-turret", "laser-turret", "rocket-turret"
-    }, level)
+    local buildable_entities
+    if mods["space-age"] then
+        buildable_entities = ERM_UnitHelper.get_buildable_entities(ERM_REDARMY.MOD_NAME, {
+            "assemble-machine", "electric-furnace", "lab", "gun-turret", "laser-turret", "rocket-turret"
+        }, level)
+    else
+        buildable_entities = ERM_UnitHelper.get_buildable_entities(ERM_REDARMY.MOD_NAME, {
+            "assemble-machine", "electric-furnace", "lab", "gun-turret", "laser-turret"
+        }, level)
+    end
 
     local gunship_animation = {
         layers = {

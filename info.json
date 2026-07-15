@@ -11,6 +11,6 @@
     "?space-age >= 2.1.0",
     "enemyracemanager >= 2.1.4",
     "factorio-world >= 2.1.6",
-    "?redalert_music >= 2.1.0"
+    "+redalert_music >= 2.1.0"
   ]
 }

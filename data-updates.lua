@@ -4,6 +4,7 @@
 --- DateTime: 10/29/2024 2:29 AM
 ---
 local ERM_REDARMY = require("__erm_redarmy__/global")
+local ERM_SETTING_CONST = require("__enemyracemanager__/setting-constants")
 
 local MapGenFunctions = require('__erm_libs__/prototypes/map_gen')
 -- Update RTS world
@@ -17,7 +18,7 @@ end
 if mapgen["erm-debug"] then
     mapgen["erm-debug"]["basic_settings"]["autoplace_controls"][ERM_REDARMY.AUTOCONTROL_NAME] = { frequency = 5, size = 5 }
 end
-local NAUVIS_MIXED = "Mixed Races"
+
 local nauvis_planet = data.raw.planet.nauvis
 local map_gen_settings = nauvis_planet.map_gen_settings
 
@@ -27,7 +28,7 @@ if map_gen_settings then
     if nauvis_enemy_settings == ERM_REDARMY.MOD_NAME then
         MapGenFunctions.remove_enemy_autoplace_controls(nauvis_autocontrols)
         nauvis_autocontrols[ERM_REDARMY.AUTOCONTROL_NAME] = {}
-    elseif nauvis_enemy_settings == NAUVIS_MIXED then
+    elseif nauvis_enemy_settings == ERM_SETTING_CONST.NAUVIS_MIXED then
         nauvis_autocontrols[ERM_REDARMY.AUTOCONTROL_NAME] = {}
     end
 end
