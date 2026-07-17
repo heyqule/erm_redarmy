@@ -4,17 +4,15 @@ This mod adds the player character and vehicles as an enemy force. They have man
 
 They have flat resistances. 75% for unit, turret and 50% for spawners
 
-### Changes in 2.0
-- Support Factorio 2.0
-- They have a flat resistances without any weakness.
-- Support "Factorio World" to generate a proper planet Earth.
-- New economy / recipe from fighting red army
-- Added custom towns and cities on planet Earth
-- Added artillery and nuclear missile silo on planet Earth
-- Added Red army boss: Nuclear missile silo.
-- This is an experimental release.
+### Feature List
+- Has similar weapon tech as you.
+- [space-age] Support "Factorio World" to generate a proper planet Earth.
+- [space-age] New economy / recipe from loots
+- [space-age] Added custom towns and cities on planet Earth.  Some of them feature artillery and nuclear missile silo.
+- [space-age] Added Red army boss: Nuclear missile silo.
+- Additional details in Feature Details section.
 
-Credit:
+### Credit:
 Human death sound from https://opengameart.org/content/11-male-human-paindeath-sounds
 Airplane graphic from https://mods.factorio.com/mods/SuicidalKid/Aircraft
 Organ icons from https://github.com/malcolmriley/unused-renders/blob/main/item/mipped/part-specimin-1.png
@@ -25,7 +23,7 @@ Discord:  [https://discord.gg/BwWXygyEyQ](https://discord.gg/BwWXygyEyQ)
 
 ERM - Features Reel: [https://www.youtube.com/watch?v=phLRReAjxHA](https://www.youtube.com/watch?v=phLRReAjxHA)
 
-### Features
+### Feature Details
 
 #### Tier 1 Units
 ##### Miner
