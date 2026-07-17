@@ -9,9 +9,10 @@ if not mods['space-age'] then
 end
 
 local Organs = require('__erm_redarmy__/prototypes/create-organs')
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 local organ_color = {r=0.533,g=0.031,b=0.031,a=1}
-local organ_name = MOD_NAME..'--organ'
+local organ_name = ERM_REDARMY.MOD_NAME..'--organ'
 --- Create recipe category and subgroup
 Organs.init()
 --- Create crystal item
@@ -52,10 +53,10 @@ local loot_multiplier = {
 
 for _, spawner in pairs(lootable_spawners) do
     for tier, multiplier in pairs(loot_multiplier) do
-        local unit_prototype = data.raw['unit-spawner'][MOD_NAME..'--'..spawner..'--'..tier]
+        local unit_prototype = data.raw['unit-spawner'][ERM_REDARMY.MOD_NAME..'--'..spawner..'--'..tier]
         if unit_prototype then
             unit_prototype.loot = {
-                {item = organ_name, count_min = multiplier[1], count_max = multiplier[2] }
+                {type = "item", name = organ_name, amount_min = multiplier[1], amount_max = multiplier[2]} 
             }
         end
     end
@@ -75,10 +76,10 @@ local loot_multiplier_with_probablity = {
 
 for _, spawner in pairs(lootable_spawner_with_probablity) do
     for tier, multiplier in pairs(loot_multiplier_with_probablity) do
-        local unit_prototype = data.raw['unit-spawner'][MOD_NAME..'--'..spawner..'--'..tier]
+        local unit_prototype = data.raw['unit-spawner'][ERM_REDARMY.MOD_NAME..'--'..spawner..'--'..tier]
         if unit_prototype then
             unit_prototype.loot = {
-                {item = organ_name, probability = 0.33, count_min = multiplier[1], count_max = multiplier[2] }
+                {type = "item", name = organ_name, independent_probability = 0.33,  amount_min = multiplier[1], amount_max = multiplier[2]}
             }
         end
     end

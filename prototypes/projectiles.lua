@@ -4,6 +4,7 @@
 --- DateTime: 4/27/2026 11:02 PM
 ---
 
+local ERM_REDARMY = require('__erm_redarmy__/global')
 local WeaponRig = require("__enemyracemanager__/lib/rig/weapon")
 local DataHelper = require("__enemyracemanager__/lib/rig/data_helper")
 
@@ -18,21 +19,21 @@ data:extend(
 
 local cannon_projectile = WeaponRig.standardize_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['cannon-projectile']),
-        MOD_NAME..'--cannon-projectile'
+        ERM_REDARMY.MOD_NAME..'--cannon-projectile'
 )
 cannon_projectile['force_condition'] = "not-same"
 cannon_projectile['hit_collision_mask'] = { layers = {player = true, train = true,   [DataHelper.getFlyingLayerName()] = true}}
 
 local cannon_explosive_projectile = WeaponRig.standardize_explosive_cannon_projectile(
         util.table.deepcopy(data.raw['projectile']['explosive-cannon-projectile']),
-        MOD_NAME..'--explosive-cannon-projectile'
+        ERM_REDARMY.MOD_NAME..'--explosive-cannon-projectile'
 )
 cannon_explosive_projectile['force_condition'] = "not-same"
 cannon_explosive_projectile['hit_collision_mask'] = { layers = {player = true, train = true,   [DataHelper.getFlyingLayerName()] = true}}
 
 local rocket = WeaponRig.standardize_explosive_rocket_damage(
         util.table.deepcopy(data.raw['projectile']['explosive-rocket']),
-        MOD_NAME..'--explosive-rocket',
+        ERM_REDARMY.MOD_NAME..'--explosive-rocket',
         3
 )
 rocket['turn_speed'] = nil
@@ -47,11 +48,11 @@ rocket['action']['action_delivery']['target_effects'][2] = {
 data:extend({ cannon_projectile, cannon_explosive_projectile, rocket })
 
 local fire_stream = util.table.deepcopy(data.raw['stream']['flamethrower-fire-stream'])
-fire_stream['name'] = MOD_NAME..'--flamethrower-fire-stream'
-fire_stream['action'][1]['action_delivery']['target_effects'][1]['sticker'] = MOD_NAME..'--fire-sticker'
+fire_stream['name'] = ERM_REDARMY.MOD_NAME..'--flamethrower-fire-stream'
+fire_stream['action'][1]['action_delivery']['target_effects'][1]['sticker'] = ERM_REDARMY.MOD_NAME..'--fire-sticker'
 
 local fire_sticker = util.table.deepcopy(data.raw['sticker']['fire-sticker'])
-fire_sticker['name'] = MOD_NAME..'--fire-sticker'
+fire_sticker['name'] = ERM_REDARMY.MOD_NAME..'--fire-sticker'
 
 data.extend({
     fire_sticker,
@@ -61,7 +62,7 @@ data.extend({
 --- Boss Projectiles ----
 local explosive_rocket_4 = WeaponRig.standardize_explosive_rocket_damage(
         util.table.deepcopy(data.raw['projectile']['explosive-rocket']),
-        MOD_NAME.."--explosive-rocket-4--projectile",
+        ERM_REDARMY.MOD_NAME.."--explosive-rocket-4--projectile",
         4
 )
 
@@ -79,11 +80,11 @@ explosive_rocket_4["action"]["action_delivery"]["target_effects"][2] = {
 }
 
 local falling_rocket_4 = util.table.deepcopy(explosive_rocket_4)
-falling_rocket_4['name'] = MOD_NAME.."--explosive-rocket-4--falling_projectile"
+falling_rocket_4['name'] = ERM_REDARMY.MOD_NAME.."--explosive-rocket-4--falling_projectile"
 
 local explosive_rocket_8 = WeaponRig.standardize_explosive_rocket_damage(
         util.table.deepcopy(data.raw['projectile']['explosive-rocket']),
-        MOD_NAME.."--explosive-rocket-8--projectile",
+        ERM_REDARMY.MOD_NAME.."--explosive-rocket-8--projectile",
         8
 )
 
@@ -101,11 +102,11 @@ explosive_rocket_8["action"]["action_delivery"]["target_effects"][2] = {
 }
 
 local falling_rocket_8 = util.table.deepcopy(explosive_rocket_8)
-falling_rocket_8['name'] = MOD_NAME.."--explosive-rocket-8--falling_projectile"
+falling_rocket_8['name'] = ERM_REDARMY.MOD_NAME.."--explosive-rocket-8--falling_projectile"
 
 local explosive_rocket_he = WeaponRig.standardize_explosive_rocket_damage(
         util.table.deepcopy(data.raw['projectile']['explosive-rocket']),
-        MOD_NAME.."--explosive-rocket-he--projectile",
+        ERM_REDARMY.MOD_NAME.."--explosive-rocket-he--projectile",
         16
 )
 
@@ -123,12 +124,12 @@ explosive_rocket_he["action"]["action_delivery"]["target_effects"][2] = {
 }
 
 local falling_rocket_he = util.table.deepcopy(explosive_rocket_he)
-falling_rocket_he['name'] = MOD_NAME.."--explosive-rocket-he--falling_projectile"
+falling_rocket_he['name'] = ERM_REDARMY.MOD_NAME.."--explosive-rocket-he--falling_projectile"
 
 
 
 local atomic_rocket = util.table.deepcopy(data.raw['projectile']['atomic-rocket'])
-atomic_rocket['name'] = MOD_NAME.."--atomic-rocket--falling_projectile"
+atomic_rocket['name'] = ERM_REDARMY.MOD_NAME.."--atomic-rocket--falling_projectile"
 
 data:extend({
     explosive_rocket_4,

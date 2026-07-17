@@ -7,13 +7,14 @@ local Position = require("__erm_libs__/stdlib/position")
 local CustomAttacks = require('__erm_redarmy__/scripts/custom_attacks')
 local AttackGroupBeaconConstants = require("__enemyracemanager__/lib/attack_group_beacon_constants")
 
+local ERM_REDARMY = require('__erm_redarmy__/global')
 local table_insert = table.insert
 local draw_text = rendering.draw_text
-local notification_enabled = settings.startup[FORCE_NAME.."-orbital-surveillance"].value
+local notification_enabled = settings.startup[ERM_REDARMY.FORCE_NAME.."-orbital-surveillance"].value
 
 local is_valid_artillery = function(event)
     local entity = event.created_entity or event.entity
-    if entity and entity.valid and entity.type == "artillery-turret" and entity.force.name == FORCE_NAME then
+    if entity and entity.valid and entity.type == "artillery-turret" and entity.force.name == ERM_REDARMY.FORCE_NAME then
         return true
     end
     return false
@@ -34,7 +35,7 @@ function Artillery.register(artillery_turret)
 end
 
 local shell_name = "artillery-shell"
-local script_fire_chance = settings.startup[FORCE_NAME.."-artillery-manual-fire-chance"].value
+local script_fire_chance = settings.startup[ERM_REDARMY.FORCE_NAME.."-artillery-manual-fire-chance"].value
 function Artillery.add_ammo(event)
     local active_artilleries = storage.active_artilleries
 
@@ -65,7 +66,7 @@ local process_attack = function()
     if entity and entity.valid then
         entity.surface.create_entity({
             name = "artillery-flare",
-            force = FORCE_NAME,
+            force = ERM_REDARMY.FORCE_NAME,
             position = entity.position,
             movement = {0, 0}, -- Flares require a movement vector, even if static
             height = 0,
@@ -141,7 +142,7 @@ Artillery.process_attack = function(event)
 end
 
 
-local refuel = settings.startup[FORCE_NAME.."-artillery-refuel"].value
+local refuel = settings.startup[ERM_REDARMY.FORCE_NAME.."-artillery-refuel"].value
 Artillery.on_nth_tick = {
     [refuel * minute + 1] = Artillery.add_ammo,
     [33] = Artillery.process_attack 

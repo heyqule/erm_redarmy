@@ -13,6 +13,7 @@ local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 
 
 local enemy_autoplace = require("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 local name = 'gun-turret'
 local short_range_name = 'gun-turret-short'
@@ -63,12 +64,12 @@ function ErmRedArmy.make_gun_turret(level)
     -- Base changes
     redarmy_gun_turret['type'] = 'turret'
     redarmy_gun_turret['subgroup'] = 'enemies'
-    redarmy_gun_turret['name'] = MOD_NAME .. '--' .. name .. '--' .. level
-    redarmy_gun_turret['localised_name'] = { 'entity-name.' .. MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
+    redarmy_gun_turret['name'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--' .. level
+    redarmy_gun_turret['localised_name'] = { 'entity-name.' .. ERM_REDARMY.MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
     redarmy_gun_turret['flags'] = { "placeable-player", "placeable-enemy" }
     redarmy_gun_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier, level)
     redarmy_gun_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, level)
-    redarmy_gun_turret['order'] = MOD_NAME .. '--building--' .. name .. '--'.. level
+    redarmy_gun_turret['order'] = ERM_REDARMY.MOD_NAME .. '--building--' .. name .. '--'.. level
     redarmy_gun_turret['minable'] = nil
     redarmy_gun_turret['next_upgrade'] = nil
     redarmy_gun_turret['resistances'] = {
@@ -81,14 +82,14 @@ function ErmRedArmy.make_gun_turret(level)
         { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
         { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, level) }
     }
-    redarmy_gun_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[FORCE_NAME.."-map-color"].value)
+    redarmy_gun_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[ERM_REDARMY.FORCE_NAME.."-map-color"].value)
     redarmy_gun_turret['collision_box'] = collision_box
     redarmy_gun_turret['selection_box'] = selection_box
     redarmy_gun_turret['map_generator_bounding_box'] = map_generator_bounding_box
     redarmy_gun_turret['autoplace'] = enemy_autoplace.enemy_worm_autoplace({
         probability_expression = "erm_redarmy_autoplace_base(0, 3)",
-        force = FORCE_NAME,
-        control = AUTOCONTROL_NAME
+        force = ERM_REDARMY.FORCE_NAME,
+        control = ERM_REDARMY.AUTOCONTROL_NAME
     })
     redarmy_gun_turret['call_for_help_radius'] = 50
     redarmy_gun_turret['spawn_decorations_on_expansion'] = false
@@ -122,7 +123,7 @@ function ErmRedArmy.make_gun_turret(level)
         }
     }
 
-    redarmy_gun_turret['corpse'] = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_gun_turret['corpse'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
 
     -- Animation Changes
     ERM_UnitTint.mask_tint(redarmy_gun_turret['graphics_set']['base_visualisation']['animation']['layers'][2], ERM_UnitTint.tint_red())
@@ -132,7 +133,7 @@ function ErmRedArmy.make_gun_turret(level)
     ERM_UnitTint.mask_tint(redarmy_gun_turret['folding_animation']['layers'][2], ERM_UnitTint.tint_red())
     
     local redarmy_gun_turret_corpse = util.table.deepcopy(data.raw['corpse']['gun-turret-remnants'])
-    redarmy_gun_turret_corpse.name = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_gun_turret_corpse.name = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
     redarmy_gun_turret_corpse.time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
     redarmy_gun_turret_corpse.hidden = true
     redarmy_gun_turret_corpse.hidden_in_factoriopedia  = true
@@ -144,7 +145,7 @@ function ErmRedArmy.make_gun_turret(level)
 
     local short_redarmy_gun_turret = util.table.deepcopy(redarmy_gun_turret)
 
-    short_redarmy_gun_turret['name'] = MOD_NAME .. '--' .. short_range_name .. '--' .. level
+    short_redarmy_gun_turret['name'] = ERM_REDARMY.MOD_NAME .. '--' .. short_range_name .. '--' .. level
     short_redarmy_gun_turret['attack_parameters']['range'] = GlobalConfig.get_max_attack_range()
     short_redarmy_gun_turret['autoplace']['probability_expression'] = "0"
 

@@ -12,6 +12,7 @@ local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 
 local enemy_autoplace = require("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 local name = 'rocket-turret'
 
@@ -61,12 +62,12 @@ function ErmRedArmy.make_rocket_turret(level)
     -- Base changes
     redarmy_rocket_turret['type'] = 'turret'
     redarmy_rocket_turret['subgroup'] = 'enemies'
-    redarmy_rocket_turret['name'] = MOD_NAME .. '--' .. name .. '--' .. level
-    redarmy_rocket_turret['localised_name'] = { 'entity-name.' .. MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
+    redarmy_rocket_turret['name'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--' .. level
+    redarmy_rocket_turret['localised_name'] = { 'entity-name.' .. ERM_REDARMY.MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
     redarmy_rocket_turret['flags'] = { "placeable-player", "placeable-enemy" }
     redarmy_rocket_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier, level)
     redarmy_rocket_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, level)
-    redarmy_rocket_turret['order'] = MOD_NAME .. '--building--' .. name .. '--'.. level
+    redarmy_rocket_turret['order'] = ERM_REDARMY.MOD_NAME .. '--building--' .. name .. '--'.. level
     redarmy_rocket_turret['minable'] = nil
     redarmy_rocket_turret['next_upgrade'] = nil
     redarmy_rocket_turret['resistances'] = {
@@ -79,14 +80,14 @@ function ErmRedArmy.make_rocket_turret(level)
         { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
         { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, level) }
     }
-    redarmy_rocket_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[FORCE_NAME.."-map-color"].value)
+    redarmy_rocket_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[ERM_REDARMY.FORCE_NAME.."-map-color"].value)
     redarmy_rocket_turret['collision_box'] = collision_box
     redarmy_rocket_turret['selection_box'] = selection_box
     redarmy_rocket_turret['map_generator_bounding_box'] = map_generator_bounding_box
     redarmy_rocket_turret['autoplace'] = enemy_autoplace.enemy_worm_autoplace({
         probability_expression = "erm_redarmy_autoplace_base(0, 9)",
-        force = FORCE_NAME,
-        control = AUTOCONTROL_NAME
+        force = ERM_REDARMY.FORCE_NAME,
+        control = ERM_REDARMY.AUTOCONTROL_NAME
     })
     redarmy_rocket_turret['call_for_help_radius'] = 50
     redarmy_rocket_turret['spawn_decorations_on_expansion'] = false
@@ -107,7 +108,7 @@ function ErmRedArmy.make_rocket_turret(level)
             type = "direct",
             action_delivery = {
                 type = "projectile",
-                projectile = MOD_NAME.."--explosive-rocket",
+                projectile = ERM_REDARMY.MOD_NAME.."--explosive-rocket",
                 starting_speed = 0.3,
                 max_range = GlobalConfig.get_max_projectile_range(),
             }
@@ -115,7 +116,7 @@ function ErmRedArmy.make_rocket_turret(level)
     }
     redarmy_rocket_turret['build_base_evolution_requirement '] = 0.5
 
-    redarmy_rocket_turret['corpse'] = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_rocket_turret['corpse'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
     
 
     -- Animation Changes
@@ -125,7 +126,7 @@ function ErmRedArmy.make_rocket_turret(level)
     ERM_UnitTint.mask_tint(redarmy_rocket_turret['folding_animation']['layers'][2], ERM_UnitTint.tint_red())
 
     local redarmy_rocket_turret_corpse = util.table.deepcopy(data.raw['corpse']['rocket-turret-remnants'])
-    redarmy_rocket_turret_corpse.name = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_rocket_turret_corpse.name = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
     redarmy_rocket_turret_corpse.time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
     redarmy_rocket_turret_corpse.hidden = true
     redarmy_rocket_turret_corpse.hidden_in_factoriopedia  = true

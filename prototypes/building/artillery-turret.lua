@@ -9,6 +9,7 @@ require('util')
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local ERM_UnitTint = require('__enemyracemanager__/lib/rig/unit_tint')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 local name = 'artillery-turret'
 
@@ -49,12 +50,12 @@ function ErmRedArmy.make_artillery_turret(level)
 
     -- Base changes
     redarmy_artillery_turret['subgroup'] = 'enemies'
-    redarmy_artillery_turret['name'] = MOD_NAME .. '--' .. name .. '--' .. level
-    redarmy_artillery_turret['localised_name'] = { 'entity-name.' .. MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
+    redarmy_artillery_turret['name'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--' .. level
+    redarmy_artillery_turret['localised_name'] = { 'entity-name.' .. ERM_REDARMY.MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
     redarmy_artillery_turret['flags'] = { "placeable-player", "placeable-enemy" }
     redarmy_artillery_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier, level)
     redarmy_artillery_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, level)
-    redarmy_artillery_turret['order'] = MOD_NAME .. '--building--' .. name .. '--'.. level
+    redarmy_artillery_turret['order'] = ERM_REDARMY.MOD_NAME .. '--building--' .. name .. '--'.. level
     redarmy_artillery_turret['minable'] = nil
     redarmy_artillery_turret['next_upgrade'] = nil
     redarmy_artillery_turret['manual_range_modifier'] = 3
@@ -67,7 +68,7 @@ function ErmRedArmy.make_artillery_turret(level)
         { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
         { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, level) },
     }
-    redarmy_artillery_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[FORCE_NAME.."-map-color"].value)
+    redarmy_artillery_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[ERM_REDARMY.FORCE_NAME.."-map-color"].value)
     redarmy_artillery_turret['rotation_speed'] = 0.001
     redarmy_artillery_turret['preparing_speed'] = 0.05
     redarmy_artillery_turret['folding_speed'] = 0.05
@@ -77,7 +78,7 @@ function ErmRedArmy.make_artillery_turret(level)
     redarmy_artillery_turret['spawn_decorations_on_expansion'] = false
 
     -- Attack Changes - Create custom gun for this level
-    local gun_name = MOD_NAME .. '--' .. name .. '--gun--' .. level
+    local gun_name = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--gun--' .. level
     local cooldown = ERM_UnitHelper.get_attack_speed(base_attack_speed, incremental_attack_speed, level)
     local damage = ERM_UnitHelper.get_damage(base_physical_damage, incremental_physical_damage, level)
 
@@ -94,10 +95,10 @@ function ErmRedArmy.make_artillery_turret(level)
         artillery_gun
     })
 
-    redarmy_artillery_turret['corpse'] = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_artillery_turret['corpse'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
 
     local redarmy_artillery_turret_corpse = util.table.deepcopy(data.raw['corpse']['artillery-turret-remnants'])
-    redarmy_artillery_turret_corpse.name = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_artillery_turret_corpse.name = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
     redarmy_artillery_turret_corpse.time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
     redarmy_artillery_turret_corpse.hidden = true
     redarmy_artillery_turret_corpse.hidden_in_factoriopedia  = true

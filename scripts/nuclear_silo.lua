@@ -4,10 +4,12 @@
 --- DateTime: 4/12/2026 10:11 PM
 ---
 
+local ERM_REDARMY = require('__erm_redarmy__/global')
+
 local NuclearSilo = {}
 
 local draw_text = rendering.draw_text
-local notification_enabled = settings.startup[FORCE_NAME.."-orbital-surveillance"].value
+local notification_enabled = settings.startup[ERM_REDARMY.FORCE_NAME.."-orbital-surveillance"].value
 
 function NuclearSilo.register(silo)
     if silo then
@@ -77,13 +79,13 @@ end
 
 local is_valid_silo = function(event)
     local entity = event.created_entity or event.entity
-    if entity and entity.valid and entity.type == 'rocket-silo' and entity.force.name == FORCE_NAME then
+    if entity and entity.valid and entity.type == 'rocket-silo' and entity.force.name == ERM_REDARMY.FORCE_NAME then
         return true
     end
     return false
 end
 
-local refuel = settings.startup[FORCE_NAME.."-atomic-rocket-refuel"].value
+local refuel = settings.startup[ERM_REDARMY.FORCE_NAME.."-atomic-rocket-refuel"].value
 NuclearSilo.on_nth_tick = {
     [refuel * minute + 1] = NuclearSilo.add_parts
 }

@@ -6,7 +6,7 @@
 
 ErmRedArmy = {}
 require('util')
-require('__erm_redarmy__/global')
+local ERM_REDARMY = require('__erm_redarmy__/global')
 require "prototypes.noise-functions"
 
 
@@ -14,11 +14,11 @@ local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 
 -- This set of data is used for set up default autoplace calculation.
 data.erm_registered_race = data.erm_registered_race or {}
-data.erm_registered_race[MOD_NAME] = true
+data.erm_registered_race[ERM_REDARMY.MOD_NAME] = true
 data.erm_spawn_specs = data.erm_spawn_specs or {}
 table.insert(data.erm_spawn_specs, {
-    mod_name = MOD_NAME,
-    force_name = FORCE_NAME,
+mod_name = ERM_REDARMY.MOD_NAME,
+  force_name = ERM_REDARMY.FORCE_NAME,
     moisture = 2, -- 1 = Dry and 2 = Wet
     aux = 2, -- -- 1 = red desert, 2 = sand
     elevation = 1, --1,2,3 (1 low elevation, 2. medium, 3 high elavation)
@@ -110,7 +110,9 @@ if mods["space-age"] and mods['quality'] then
     ErmRedArmy.make_bomber_plane(level)
     ErmRedArmy.make_dropship_plane(level)
     for _, unit in pairs(override_units) do
-        data.raw["unit"][MOD_NAME.."--"..unit.."--"..level]["ai_settings"] = boss_unit_ai
+        for key, value in pairs(boss_unit_ai) do
+            data.raw["unit"][ERM_REDARMY.MOD_NAME.."--"..unit.."--"..level]["ai_settings"][key] = value
+        end
     end
 
     --- Define boss prototypes data
@@ -142,8 +144,8 @@ if mods["space-age"] and mods['quality'] then
     data.extend({
         {
             type = 'mod-data',
-            name = MOD_NAME..'--boss-attack-data',
-            data_type = MOD_NAME..'.boss_data',
+name = ERM_REDARMY.MOD_NAME..'--boss-attack-data',
+  data_type = ERM_REDARMY.MOD_NAME..'.boss_data',
             data = {
                 --- Max assist spawner
                 max_buildable_unit_spawner = {5, 6, 8, 10, 12},
@@ -161,8 +163,8 @@ if mods["space-age"] and mods['quality'] then
     data.extend({
         {
             type = 'mod-data',
-            name = MOD_NAME..'--boss-reward-data',
-            data_type = MOD_NAME..'.boss_reward_data',
+name = ERM_REDARMY.MOD_NAME..'--boss-reward-data',
+  data_type = ERM_REDARMY.MOD_NAME..'.boss_reward_data',
             data = {
                 reward_data = {
                     "uranium-238",
@@ -193,51 +195,50 @@ if mods["space-age"] and mods['quality'] then
         },
     })
 
-    if DEBUG then
+    if ERM_REDARMY.DEBUG_MODE then
         --- For debug
-        data.raw['mod-data'][MOD_NAME..'--boss-attack-data'].data.idle_attack_interval = {5 * second, 5 * second, 5 * second, 5 * second, 5 * second,}
+        data.raw['mod-data'][ERM_REDARMY.MOD_NAME..'--boss-attack-data'].data.idle_attack_interval = {5 * second, 5 * second, 5 * second, 5 * second, 5 * second,}
     end
 
-    data.extend({
-        {
-            type = "kill-achievement",
-            name = MOD_NAME.."--rebellion",
-            to_kill = "enemy_erm_redarmy--boss_rocket-silo--1",
-            amount = 1,
-            icon = "__erm_redarmy__/graphics/red_army_icon.png",
-            icon_size = 64,
-            allow_without_fight = false,
-            order = "z["..MOD_NAME.."]--01-rebellion"
-        },
-        {
-            type = "kill-achievement",
-            name = MOD_NAME.."--revolution",
-            to_kill = "enemy_erm_redarmy--boss_rocket-silo--3",
-            amount = 1,
-            icon = "__erm_redarmy__/graphics/red_army_icon.png",
-            icon_size = 64,
-            allow_without_fight = false,
-            order = "z["..MOD_NAME.."]--02-revolution"
-        },
-        {
-            type = "kill-achievement",
-            name = MOD_NAME.."--liberation",
-            to_kill = "enemy_erm_redarmy--boss_rocket-silo--5",
-            amount = 1,
-            icon = "__erm_redarmy__/graphics/red_army_icon.png",
-            icon_size = 64,
-            allow_without_fight = false,
-            order = "z["..MOD_NAME.."]--03-liberation"
-        },
-    })
+data.extend({
+  {
+    type = "kill-achievement",
+    name = ERM_REDARMY.MOD_NAME.."--rebellion",
+    to_kill = "enemy_erm_redarmy--boss_rocket-silo--1",
+    amount = 1,
+    icon = "__erm_redarmy__/graphics/red_army_icon.png",
+    icon_size = 64,
+    allow_without_fight = false,
+    order = "z["..ERM_REDARMY.MOD_NAME.."]--01-rebellion"
+  },
+  {
+    type = "kill-achievement",
+    name = ERM_REDARMY.MOD_NAME.."--revolution",
+    to_kill = "enemy_erm_redarmy--boss_rocket-silo--3",
+    amount = 1,
+    icon = "__erm_redarmy__/graphics/red_army_icon.png",
+    icon_size = 64,
+    allow_without_fight = false,
+    order = "z["..ERM_REDARMY.MOD_NAME.."]--02-revolution"
+  },
+  {
+    type = "kill-achievement",
+    name = ERM_REDARMY.MOD_NAME.."--liberation",
+    to_kill = "enemy_erm_redarmy--boss_rocket-silo--5",
+    amount = 1,
+    icon = "__erm_redarmy__/graphics/red_army_icon.png",
+    icon_size = 64,
+    allow_without_fight = false,
+    order = "z["..ERM_REDARMY.MOD_NAME.."]--03-liberation"
+  },
+})
 end
 
 
 data.erm_land_scout = data.erm_land_scout or {}
-data.erm_land_scout[MOD_NAME] = 'human-miner'
+data.erm_land_scout[ERM_REDARMY.MOD_NAME] = 'human-miner'
 
-data.erm_aerial_scout = data.erm_aerial_scout or {}
-data.erm_aerial_scout[MOD_NAME] = 'plane-gunner'
+data.erm_aerial_scout[ERM_REDARMY.MOD_NAME] = 'plane-gunner'
 
 require "prototypes.economy"
 require "prototypes.planets"

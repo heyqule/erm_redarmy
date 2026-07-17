@@ -6,6 +6,7 @@
 local ErmConfig = require('__enemyracemanager__/lib/global_config')
 local CustomAttacks = require('scripts/custom_attacks')
 local Position = require("__erm_libs__/stdlib/position")
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 local RemoteAPI = {}
 
@@ -16,9 +17,9 @@ function RemoteAPI.milestones_preset_addons()
             required_mods = { "erm_redarmy" },
             milestones = {
                 { type = "group", name = "Kills" },
-                { type = "kill", name = MOD_NAME.."--lab--1", quantity = 1 },
-                { type = "kill", name = MOD_NAME.."--lab--3", quantity = 1 },
-                { type = "kill", name = MOD_NAME.."--lab--5", quantity = 1, next = "x10" },
+                { type = "kill", name = ERM_REDARMY.MOD_NAME.."--lab--1", quantity = 1 },
+                { type = "kill", name = ERM_REDARMY.MOD_NAME.."--lab--3", quantity = 1 },
+                { type = "kill", name = ERM_REDARMY.MOD_NAME.."--lab--5", quantity = 1, next = "x10" },
             }
         },
     }
@@ -27,11 +28,11 @@ function RemoteAPI.milestones_preset_addons()
         required_mods = {"erm_redarmy"},
         milestones = {
             {type="group", name="ERM Boss Kills"},
-            {type="kill", name= MOD_NAME.."--boss_rocket-silo--1",  quantity=1},
-            {type="kill", name= MOD_NAME.."--boss_rocket-silo--2",  quantity=1},
-            {type="kill", name= MOD_NAME.."--boss_rocket-silo--3",  quantity=1},
-            {type="kill", name= MOD_NAME.."--boss_rocket-silo--4",  quantity=1},
-            {type="kill", name= MOD_NAME.."--boss_rocket-silo--5",  quantity=1},
+            {type="kill", name= ERM_REDARMY.MOD_NAME.."--boss_rocket-silo--1",  quantity=1},
+            {type="kill", name= ERM_REDARMY.MOD_NAME.."--boss_rocket-silo--2",  quantity=1},
+            {type="kill", name= ERM_REDARMY.MOD_NAME.."--boss_rocket-silo--3",  quantity=1},
+            {type="kill", name= ERM_REDARMY.MOD_NAME.."--boss_rocket-silo--4",  quantity=1},
+            {type="kill", name= ERM_REDARMY.MOD_NAME.."--boss_rocket-silo--5",  quantity=1},
         }
     }
 
@@ -46,11 +47,11 @@ function RemoteAPI.print_global()
 end
 
 function RemoteAPI.register_new_enemy_race()
-    return MOD_NAME
+    return ERM_REDARMY.MOD_NAME
 end
 
 function RemoteAPI.refresh_custom_attack_cache()
-    CustomAttacks.get_race_settings(MOD_NAME, true)
+    CustomAttacks.get_race_settings(ERM_REDARMY.MOD_NAME, true)
 end
 
 --- Add home planet to ignore list
@@ -104,7 +105,7 @@ function RemoteAPI.boss_custom_spawn(radar, is_test)
     local surface = radar.surface
     local max_search_distance = 1200
     local max_allowed_distance = 1000
-    local silos = surface.find_entities_filtered { name = MOD_NAME .. '--rocket-silo--5', position = radar.position, radius = max_search_distance, limit = 1 }
+    local silos = surface.find_entities_filtered { name = ERM_REDARMY.MOD_NAME .. '--rocket-silo--5', position = radar.position, radius = max_search_distance, limit = 1 }
     local valid_silo = nil
     local distance = -1
     for _, silo in pairs(silos) do
@@ -126,11 +127,11 @@ function RemoteAPI.boss_custom_spawn(radar, is_test)
     local position = valid_silo.position
     valid_silo.destroy()
 
-    CustomAttacks.get_race_settings(FORCE_NAME, game.forces[FORCE_NAME])
+    CustomAttacks.get_race_settings(ERM_REDARMY.FORCE_NAME, game.forces[ERM_REDARMY.FORCE_NAME])
     local boss_silo = surface.create_entity {
-        name = MOD_NAME .. '--boss_rocket-silo--' .. storage.custom_attack_race_settings[FORCE_NAME].boss_tier,
+        name = ERM_REDARMY.MOD_NAME .. '--boss_rocket-silo--' .. storage.custom_attack_race_settings[ERM_REDARMY.FORCE_NAME].boss_tier,
         position = position,
-        force = FORCE_NAME,
+        force = ERM_REDARMY.FORCE_NAME,
         raise_built = true
     }
     return boss_silo

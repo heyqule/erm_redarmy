@@ -15,6 +15,7 @@ local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 
 local enemy_autoplace = require("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_REDARMY = require('__erm_redarmy__/global')
 local name = 'electric-furnace'
 
 -- Hitpoints
@@ -49,20 +50,20 @@ local max_friends_around_to_spawn = 5
 local spawn_table = function(level)
     local res = {}
     --Tire 1
-    res[1] = { MOD_NAME .. '--human-miner--' .. level, { { 0.0, 1 }, { 0.2, 0.6 }, { 0.4, 0.4 }, { 0.6, 0.35 }, { 0.8, 0.2 }, { 1.0, 0.2 } } }
-    res[2] = { MOD_NAME .. '--human-pistol--' .. level, { { 0.0, 0 }, { 0.2, 0.35 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
+    res[1] = { ERM_REDARMY.MOD_NAME .. '--human-miner--' .. level, { { 0.0, 1 }, { 0.2, 0.6 }, { 0.4, 0.4 }, { 0.6, 0.35 }, { 0.8, 0.2 }, { 1.0, 0.2 } } }
+    res[2] = { ERM_REDARMY.MOD_NAME .. '--human-pistol--' .. level, { { 0.0, 0 }, { 0.2, 0.35 }, { 0.4, 0.4 }, { 0.6, 0.2 }, { 0.8, 0.0 }, { 1.0, 0.0 } } }
     --Tire 2
-    res[3] = { MOD_NAME .. '--human-machinegun--' .. level, { { 0.0, 0.0 }, { 0.2, 0.05 }, { 0.4, 0.1 }, { 0.6, 0.3 }, { 0.8, 0.15 }, { 1.0, 0.15 } } }
-    res[4] = { MOD_NAME .. '--human-sniper--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
-    res[5] = { MOD_NAME .. '--tank-cannon--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.05 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
-    res[6] = { MOD_NAME .. '--plane-gunner--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
+    res[3] = { ERM_REDARMY.MOD_NAME .. '--human-machinegun--' .. level, { { 0.0, 0.0 }, { 0.2, 0.05 }, { 0.4, 0.1 }, { 0.6, 0.3 }, { 0.8, 0.15 }, { 1.0, 0.15 } } }
+    res[4] = { ERM_REDARMY.MOD_NAME .. '--human-sniper--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.1 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
+    res[5] = { ERM_REDARMY.MOD_NAME .. '--tank-cannon--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.05 }, { 0.6, 0.05 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
+    res[6] = { ERM_REDARMY.MOD_NAME .. '--plane-gunner--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
     --Tire 3
-    res[7] = { MOD_NAME .. '--human-engineer--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
-    res[8] = { MOD_NAME .. '--human-flamethrower--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.15 }, { 1.0, 0.1 } } }
-    res[9] = { MOD_NAME .. '--human-shotgun--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
-    res[10] = { MOD_NAME .. '--tank-explosive-cannon--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
-    res[11] = { MOD_NAME .. '--plane-bomber--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
-    res[12] = { MOD_NAME .. '--plane-dropship--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
+    res[7] = { ERM_REDARMY.MOD_NAME .. '--human-engineer--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
+    res[8] = { ERM_REDARMY.MOD_NAME .. '--human-flamethrower--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.15 }, { 1.0, 0.1 } } }
+    res[9] = { ERM_REDARMY.MOD_NAME .. '--human-shotgun--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.1 }, { 1.0, 0.1 } } }
+    res[10] = { ERM_REDARMY.MOD_NAME .. '--tank-explosive-cannon--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.1 } } }
+    res[11] = { ERM_REDARMY.MOD_NAME .. '--plane-bomber--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
+    res[12] = { ERM_REDARMY.MOD_NAME .. '--plane-dropship--' .. level, { { 0.0, 0.0 }, { 0.2, 0.0 }, { 0.4, 0.0 }, { 0.6, 0.0 }, { 0.8, 0.05 }, { 1.0, 0.05 } } }
 
     return res
 end
@@ -105,8 +106,8 @@ function ErmRedArmy.make_furnace(level)
         },
         {
             type = "unit-spawner",
-            name = MOD_NAME .. '--' .. name .. '--' .. level,
-            localised_name = { 'entity-name.' .. MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] },
+            name = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--' .. level,
+            localised_name = { 'entity-name.' .. ERM_REDARMY.MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] },
             icons = {
                 {
                     icon = "__base__/graphics/icons/electric-furnace.png",
@@ -121,7 +122,7 @@ function ErmRedArmy.make_furnace(level)
             },
             flags = { "placeable-player", "placeable-enemy" },
             max_health = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier, level),
-            order = MOD_NAME .. '--building--' .. name .. '--' .. level,
+            order = ERM_REDARMY.MOD_NAME .. '--building--' .. name .. '--' .. level,
             subgroup = "enemies",
             vehicle_impact_sound = HumanSound.generic_impact(),
             resistances = {
@@ -161,7 +162,7 @@ function ErmRedArmy.make_furnace(level)
                     }
                 },
             },
-            map_color = ERM_UnitHelper.format_map_color(settings.startup[FORCE_NAME.."-map-color"].value),
+            map_color = ERM_UnitHelper.format_map_color(settings.startup[ERM_REDARMY.FORCE_NAME.."-map-color"].value),
             healing_per_tick = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, level),
             collision_box = collision_box,
             map_generator_bounding_box = map_generator_bounding_box,
@@ -184,8 +185,8 @@ function ErmRedArmy.make_furnace(level)
             -- (2018-12-07)
             autoplace =  enemy_autoplace.enemy_spawner_autoplace({
                 probability_expression = "erm_redarmy_autoplace_base(0, 6)",
-                force = FORCE_NAME,
-                control = AUTOCONTROL_NAME
+                force = ERM_REDARMY.FORCE_NAME,
+                control = ERM_REDARMY.AUTOCONTROL_NAME
             }),
             call_for_help_radius = 50,
             spawn_decorations_on_expansion = false,

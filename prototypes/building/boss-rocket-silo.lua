@@ -6,14 +6,16 @@
 
 local ERM_UnitHelper = require('__enemyracemanager__/lib/rig/unit_helper')
 local GlobalConfig = require("__enemyracemanager__/lib/global_config")
+local ERM_REDARMY = require('__erm_redarmy__/global')
+
 
 function ErmRedArmy.make_boss_rocket_silo(level, boss_data)
     level = level or 1
     
     local rocket_silo = table.deepcopy(data.raw["rocket-silo"]["rocket-silo"])
-    rocket_silo.name = MOD_NAME .. "--boss_rocket-silo--"..level
-    rocket_silo.localised_name = { "entity-name." .. MOD_NAME .. "--boss_rocket-silo", GlobalConfig.QUALITY_MAPPING[level] }
-    rocket_silo.minable.result = MOD_NAME .. "--boss_rocket-silo--"..level
+    rocket_silo.name = ERM_REDARMY.MOD_NAME .. "--boss_rocket-silo--"..level
+    rocket_silo.localised_name = { "entity-name." .. ERM_REDARMY.MOD_NAME .. "--boss_rocket-silo", GlobalConfig.QUALITY_MAPPING[level] }
+    rocket_silo.minable.result = ERM_REDARMY.MOD_NAME .. "--boss_rocket-silo--"..level
     rocket_silo.max_health = boss_data.rocket_silo_hp[level]
     rocket_silo.subgroup = 'enemies'
 
@@ -29,7 +31,7 @@ function ErmRedArmy.make_boss_rocket_silo(level, boss_data)
     rocket_silo.dying_trigger_effect = {
         {
             type = "script",
-            effect_id = TRIGGER_BOSS_DIES,
+            effect_id = ERM_REDARMY.TRIGGER_BOSS_DIES,
         }
     }
     rocket_silo.created_effect = {
@@ -39,7 +41,7 @@ function ErmRedArmy.make_boss_rocket_silo(level, boss_data)
             source_effects = {
                 {
                     type = "script",
-                    effect_id = TRIGGER_BOSS_SPAWNED
+                    effect_id = ERM_REDARMY.TRIGGER_BOSS_SPAWNED
                 }
             }
         }
@@ -51,8 +53,8 @@ function ErmRedArmy.make_boss_rocket_silo(level, boss_data)
 
     -- Create the item for the new rocket silo
     local rocket_silo_item = table.deepcopy(data.raw.item["rocket-silo"])
-    rocket_silo_item.name = MOD_NAME.."--boss_rocket-silo--"..level
-    rocket_silo_item.place_result = MOD_NAME.."--boss_rocket-silo--"..level
+    rocket_silo_item.name = ERM_REDARMY.MOD_NAME.."--boss_rocket-silo--"..level
+    rocket_silo_item.place_result = ERM_REDARMY.MOD_NAME.."--boss_rocket-silo--"..level
     rocket_silo_item.subgroup = 'enemies'
 
     data:extend({rocket_silo_item})

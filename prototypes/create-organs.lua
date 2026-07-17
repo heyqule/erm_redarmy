@@ -86,7 +86,7 @@ function Organs.create_organ_duplication_recipe(name, additional_ingredients, co
              type = "recipe",
              name = name.."-clone",
              icon = "__erm_redarmy__/graphics/organ/part-specimin-1.png",
-             category = "organic",
+             categories = {"organic"},
              subgroup = "erm-organs-processes",
              order = "x["..name.."]-a[organs]",
              hide_from_player_crafting = false,
@@ -98,7 +98,7 @@ function Organs.create_organ_duplication_recipe(name, additional_ingredients, co
              {
                  {type = "item", name = name, amount = 4}
              },
-             result_is_always_fresh = true,
+             always_fresh = true,
              allow_productivity = true,
              allow_quality = false,
              enabled = false,
@@ -132,7 +132,7 @@ function Organs.create_organ_to_nutrients_recipe(name, nutrients_amount, color_t
                     shift = {9, 9}
                 },
             },
-            category = "organic",
+            categories = {"organic"},
             subgroup = "erm-organs-processes",
             order = "x["..name.."]-a[organ-nutrients]",
             hide_from_player_crafting = false,
@@ -184,7 +184,7 @@ function Organs.create_organ_to_biter_egg_recipe(name, additional_ingredients, c
                 shift = {9, 9}
             },
         },
-        category = "organic",
+        categories = {"organic"},
         subgroup = "erm-organs-processes",
         order = "x["..name.."]-a[biter-egg]",
         hide_from_player_crafting = false,
@@ -224,7 +224,7 @@ function Organs.create_organ_to_military_recipe(name, color_tint)
                     shift = {9, 9}
                 },
             },
-            category = "chemistry",
+            categories = {"chemistry"},
             subgroup = "erm-organs-processes",
             order = "x["..name.."]-a[military]",
             hide_from_player_crafting = false,
@@ -269,7 +269,7 @@ function Organs.create_organ_to_promethium_recipe(name)
                     shift = {9, 9}
                 },
             },
-            category = "fusion-assembly",
+            categories = {"fusion-assembly"},
             subgroup = "erm-organs-processes",
             order = "x["..name.."]-a[promethium]",
             hide_from_player_crafting = false,

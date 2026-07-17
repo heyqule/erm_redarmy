@@ -12,6 +12,7 @@ local ERM_DebugHelper = require('__enemyracemanager__/lib/debug_helper')
 local GlobalConfig = require('__enemyracemanager__/lib/global_config')
 
 local enemy_autoplace = require("__enemyracemanager__/prototypes/enemy-autoplace")
+local ERM_REDARMY = require('__erm_redarmy__/global')
 
 local name = 'tesla-turret'
 
@@ -53,12 +54,12 @@ function ErmRedArmy.make_tesla_turret(level)
     -- Base changes
     redarmy_tesla_turret['type'] = 'turret'
     redarmy_tesla_turret['subgroup'] = 'enemies'
-    redarmy_tesla_turret['name'] = MOD_NAME .. '--' .. name .. '--' .. level
-    redarmy_tesla_turret['localised_name'] = { 'entity-name.' .. MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
+    redarmy_tesla_turret['name'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--' .. level
+    redarmy_tesla_turret['localised_name'] = { 'entity-name.' .. ERM_REDARMY.MOD_NAME .. '--' .. name, GlobalConfig.QUALITY_MAPPING[level] }
     redarmy_tesla_turret['flags'] = { "placeable-player", "placeable-enemy" }
     redarmy_tesla_turret['max_health'] = ERM_UnitHelper.get_building_health(hitpoint, max_hitpoint_multiplier, level)
     redarmy_tesla_turret['healing_per_tick'] = ERM_UnitHelper.get_building_healing(hitpoint, max_hitpoint_multiplier, level)
-    redarmy_tesla_turret['order'] = MOD_NAME .. '--building--' .. name .. '--'.. level
+    redarmy_tesla_turret['order'] = ERM_REDARMY.MOD_NAME .. '--building--' .. name .. '--'.. level
     redarmy_tesla_turret['minable'] = nil
     redarmy_tesla_turret['next_upgrade'] = nil
     redarmy_tesla_turret['collision_mask'] = nil
@@ -72,14 +73,14 @@ function ErmRedArmy.make_tesla_turret(level)
         { type = "electric", percent = ERM_UnitHelper.get_resistance(base_electric_resistance, incremental_electric_resistance, level) },
         { type = "cold", percent = ERM_UnitHelper.get_resistance(base_cold_resistance, incremental_cold_resistance, level) }
     }
-    redarmy_tesla_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[FORCE_NAME.."-map-color"].value)
+    redarmy_tesla_turret['map_color'] = ERM_UnitHelper.format_map_color(settings.startup[ERM_REDARMY.FORCE_NAME.."-map-color"].value)
     redarmy_tesla_turret['collision_box'] = collision_box
     redarmy_tesla_turret['selection_box'] = selection_box
     redarmy_tesla_turret['map_generator_bounding_box'] = map_generator_bounding_box
     redarmy_tesla_turret['autoplace'] = enemy_autoplace.enemy_worm_autoplace({
         probability_expression = "erm_redarmy_autoplace_base(0, 8)",
-        force = FORCE_NAME,
-        control = AUTOCONTROL_NAME
+        force = ERM_REDARMY.FORCE_NAME,
+        control = ERM_REDARMY.AUTOCONTROL_NAME
     })
     redarmy_tesla_turret['call_for_help_radius'] = 50
     redarmy_tesla_turret['spawn_decorations_on_expansion'] = false
@@ -145,7 +146,7 @@ function ErmRedArmy.make_tesla_turret(level)
         }
     }
 
-    redarmy_tesla_turret['corpse'] = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_tesla_turret['corpse'] = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
 
     -- Animation Changes
     ERM_UnitTint.mask_tint(redarmy_tesla_turret['folded_animation']['layers'][3], ERM_UnitTint.tint_red())
@@ -154,7 +155,7 @@ function ErmRedArmy.make_tesla_turret(level)
     ERM_UnitTint.mask_tint(redarmy_tesla_turret['folding_animation']['layers'][2], ERM_UnitTint.tint_red())
 
     local redarmy_tesla_turret_corpse = util.table.deepcopy(data.raw['corpse']['tesla-turret-remnants'])
-    redarmy_tesla_turret_corpse.name = MOD_NAME .. '--' .. name .. '--corpse'
+    redarmy_tesla_turret_corpse.name = ERM_REDARMY.MOD_NAME .. '--' .. name .. '--corpse'
     redarmy_tesla_turret_corpse.time_before_removed = minute * settings.startup["enemyracemanager-enemy-corpse-time"].value
     redarmy_tesla_turret_corpse.hidden = true
     redarmy_tesla_turret_corpse.hidden_in_factoriopedia  = true
