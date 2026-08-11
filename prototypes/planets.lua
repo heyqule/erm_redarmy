@@ -228,10 +228,7 @@ data.extend({
 
 if mods['redalert_music'] then
     local MusicSetup = require('__redalert_music__/music_setup')
-    MusicSetup.add_to('earth')
+    MusicSetup.add_to({'earth'})
 else
-    local sound_data = SoundUtil.dupe_planet_music('nauvis','earth')
-    if table_size(sound_data) > 0 then
-        data:extend(sound_data) 
-    end
+    SoundUtil.dupe_planet_music('nauvis','earth')
 end 

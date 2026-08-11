@@ -1,4 +1,21 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.1.1
+Date: 2026-08-10
+
+  Features:
+    - Added 5 levels of organ productivity research.  Beating each tier of the boss advance to the next level.
+    - [existing saves] If you are on tier 4 boss, beating it will automatically research level 1 - 4.
+    - Added emotional damage attacks on planet char after its evolution reach 35%.
+
+  Changes:
+    - Boss reward now gives unlimited science pots, instead of intermediate products.
+    - Guaranteed 2 agricultural-science-pack chests.
+    - utility-science-pack has slightly higher spawn chance.
+
+  Bugfixes:
+    - Fixed an issue for planet music due to removal of deprecated ambient-sound's planet attribute.    
+
+---------------------------------------------------------------------------------------------------
 Version: 2.1.0
 Date: 2026-07-17
 
@@ -18,7 +35,7 @@ Date: 2026-06-29
 
   Changes:
     - Show organ recipes in crafting menu.
-    
+
   Bugfixes:
     - Fixed PSI radar recipe not included in tech unlock.
     - Fixed recipes display on crafting menu.
