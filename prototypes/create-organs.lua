@@ -53,7 +53,7 @@ function Organs.create_item(name)
                     }
                 }
             },
-            fuel_category = "chemical",
+            fuel_categories = {"chemical"},
             fuel_value = "20MJ",
             subgroup = "agriculture-products",
             order = "x[egg]-a[organ]",
